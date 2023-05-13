@@ -1,3 +1,68 @@
 {
-  "extends": "next/core-web-vitals"
+  "parser": "@babel/eslint-parser",
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "commonjs": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "requireConfigFile": false
+  },
+  "plugins": ["react"],
+  "rules": {
+    "indent": ["warn", "tab"],
+    "linebreak-style": ["warn", "unix"],
+    "quotes": ["warn", "single"],
+    "semi": ["warn", "never"],
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "react-hooks/rules-of-hooks": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "react/react-in-jsx-scope": "off",
+        "no-unused-vars": [
+          "error",
+          {
+            "varsIgnorePattern": "^_",
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "varsIgnorePattern": "^_",
+            "argsIgnorePattern": "^_",
+            "ignoreRestSiblings": true
+          }
+        ]
+      }
+    }
+  ]
 }
