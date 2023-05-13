@@ -11,9 +11,9 @@
     <h3 align="center">FAST DELIVERY</h3>
     <a href="#"><strong>See the website »</strong></a>
     <br />
-    <a href="https://github.com/EmanuelAmico/staffys-backoffice-client"><strong>See the Frontend repository - back office »</strong></a>
+    <a href="https://github.com/EmanuelAmico/staffys-backoffice-client"><strong>See the frontend repository - back office »</strong></a>
     <br />
-    <a href="https://github.com/EmanuelAmico/staffys-api"><strong>See the Backend repository - API »</strong></a>
+    <a href="https://github.com/EmanuelAmico/staffys-api"><strong>See the backend repository - API »</strong></a>
     <br />
   </p>
 </div>
@@ -91,37 +91,37 @@ This project is not yet deployed, but you can try it in your local. Follow the i
 
 <!-- FUNCTIONALITIES -->
 
-## functionalities
+## Functionalities
 
-- 🔹 MANAGER
+🔹 MANAGER
 
-  - [] Login
-  - [] See schedule line history by date
-  - [] See delivery history
-  - [] See the activity of the deliverymen
-  - [] See the number of packages for each delivery person
-  - [] Create packages
-  - [] See packages
-  - [] Edit packages
-  - [] Delete packages
+  - [x] Login
+  - [x] See schedule line history by date
+  - [x] See delivery history
+  - [x] See the activity of the deliverymen
+  - [x] See the number of packages for each delivery person
+  - [x] Create packages
+  - [x] See packages
+  - [x] Edit packages
+  - [x] Delete packages
 
-- 🔹 DELIVERY
+🔹 DELIVERY
 
-  - [] Register
-  - [] Login
-  - [] Password recovery
-  - [] Select packages (maximum 10)
-  - [] See pending deliveries
-  - [] See delivery history
-  - [] Delete delivery history
-  - [] Accept delivery declaration
+  - [x] Register
+  - [x] Login
+  - [x] Password recovery
+  - [x] Select packages (maximum 10)
+  - [x] See pending deliveries
+  - [x] See delivery history
+  - [x] Delete delivery history
+  - [x] Accept delivery declaration
 
-- 🔹 OTHER
+🔹 OTHER
 
-  - [] Session persistence
-  - [] Responsive
-  - [] Location the delivery person and show him where he is going on the map.
-  - [] Points system for parcels delivered and penalties for do not complete of deliveries
+  - [x] Session persistence
+  - [x] Responsive
+  - [x] Location the delivery person and show him where he is going on the map.
+  - [x] Points system for parcels delivered and penalties for do not complete of deliveries
 
 <p align="right"><a href="#home">⬆ Back to top/a></p>
 
@@ -134,7 +134,7 @@ This project is not yet deployed, but you can try it in your local. Follow the i
 
 🔹 REPORT BUG - REQUEST FEATURE
 
-1. <a href="https://github.com/EmanuelAmico/staffys-delivery-client/issues">REPORT BUG - REQUEST FEATURE</a>
+1. 👉 <a href="https://github.com/EmanuelAmico/staffys-delivery-client/issues">report bug - request feature</a>
 
 🔹 PULL REQUEST
 
@@ -191,14 +191,6 @@ This project is not yet deployed, but you can try it in your local. Follow the i
   <a href="https://www.linkedin.com/in/santi-estevez/" target="_blank" rel="noopener noreferrer">
     <img alt="Linkedin" title="linkedin" src="https://custom-icon-badges.demolab.com/badge/-Linkedin-blue?style=for-the-badge&logoColor=white&logo=linkedin"/></a>
   <a href="https://github.com/elbolaestevez" target="_blank" rel="noopener noreferrer">
-    <img alt="Github" title="Github" src="https://custom-icon-badges.demolab.com/badge/-Github-grey?style=for-the-badge&logoColor=white&logo=github"/></a>
-
-  <p>German Cuevas:</p>
-  <a href="mailto:german.1990.cuevas@gmail.com" target="_blank" rel="noopener noreferrer">
-    <img alt="Gmail" title="gmail" src="https://custom-icon-badges.demolab.com/badge/-emanuelamicoo@gmail.com-red?style=for-the-badge&logo=mention&logoColor=white"/></a>
-  <a href="https://www.linkedin.com/in/german-cuevas-/" target="_blank" rel="noopener noreferrer">
-    <img alt="Linkedin" title="linkedin" src="https://custom-icon-badges.demolab.com/badge/-Linkedin-blue?style=for-the-badge&logoColor=white&logo=linkedin"/></a>
-  <a href="https://github.com/GermanCuevas" target="_blank" rel="noopener noreferrer">
     <img alt="Github" title="Github" src="https://custom-icon-badges.demolab.com/badge/-Github-grey?style=for-the-badge&logoColor=white&logo=github"/></a>
 </p>
 
