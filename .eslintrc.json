@@ -1,5 +1,5 @@
 {
-  "parser": "@babel/eslint-parser",
+  "parser": "@typescript-eslint/parser",
   "settings": {
     "react": {
       "version": "detect"
@@ -8,13 +8,16 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true,
     "commonjs": true
   },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -26,43 +29,24 @@
   },
   "plugins": ["react"],
   "rules": {
-    "indent": ["warn", "tab"],
-    "linebreak-style": ["warn", "unix"],
-    "quotes": ["warn", "single"],
-    "semi": ["warn", "never"],
+    "no-tabs": ["error", { "allowIndentationTabs": true }],
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"],
+    "no-empty-function": "error",
+    "no-implicit-coercion": "error",
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_"
+      }
+    ],
     "react/prop-types": "off",
     "react/display-name": "off",
     "react-hooks/exhaustive-deps": "off",
-    "react-hooks/rules-of-hooks": "error"
-  },
-  "overrides": [
-    {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "parser": "@typescript-eslint/parser",
-      "plugins": ["@typescript-eslint"],
-      "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended"
-      ],
-      "rules": {
-        "react/react-in-jsx-scope": "off",
-        "no-unused-vars": [
-          "error",
-          {
-            "varsIgnorePattern": "^_",
-            "argsIgnorePattern": "^_"
-          }
-        ],
-        "@typescript-eslint/no-unused-vars": [
-          "warn",
-          {
-            "varsIgnorePattern": "^_",
-            "argsIgnorePattern": "^_",
-            "ignoreRestSiblings": true
-          }
-        ]
-      }
-    }
-  ]
+    "react-hooks/rules-of-hooks": "error",
+    "react/react-in-jsx-scope": "off"
+  }
 }
