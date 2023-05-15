@@ -2,6 +2,38 @@
   "name": "staffys-delivery-client",
   "version": "0.1.0",
   "private": true,
+  "description": "This project is the delivery side of Fast Delivery app. Which deals with the client of deliverers, the user interface to use the delivery service.",
+  "module": "src/app/layout.tsx",
+  "keywords": [
+    "frontend",
+    "fast delivery",
+    "next.js"
+  ],
+  "contributors": [
+    {
+      "email": "emanuelamicoo@gmail.com",
+      "name": "EmanuelAmico",
+      "url": "https://www.amico.com.ar/"
+    },
+    {
+      "email": "roescal347@gmail.com",
+      "name": "Rodriix99",
+      "url": "https://my-portfolio-rodriix99.vercel.app/"
+    },
+    {
+      "email": "santi.estevez.multedo@gmail.com",
+      "name": "elbolaestevez",
+      "url": "https://whimsical-lily-074ee6.netlify.app/"
+    },
+    {
+      "email": "rafael.mojica27@gmail.com",
+      "name": "RafaMojica",
+      "url": "https://rafaelmojica.vercel.app/"
+    }
+  ],
+  "license": "ISC",
+  "repository": "https://github.com/EmanuelAmico/staffys-delivery-client",
+  "bugs": "https://github.com/EmanuelAmico/staffys-delivery-client/issues",
   "scripts": {
     "start": "next start",
     "dev": "next dev",
