@@ -36,17 +36,17 @@
     "semi": ["error", "always"],
     "no-empty-function": "error",
     "no-implicit-coercion": "error",
-    "no-unused-vars": [
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-unused-vars": [
       "error",
       {
         "varsIgnorePattern": "^_",
         "argsIgnorePattern": "^_"
       }
-    ],
-    "react/prop-types": "off",
-    "react/display-name": "off",
-    "react-hooks/exhaustive-deps": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react/react-in-jsx-scope": "off"
+    ]
   }
 }
