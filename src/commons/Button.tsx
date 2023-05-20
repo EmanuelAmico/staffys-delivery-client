@@ -14,7 +14,7 @@ const Button: FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`flex items-center uppercase px-4 py-1.5 rounded text-whiteText shadow-md transition-colors ${
+      className={`flex justify-center items-center uppercase px-4 py-1.5 rounded text-whiteText shadow-md transition-colors ${
         disabled
           ? "bg-gray-400 cursor-default"
           : "bg-primaryBlue hover:bg-blue-600 active:bg-blue-700"
