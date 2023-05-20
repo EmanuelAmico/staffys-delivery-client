@@ -5,7 +5,7 @@ interface NavbarProps {
   children: ReactNode;
 }
 
-const Navbar: FC<NavbarProps> = () => {
+const Header: FC<NavbarProps> = () => {
   return (
     <div className="flex w-full items-center">
       <div>
@@ -27,4 +27,4 @@ const Navbar: FC<NavbarProps> = () => {
   );
 };
 
-export default Navbar;
+export default Header;
