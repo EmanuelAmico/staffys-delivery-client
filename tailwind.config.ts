@@ -1,8 +1,10 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss";
+
+export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/commons/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -18,8 +20,8 @@ module.exports = {
         greenText: "#96DB76",
         yellowBackground: "#FCBC11",
         salmonText: "#FF6B6B",
-      },
+      } as const,
     },
   },
   plugins: [],
-};
+} satisfies Config;
