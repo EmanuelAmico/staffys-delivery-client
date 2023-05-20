@@ -9,13 +9,16 @@ const Button: FC<ButtonProps> = ({
   children,
   className,
   loading,
+  disabled,
   ...buttonProps
 }) => {
   return (
     <button
-      className={`flex items-center uppercase px-4 py-1.5 rounded text-whiteText bg-primaryBlue shadow-md transition-colors hover:bg-blue-600 active:bg-blue-700 ${
-        className || ""
-      }`}
+      className={`flex items-center uppercase px-4 py-1.5 rounded text-whiteText shadow-md transition-colors ${
+        disabled
+          ? "bg-gray-400 cursor-default"
+          : "bg-primaryBlue hover:bg-blue-600 active:bg-blue-700"
+      } ${className || ""}`}
       {...buttonProps}
     >
       {loading && (
