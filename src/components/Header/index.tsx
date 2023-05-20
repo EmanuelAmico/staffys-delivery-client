@@ -14,7 +14,7 @@ const Header: FC<NavbarProps> = () => {
           alt="Example"
           width={20}
           height={20}
-          className="w-[100px] h-[80px]"
+          className="w-[80px] h-[60px]"
         />
       </div>
       <div className="w-full absolute text-center">
