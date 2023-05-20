@@ -3,8 +3,6 @@ import NextLink from "next/link";
 
 interface LinkProps extends ComponentPropsWithoutRef<"a"> {
   children: string;
-  href: string;
-  className?: string;
 }
 
 const Link: FC<LinkProps> = ({ children, href, className, ...rest }) => {
