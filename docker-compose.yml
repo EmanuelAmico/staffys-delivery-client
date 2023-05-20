@@ -1,0 +1,14 @@
+version: '1.0.0'
+services:
+  local:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: staffys_delivery_client
+    volumes:
+      - .:/app
+    container_name: staffys_delivery_client_local
+    ports:
+      - 3000:3000
+    tty: true
+    entrypoint: [ "npm", "run", "dev" ]

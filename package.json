@@ -36,7 +36,7 @@
   "bugs": "https://github.com/EmanuelAmico/staffys-delivery-client/issues",
   "scripts": {
     "start": "next start",
-    "dev": "next dev",
+    "dev": "next dev --port=3000",
     "build": "next build",
     "check-types": "tsc --noEmit",
     "prettier-staged": "pretty-quick --staged",
