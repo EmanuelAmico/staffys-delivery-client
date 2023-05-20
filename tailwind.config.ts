@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-export default module.exports = {
+export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -26,7 +26,7 @@ export default module.exports = {
         disableButton: "#9CA3AF",
         shadowGray: "#6B7280",
         redTrashIcon: "#FA0206",
-      },
+      } as const,
     },
   },
   plugins: [],
