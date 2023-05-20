@@ -19,7 +19,7 @@ const IconButton: FC<IconButtonProps> = ({
       } ${className || ""}`}
       {...iconButtonProps}
     >
-      <div>{icon}</div>
+      {icon}
     </button>
   );
 };
