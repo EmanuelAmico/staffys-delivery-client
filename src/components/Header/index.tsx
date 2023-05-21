@@ -11,7 +11,7 @@ const Header: FC<NavbarProps> = () => {
       <div>
         <Image
           src={"/images/moto.svg"}
-          alt="Example"
+          alt="Moto"
           width={20}
           height={20}
           className="w-[80px] h-[60px]"
