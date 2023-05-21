@@ -2,12 +2,12 @@ import React, { FC, ReactNode } from "react";
 import Image from "next/image";
 
 interface NavbarProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const Header: FC<NavbarProps> = () => {
   return (
-    <div className="flex w-full items-center">
+    <div className="flex w-full items-center mt-1 bg-white shadow-md">
       <div>
         <Image
           src={"/images/moto.svg"}

@@ -13,20 +13,27 @@ const PackageDescription: FC<PackageDescriptionProps> = ({
   recipient,
 }) => {
   return (
-    <div className="flex justify-center flex-col w-4/5">
-      <div>
+    <div className="flex h-[28rem]  justify-center flex-col ">
+      <div className="flex justify-center  h-[22rem] items-center">
         <Image
-          src={"/images/moto.svg"}
+          src={"/images/mapcoordinatesdelivery.svg"}
           alt="Example"
           width={20}
           height={20}
-          className="w-[80px] h-[60px]"
+          // style={{ scale: "1.2" }}
+          className="w-[335px] h-[290px] object-cover "
         />
       </div>
-      <div>
-        <p>Destino:{destination}</p>
-        <p># del paquete:{packageId}</p>
-        <p>Recibe:{recipient}</p>
+      <div className="text-1xl ">
+        <p className="font-bold">
+          Destino:<span className="font-normal ml-1">{destination}</span>
+        </p>
+        <p className="font-bold">
+          # del paquete:<span className="font-normal ml-1">{packageId}</span>
+        </p>
+        <p className="font-bold">
+          Recibe:<span className="font-normal ml-1">{recipient}</span>
+        </p>
       </div>
     </div>
   );
