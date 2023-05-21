@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef, FC } from "react";
 
 export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
-  children: JSX.Element | JSX.Element[] | string;
+  children: string;
   loading?: boolean;
 }
 

@@ -1,21 +1,17 @@
 import React, { FC } from "react";
 import DescriptionCard from "@/components/DescriptionCard";
 import Navbar from "../../components/Header";
-import Image from "next/image";
+
+import IconButton from "@/commons/IconButton";
+import { RiArrowLeftSLine } from "react-icons/ri";
 
 const page: FC = () => {
   return (
     <>
       <Navbar />
       <div className="w-full flex  justify-center items-center flex-col">
-        <div className="w-full">
-          <Image
-            src="/images/arrowleft.svg"
-            alt="arrowleft"
-            className="w-[2rem]  mt-4 ml-2"
-            width={100}
-            height={10}
-          />
+        <div className="w-full mt-3">
+          <IconButton icon={<RiArrowLeftSLine size={40} />} />
         </div>
 
         <DescriptionCard
