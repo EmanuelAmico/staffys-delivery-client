@@ -28,7 +28,6 @@ const DropdownBox: React.FC<IDropdownBox> = ({
   const handleArrowButton = () => {
     setArrowButton(!arrowButton);
   };
-  console.log(arrowButton);
   return (
     <div
       className={`w-[90%] rounded-lg shadow-md ${
