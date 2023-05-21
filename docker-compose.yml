@@ -1,4 +1,4 @@
-version: '1.0.0'
+version: "1.0.0"
 services:
   local:
     build:
@@ -11,4 +11,4 @@ services:
     ports:
       - 3000:3000
     tty: true
-    entrypoint: [ "npm", "run", "dev" ]
+    entrypoint: ["npm", "run", "dev"]
