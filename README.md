@@ -29,11 +29,11 @@
       <li><a href="#built-with">Built With</a></li>
     </ul>
   </li>
-  <li><a href="#Gitflow-and-semver">Gitflow and semver</a></li>
+  <li><a href="#gitflow-and-semver">Gitflow and semver</a></li>
   <li>
     <a href="#getting-started">Getting Started</a>
     <ul>
-      <li><a href="#Pre-requisites">Pre-requisites</a></li>
+      <li><a href="#pre-requisites">Pre-requisites</a></li>
       <li><a href="#installation">Installation</a></li>
     </ul>
   </li>
@@ -64,6 +64,8 @@ Easy to use web application that allows you to navigate quickly so you can monit
 For the development of the project we created a documentation in order to follow the same guidelines, with this we seek to provide consistency in the development of the application.
 
 See the documentation here: 👉 <a href="./gitflow-semver.md">Gitflow and semver</a>
+
+<p align="right"><a href="#home">⬆ Back to top</a></p>
 
 <!-- GETTING STARTED -->
 
