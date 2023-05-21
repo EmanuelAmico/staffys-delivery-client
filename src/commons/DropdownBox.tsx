@@ -32,7 +32,7 @@ const DropdownBox: React.FC<IDropdownBox> = ({
     <div
       className={`w-[90%] rounded-lg shadow-md ${
         !arrowButton ? "h-[7rem] " : "min-h-[7rem]"
-      } bg-white flex justify-start items-center ${className}`}
+      } bg-white flex justify-start items-center ${className || ""}`}
       style={style}
       onClick={onClick}
     >
