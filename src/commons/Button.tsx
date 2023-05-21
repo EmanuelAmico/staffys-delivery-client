@@ -1,6 +1,6 @@
 import React, { ComponentPropsWithoutRef, FC } from "react";
 
-interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
+export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   children: string;
   loading?: boolean;
 }
