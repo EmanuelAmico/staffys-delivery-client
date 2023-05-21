@@ -23,7 +23,7 @@ const DescriptionCard: FC<DescriptionCardProps> = ({
   ...buttonProps
 }) => {
   return (
-    <div className="bg-white w-[90%] mt-16 rounded-lg shadow-lg h-[37rem] ">
+    <div className="bg-white w-[90%] mt-8 rounded-lg shadow-lg h-[37rem] ">
       <Card title={title}>
         <PackageDescription
           destination={destination}
