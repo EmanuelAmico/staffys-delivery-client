@@ -1,6 +1,9 @@
 {
   "parser": "@typescript-eslint/parser",
   "settings": {
+    "import/resolver": {
+      "typescript": true
+    },
     "react": {
       "version": "detect"
     }
