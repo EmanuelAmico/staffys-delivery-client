@@ -1,3 +1,4 @@
+import Button from "@/commons/Button";
 import Counter from "@/commons/Counter";
 import DeliveryPackageCard from "@/commons/DeliveryPackageCard";
 import IconButton from "@/commons/IconButton";
@@ -58,24 +59,28 @@ const GetPackage = () => {
   ];
 
   return (
-    <Layout>
+    <Layout className="overflow-y-scroll">
       <div className="flex justify-between">
         <IconButton icon={<RiArrowLeftSLine size={40} />} />
         <Counter title="Paquetes restantes" count={10} />
       </div>
       <h4 className="mt-4 font-bold text-xl">Obtener paquetes</h4>
-      <p>¿Cuántos paquetes más vas a repartir hoy?</p>
-      <div className="flex flex-col justify-center items-center p-8">
+      <p className="mb-4">¿Cuántos paquetes más vas a repartir hoy?</p>
+      <div className="pt-4 mb-4 px-4 border-t-2 overflow-y-scroll">
         {deliveryPackages.map((deliveryPackage) => (
           <>
             <DeliveryPackageCard
+              className="mb-4"
               key={deliveryPackage.id}
               {...deliveryPackage}
             />
-            <hr />
+            {deliveryPackage !== deliveryPackages.at(-1) && (
+              <hr className="mb-4" />
+            )}
           </>
         ))}
       </div>
+      <Button>Iniciar Jornada</Button>
     </Layout>
   );
 };

@@ -1,3 +1,5 @@
+import Header from "@/components/Header";
+
 export default function Template({
   children,
 }: {
@@ -7,10 +9,10 @@ export default function Template({
 
   if (loggedUser) {
     return (
-      <>
-        <div className="bg-slate-200 h-12" /> {/* Header */}
+      <div className="h-screen w-full">
+        <Header />
         {children}
-      </>
+      </div>
     );
   }
 
