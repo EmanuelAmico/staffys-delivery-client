@@ -7,7 +7,7 @@ interface NavbarProps {
 
 const Header: FC<NavbarProps> = () => {
   return (
-    <div className="flex w-full items-center">
+    <div className="flex w-full items-center mt-1 bg-white shadow-md">
       <div>
         <Image
           src={"/images/motorcycle.svg"}
