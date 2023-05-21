@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from "react";
 import Image from "next/image";
 
 interface NavbarProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const Header: FC<NavbarProps> = () => {
