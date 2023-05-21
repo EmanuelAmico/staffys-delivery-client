@@ -20,7 +20,6 @@ const PackageDescription: FC<PackageDescriptionProps> = ({
           alt="Example"
           width={20}
           height={20}
-          // style={{ scale: "1.2" }}
           className="w-[335px] h-[290px] object-cover "
         />
       </div>
