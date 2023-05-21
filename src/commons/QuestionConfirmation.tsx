@@ -1,16 +1,20 @@
 import React, { FC } from "react";
-import Button from "./Button";
+import Button, { ButtonProps } from "./Button";
 
 interface QuestionConfirmationProps {
   question: string;
   value: string;
   onChange: (value: string) => void;
+  confirmButtonProps?: ButtonProps;
+  cancelButtonProps?: ButtonProps;
 }
 
 const QuestionConfirmation: FC<QuestionConfirmationProps> = ({
   question,
   value,
   onChange,
+  confirmButtonProps,
+  cancelButtonProps,
 }) => {
   return (
     <div className="flex flex-col items-center">
@@ -22,6 +26,7 @@ const QuestionConfirmation: FC<QuestionConfirmationProps> = ({
           className={`capitalize px-11 ${
             value === "yes" ? "bg-primaryBlue" : "bg-gray-500"
           }`}
+          {...confirmButtonProps}
         >
           Sí
         </Button>
@@ -30,6 +35,7 @@ const QuestionConfirmation: FC<QuestionConfirmationProps> = ({
           className={`ml-6 capitalize px-11 ${
             value === "no" ? "bg-primaryBlue" : "bg-gray-500"
           }`}
+          {...cancelButtonProps}
         >
           No
         </Button>
