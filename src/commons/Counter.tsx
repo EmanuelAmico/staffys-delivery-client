@@ -8,9 +8,9 @@ interface CounterProps {
 const Counter: FC<CounterProps> = ({ title, count }) => {
   return (
     <div>
-      <p className="mb-1 text-center">{title}</p>
+      <p className="mb-1 text-center font-bold">{title}</p>
       <p
-        className={`text-center ${
+        className={`text-center font-bold ${
           count <= 0 ? "text-red-600" : "text-greenText"
         }`}
       >

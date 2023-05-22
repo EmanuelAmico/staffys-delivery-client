@@ -14,6 +14,7 @@ interface DeliveryPackageCardProps {
   status?: string;
   buttonProps?: ButtonProps;
   iconProps?: IconButtonProps;
+  className?: string;
 }
 
 const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
@@ -25,9 +26,12 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
   trash,
   buttonProps,
   iconProps,
+  className,
 }) => {
   return (
-    <div className="bg-whiteBackground rounded-lg shadow-md">
+    <div
+      className={`bg-whiteBackground rounded-lg shadow-md ${className || ""}`}
+    >
       <div className="flex items-center gap-4 p-4">
         <div className="flex items-center justify-center bg-grayBackground h-32 w-32 rounded-lg">
           <Image src={imgpackage} alt="package" />
