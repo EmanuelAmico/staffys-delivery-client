@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Image from "next/image";
 import Button from "@/commons/Button";
-import InputText from "@/commons/InputText";
+import TextInput from "@/commons/InputText";
 
 const page: FC = () => {
   return (
@@ -15,41 +15,23 @@ const page: FC = () => {
           className="w-[200px] h-[100px]"
         />
       </div>
-      <div className="flex flex-col items-center">
-        <InputText
-          name="Nombre"
-          className=""
-          placeHolder="Nombre"
-          label="Nombre"
-        ></InputText>
-        <InputText
-          name="Apellido"
-          className=""
-          placeHolder="Apellido"
-          label="Apellido"
-        ></InputText>
-        <InputText
-          name="Email"
-          className=""
-          placeHolder="Email"
-          label="Email"
-        ></InputText>
-
-        <InputText
+      <form className="flex flex-col items-center">
+        <TextInput name="Nombre" placeHolder="Nombre" label="Nombre" />
+        <TextInput name="Apellido" placeHolder="Apellido" label="Apellido" />
+        <TextInput name="Email" placeHolder="Email" label="Email" />
+        <TextInput
           name="Constraseña"
-          className=""
           hidden
           placeHolder="Contraseña"
           label="Contraseña"
-        ></InputText>
-        <InputText
+        />
+        <TextInput
           name="Segunda Contraseña"
-          className=""
           hidden
           placeHolder="Segunda Contraseña"
           label="Segunda Contraseña"
-        ></InputText>
-      </div>
+        />
+      </form>
       <div className="w-full flex justify-center ">
         <Button className="mt-8 w-11/12 ">Registrar</Button>
       </div>
