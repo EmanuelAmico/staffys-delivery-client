@@ -75,7 +75,7 @@ This project is not yet deployed, but you can try it in your local. Follow the i
 
 ### Pre-requisites
 
-1. Install docker desktop on your computer
+1. Install docker
    ```sh
    https://www.docker.com/products/docker-desktop/
    ```
