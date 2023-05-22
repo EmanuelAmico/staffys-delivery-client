@@ -1,7 +1,5 @@
 export default function Home() {
-  return (
-    <div className="bg-[#f5f5f5] flex justify-center items-center w-full h-[100vh]"></div>
-  );
+  return null;
 }
 
 // <main className="flex min-h-screen flex-col items-center justify-between p-24">
