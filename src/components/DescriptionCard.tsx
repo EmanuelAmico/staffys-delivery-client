@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import PackageDescription, {
   PackageDescriptionProps,
-} from "../../commons/PackageDescription";
+} from "@/commons/PackageDescription";
 import Button, { ButtonProps } from "@/commons/Button";
-import Card, { CardProps } from "../Card";
+import Card, { CardProps } from "@/commons/Card";
 
 interface DescriptionCardProps
   extends PackageDescriptionProps,

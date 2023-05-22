@@ -29,9 +29,11 @@
       <li><a href="#built-with">Built With</a></li>
     </ul>
   </li>
+  <li><a href="#gitflow-and-semver">Gitflow and semver</a></li>
   <li>
     <a href="#getting-started">Getting Started</a>
     <ul>
+      <li><a href="#pre-requisites">Pre-requisites</a></li>
       <li><a href="#installation">Installation</a></li>
     </ul>
   </li>
@@ -55,11 +57,28 @@ Easy to use web application that allows you to navigate quickly so you can monit
 
 <p align="right"><a href="#home">⬆ Back to top</a></p>
 
+<!-- GITFLOW AND SEMVER -->
+
+## Gitflow and semver
+
+For the development of the project we created a documentation in order to follow the same guidelines, with this we seek to provide consistency in the development of the application.
+
+See the documentation here: 👉 <a href="./gitflow-semver.md">Gitflow and semver</a>
+
+<p align="right"><a href="#home">⬆ Back to top</a></p>
+
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
 This project is not yet deployed, but you can try it in your local. Follow the instructions below to run it.
+
+### Pre-requisites
+
+1. Install docker
+   ```sh
+   https://www.docker.com/products/docker-desktop/
+   ```
 
 ### Installation
 
@@ -67,24 +86,13 @@ This project is not yet deployed, but you can try it in your local. Follow the i
    ```sh
    git clone https://github.com/EmanuelAmico/staffys-delivery-client
    ```
-2. Install NPM packages
+2. Builds the docker image
    ```sh
-   npm install
+   docker compose build local
    ```
-3. Create a file in the root **.env** then use the **.env.example** file found in this repository as a base file.
-
+3. Run the App
    ```sh
-    #GENERAL SETTINGS
-    SERVER=
-    PORT=
-
-    #JWT TOKEN SETTINGS
-    SECRET=
-   ```
-
-4. Run the App
-   ```sh
-   npm start
+   docker compose up local
    ```
 
 <p align="right"><a href="#home">⬆ Back to top</a></p>
@@ -175,7 +183,7 @@ This project is not yet deployed, but you can try it in your local. Follow the i
 
   <p>Rodrigo Escalera:</p>
   <a href="mailto:roescal347@gmail.com" target="_blank" rel="noopener noreferrer">
-    <img alt="Gmail" title="gmail" src="https://custom-icon-badges.demolab.com/badge/-emanuelamicoo@gmail.com-red?style=for-the-badge&logo=mention&logoColor=white"/></a>
+    <img alt="Gmail" title="gmail" src="https://custom-icon-badges.demolab.com/badge/-roescal347@gmail.com-red?style=for-the-badge&logo=mention&logoColor=white"/></a>
   <a href="https://my-portfolio-rodriix99.vercel.app/" target="_blank" rel="noopener noreferrer">
     <img alt="Portfolio" title="Portfolio" src="https://custom-icon-badges.demolab.com/badge/-Portfolio-teal?style=for-the-badge&logo=link&logoColor=white"/></a>
   <a href="https://www.linkedin.com/in/rodrigo-escalera-a00a97252/" target="_blank" rel="noopener noreferrer">
@@ -185,7 +193,7 @@ This project is not yet deployed, but you can try it in your local. Follow the i
 
   <p>Santiago Estevez:</p>
   <a href="mailto:santi.estevez.multedo@gmail.com" target="_blank" rel="noopener noreferrer">
-    <img alt="Gmail" title="gmail" src="https://custom-icon-badges.demolab.com/badge/-emanuelamicoo@gmail.com-red?style=for-the-badge&logo=mention&logoColor=white"/></a>
+    <img alt="Gmail" title="gmail" src="https://custom-icon-badges.demolab.com/badge/-santi.estevez.multedo@gmail.com-red?style=for-the-badge&logo=mention&logoColor=white"/></a>
   <a href="https://whimsical-lily-074ee6.netlify.app/" target="_blank" rel="noopener noreferrer">
     <img alt="Portfolio" title="Portfolio" src="https://custom-icon-badges.demolab.com/badge/-Portfolio-teal?style=for-the-badge&logo=link&logoColor=white"/></a>
   <a href="https://www.linkedin.com/in/santi-estevez/" target="_blank" rel="noopener noreferrer">

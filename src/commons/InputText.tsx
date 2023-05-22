@@ -1,5 +1,5 @@
-import React, { ComponentPropsWithoutRef, FC } from "react";
-import { CSSProperties } from "react";
+import React, { ComponentPropsWithoutRef, FC, CSSProperties } from "react";
+
 interface IinputText extends ComponentPropsWithoutRef<"input"> {
   name: string;
   id?: string;
@@ -19,10 +19,11 @@ const InputText: FC<IinputText> = ({
   error,
   helper,
   disabled,
+  type,
   ...inputProps
 }) => {
   return (
-    <div className={" w-11/12 h-[4.5rem] relative "}>
+    <div className={" w-full h-[4.5rem] relative "}>
       <div>
         <label
           htmlFor={name}
@@ -37,17 +38,14 @@ const InputText: FC<IinputText> = ({
         disabled={disabled}
         id={id}
         name={name}
-        type={hidden ? "password" : "text"}
-        className={`text-black  text-base w-full p-2.5 border-solid bg-inherit
-
-          ${
-            error
-              ? "border-b-red-600"
-              : disabled
-              ? "border-b-disableButton"
-              : "border-b-blue-500"
-          }
-
+        type={hidden ? "password" : type ? type : "text"}
+        className={`text-black  text-base w-full p-2.5 border-solid bg-inherit ${
+          error
+            ? "border-b-red-600"
+            : disabled
+            ? "border-b-disableButton"
+            : "border-b-blue-500"
+        }
          p-2.5 border-b-2 pb-1 pl-0 ring-0 outline-0  `}
       />
       {error ? (

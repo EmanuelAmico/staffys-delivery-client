@@ -16,7 +16,7 @@ const PackageDescription: FC<PackageDescriptionProps> = ({
     <div className="flex h-[28rem]  justify-center flex-col ">
       <div className="flex justify-center  h-[22rem] items-center">
         <Image
-          src={"/images/mapcoordinatesdelivery.svg"}
+          src={"/svg/mapcoordinatesdelivery.svg"}
           alt="map"
           width={20}
           height={20}
