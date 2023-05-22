@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import DescriptionCard from "@/components/DescriptionCard";
-import Navbar from "../../components/Header";
 
 import IconButton from "@/commons/IconButton";
 import { RiArrowLeftSLine } from "react-icons/ri";
@@ -8,7 +7,6 @@ import { RiArrowLeftSLine } from "react-icons/ri";
 const page: FC = () => {
   return (
     <>
-      <Navbar />
       <div className="w-full flex  justify-center items-center flex-col">
         <div className="w-full mt-3">
           <IconButton icon={<RiArrowLeftSLine size={40} />} />
