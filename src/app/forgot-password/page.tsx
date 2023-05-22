@@ -6,10 +6,9 @@ import Button from "@/commons/Button";
 const Page = () => {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
-
   const [fullField, setFullField] = useState(false);
 
-  const handleEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
   const handleCodeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +41,7 @@ const Page = () => {
           </div>
           <form onSubmit={handleSubmit} className="w-[80%] mt-10">
             <InputText
-              onChange={handleEmailInput}
+              onChange={handleEmailChange}
               value={email}
               name="email"
               label="Email"
