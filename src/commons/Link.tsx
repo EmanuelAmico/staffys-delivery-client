@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef, FC } from "react";
 import NextLink from "next/link";
 
-interface LinkProps extends ComponentPropsWithoutRef<"a"> {
+export interface LinkProps extends ComponentPropsWithoutRef<"a"> {
   children: string;
   href: string;
 }
