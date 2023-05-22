@@ -1,11 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import Image from "next/image";
 import Layout from "@/commons/Layout";
 import Button from "@/commons/Button";
 import Link from "@/commons/Link";
 import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
 
-const Login: () => JSX.Element | JSX.Element[] = () => {
+const Login: FC = () => {
   return (
     <Layout className="h-screen bg-pageBackground">
       <div className="flex justify-center items-end h-[30%]">
@@ -44,7 +44,7 @@ const Login: () => JSX.Element | JSX.Element[] = () => {
         <Link href="#" className="text-lg font-medium">
           Recuperar Contraseña
         </Link>
-        <Link href="#" className="text-lg font-bold">
+        <Link href="/register" className="text-lg font-bold">
           Registrarse
         </Link>
       </div>

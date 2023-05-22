@@ -2,18 +2,13 @@ import React, { FC } from "react";
 import Image from "next/image";
 import Button from "@/commons/Button";
 import TextInput from "@/commons/InputText";
+import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
 
 const page: FC = () => {
   return (
     <div className="flex flex-col h-screen ">
       <div className="flex w-full justify-center h-[18rem]  items-center">
-        <Image
-          src={"/images/motorcyclewithletters2.svg"}
-          alt="Moto"
-          width={20}
-          height={20}
-          className="w-[200px] h-[100px]"
-        />
+        <Image src={logoFastDelivery} alt="Logo Fast Delivery" width="200" />
       </div>
       <form className="flex flex-col items-center">
         <TextInput name="Nombre" placeHolder="Nombre" label="Nombre" />
