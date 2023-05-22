@@ -7,7 +7,7 @@ interface LayoutProps extends ComponentPropsWithoutRef<"div"> {
 const Layout: FC<LayoutProps> = ({ children, className, ...layoutProps }) => {
   return (
     <div
-      className={` p-4
+      className={`p-4 h-[calc(100vh-60px)] flex flex-col
       ${className || ""}`}
       {...layoutProps}
     >
