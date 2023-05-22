@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import Image from "next/image";
 import Button from "@/commons/Button";
+import InputText from "@/commons/InputText";
 
 const page: FC = () => {
   return (
@@ -14,48 +15,40 @@ const page: FC = () => {
           className="w-[200px] h-[100px]"
         />
       </div>
-      <div className="flex flex-col">
-        {/* <InputText placeHolder="Name" label="Name"></InputText> */}
-        <label className=" mb-1  ml-2 text-xs text-yellowText font-medium border-0">
-          Last Name
-        </label>
-        <input
-          type="text"
-          id="first_name"
-          className="ml-2 text-base w-11/12 p-2.5 border-solid border-primaryBlue p-2.5 border-b-2 pb-1 pl-0 ring-0 outline-0  mb-6"
-          placeholder="Last Name"
-          required
-        />
-        <label className=" mb-1  ml-2 text-xs text-yellowText font-medium border-0">
-          Email
-        </label>
-        <input
-          type="text"
-          id="first_name"
-          className="ml-2 text-base w-11/12 p-2.5 border-solid border-primaryBlue p-2.5 border-b-2 pb-1 pl-0 ring-0 outline-0  mb-6"
-          placeholder="Email"
-          required
-        />
-        <label className=" mb-1  ml-2 text-xs text-yellowText font-medium border-0">
-          Password
-        </label>
-        <input
-          type="text"
-          id="first_name"
-          className="ml-2 text-base w-11/12 p-2.5 border-solid border-primaryBlue p-2.5 border-b-2 pb-1 pl-0 ring-0 outline-0 mb-6"
-          placeholder="Password"
-          required
-        />
-        <label className=" mb-1  ml-2 text-xs text-yellowText font-medium border-0">
-          Second Password
-        </label>
-        <input
-          type="text"
-          id="first_name"
-          className="ml-2 text-base w-11/12 p-2.5 border-solid border-primaryBlue p-2.5 ring-0 outline-0 border-b-2 pb-1 pl-0  mb-4"
-          placeholder="Second Password"
-          required
-        />
+      <div className="flex flex-col items-center">
+        <InputText
+          name="Nombre"
+          className=""
+          placeHolder="Nombre"
+          label="Nombre"
+        ></InputText>
+        <InputText
+          name="Apellido"
+          className=""
+          placeHolder="Apellido"
+          label="Apellido"
+        ></InputText>
+        <InputText
+          name="Email"
+          className=""
+          placeHolder="Email"
+          label="Email"
+        ></InputText>
+
+        <InputText
+          name="Constraseña"
+          className=""
+          hidden
+          placeHolder="Contraseña"
+          label="Contraseña"
+        ></InputText>
+        <InputText
+          name="Segunda Contraseña"
+          className=""
+          hidden
+          placeHolder="Segunda Contraseña"
+          label="Segunda Contraseña"
+        ></InputText>
       </div>
       <div className="w-full flex justify-center ">
         <Button className="mt-8 w-11/12 ">Registrar</Button>
