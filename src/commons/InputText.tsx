@@ -1,5 +1,5 @@
-import React, { ComponentPropsWithoutRef, FC } from "react";
-import { CSSProperties } from "react";
+import React, { ComponentPropsWithoutRef, FC, CSSProperties } from "react";
+
 interface IinputText extends ComponentPropsWithoutRef<"input"> {
   name: string;
   id?: string;
