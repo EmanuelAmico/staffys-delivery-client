@@ -31,10 +31,10 @@ const page: FC = () => {
           placeHolder="Segunda Contraseña"
           label="Segunda Contraseña"
         />
+        <div className="w-full flex justify-center ">
+          <Button className="mt-8 w-11/12 ">Registrar</Button>
+        </div>
       </form>
-      <div className="w-full flex justify-center ">
-        <Button className="mt-8 w-11/12 ">Registrar</Button>
-      </div>
     </div>
   );
 };
