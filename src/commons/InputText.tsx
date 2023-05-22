@@ -26,7 +26,7 @@ const InputText: FC<IinputText> = ({
       <div>
         <label
           htmlFor={name}
-          className=" mb-1  ml-2 text-xs text-yellowText font-medium border-0"
+          className=" mb-1   text-xs text-yellowText font-medium border-0"
         >
           {label}
         </label>
@@ -38,7 +38,7 @@ const InputText: FC<IinputText> = ({
         id={id}
         name={name}
         type={hidden ? "password" : "text"}
-        className={`text-black ml-2 text-base w-11/12 p-2.5 border-solid bg-inherit
+        className={`text-black  text-base w-full p-2.5 border-solid bg-inherit
 
           ${
             error
@@ -48,11 +48,13 @@ const InputText: FC<IinputText> = ({
               : "border-b-blue-500"
           }
 
-         p-2.5 border-b-2 pb-1 pl-0 ring-0 outline-0  mb-6`}
+         p-2.5 border-b-2 pb-1 pl-0 ring-0 outline-0  `}
       />
-      <div className="h-[3rem]"></div>
-      {error ? <h1 className="text-red-600">{error}</h1> : null}
-      {helper ? <h1 className="text-black">{helper}</h1> : null}
+      {error ? (
+        <p className="text-red-600">{error}</p>
+      ) : helper ? (
+        <p className="text-black">{helper}</p>
+      ) : null}
     </div>
   );
 };
