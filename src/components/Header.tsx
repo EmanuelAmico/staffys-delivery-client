@@ -10,7 +10,7 @@ const Header: FC<NavbarProps> = () => {
     <div className="flex w-full h-[60px] items-center shadow-md relative">
       <div>
         <Image
-          src={"/images/motorcycle.svg"}
+          src={"/svg/motorcycle.svg"}
           alt="Moto"
           width={20}
           height={20}
