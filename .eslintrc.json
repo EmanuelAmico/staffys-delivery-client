@@ -91,7 +91,7 @@
       {
         "functions": true,
         "classes": true,
-        "variables": false,
+        "variables": true,
         "allowNamedExports": false,
         "enums": true,
         "typedefs": true,
