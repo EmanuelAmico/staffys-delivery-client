@@ -1,7 +1,5 @@
 .husky
 node_modules
-package.json
 package-lock.json
 dist
-next.config.js
-postcss.config.js
+.next
