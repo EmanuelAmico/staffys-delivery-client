@@ -1,8 +1,6 @@
 "use client";
-import React, { useState } from "react";
-import { CSSProperties } from "react";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { IoMdArrowDropup } from "react-icons/io";
+import React, { useState, CSSProperties } from "react";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 interface IDropdownBox {
   title: string;
   description?: string;
@@ -35,6 +33,9 @@ const DropdownBox: React.FC<IDropdownBox> = ({
       } bg-white flex justify-start items-center ${className || ""}`}
       style={style}
       onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && onClick && onClick()}
     >
       <div className=" w-[100%] ml-5 mr-5 mt-2 mb-2">
         <div className="relative">

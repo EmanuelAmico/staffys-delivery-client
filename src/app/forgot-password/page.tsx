@@ -1,6 +1,6 @@
 "use client";
+import React, { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 import InputText from "@/commons/InputText";
-import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 import Button from "@/commons/Button";
 
 const Page = () => {
