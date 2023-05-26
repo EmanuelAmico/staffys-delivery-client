@@ -12,7 +12,7 @@ const Login: FC = () => {
       <div className="flex justify-center items-end h-[30%]">
         <Image src={logoFastDelivery} alt="Logo Fast Delivery" width="200" />
       </div>
-      <form className="pt-16">
+      <form className="pt-16 pb-8">
         <InputText
           label="Usuario"
           name="email"
@@ -24,9 +24,9 @@ const Login: FC = () => {
           placeholder="Contraseña"
           hidden
         />
+        <Button className="w-[100%] font-medium mt-8">Ingresar</Button>
       </form>
-      <div className="flex flex-col items-center gap-6 pt-8">
-        <Button className="w-[100%] font-medium">Ingresar</Button>
+      <div className="flex flex-col items-center gap-6">
         <Link href="/forgot-password" className="text-lg font-medium">
           Recuperar Contraseña
         </Link>
