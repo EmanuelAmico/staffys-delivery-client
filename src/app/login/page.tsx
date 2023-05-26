@@ -10,9 +10,14 @@ const Login: FC = () => {
   return (
     <Layout className="h-screen">
       <div className="flex justify-center items-end h-[30%]">
-        <Image src={logoFastDelivery} alt="Logo Fast Delivery" width="200" />
+        <Image
+          src={logoFastDelivery}
+          alt="Logo Fast Delivery"
+          width="200"
+          priority
+        />
       </div>
-      <form className="pt-16 pb-8">
+      <form className="pt-16 pb-5">
         <InputText
           label="Usuario"
           name="email"
@@ -24,9 +29,9 @@ const Login: FC = () => {
           placeholder="Contraseña"
           hidden
         />
-        <Button className="w-[100%] font-medium mt-8">Ingresar</Button>
+        <Button className="w-[100%] font-medium mt-5">Ingresar</Button>
       </form>
-      <div className="flex flex-col items-center gap-6">
+      <div className="flex flex-col items-center gap-4">
         <Link href="/forgot-password" className="text-lg font-medium">
           Recuperar Contraseña
         </Link>
