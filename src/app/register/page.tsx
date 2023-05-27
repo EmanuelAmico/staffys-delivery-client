@@ -18,8 +18,8 @@ const Register: FC = () => {
         />
       </div>
       <form className="pt-5 pb-5">
-        <TextInput label="Nombre" name="nombre" placeholder="Nombre" />
-        <TextInput label="Apellido" name="apellido" placeholder="Apellido" />
+        <TextInput label="Nombre" name="name" placeholder="Nombre" />
+        <TextInput label="Apellido" name="lastname" placeholder="Apellido" />
         <TextInput label="Email" name="email" placeholder="staffys@gmail.com" />
         <TextInput
           label="Contraseña"
