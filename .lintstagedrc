@@ -1,3 +1,5 @@
 {
-  "**/*.{js,jsx,ts,tsx}": ["eslint"]
+  "**/*.{js,jsx,ts,tsx}": [
+    "eslint --ignore-path .eslintignore --max-warnings=0"
+  ]
 }
