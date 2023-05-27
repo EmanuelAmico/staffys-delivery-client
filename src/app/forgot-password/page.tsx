@@ -1,19 +1,14 @@
 "use client";
-import InputText from "@/commons/InputText";
-import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
-import Button from "@/commons/Button";
 
-const Page = () => {
+import TextInput from "@/commons/InputText";
+import { FormEvent, MouseEvent, useState } from "react";
+import Button from "@/commons/Button";
+import Layout from "@/commons/Layout";
+
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [fullField, setFullField] = useState(false);
-
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-  const handleCodeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setCode(e.target.value);
-  };
 
   const handleSubmit = (
     e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>
@@ -25,60 +20,49 @@ const Page = () => {
   };
 
   return (
-    <div className="bg-[#F5F5F5] w-[full] h-screen flex flex-col items-center">
+    <Layout className="h-[90%] flex justify-center">
       {!fullField ? (
-        <>
-          <div className="w-full  flex justify-start">
-            <h1 className="mt-[10rem] ml-3 font-bold text-[1.7rem]">
-              ¿Olvidaste tu contraseña?
-            </h1>
-          </div>
-          <div className="w-[100%] flex justify-start">
-            <p className="mt-1 ml-3  text-1xl w-[90%]">
-              Ingresa tu dirección de email y te enviaremos un link para
-              restablecer tu contraseña.
-            </p>
-          </div>
-          <form onSubmit={handleSubmit} className="w-[80%] mt-10">
-            <InputText
-              onChange={handleEmailChange}
+        <div className="flex flex-col justify-center gap-4">
+          <h1 className="m-auto font-bold text-2xl">
+            ¿Olvidaste tu contraseña?
+          </h1>
+          <p className="text-1xl">
+            Ingresa tu dirección de email y te enviaremos un codigo para
+            restablecer tu contraseña.
+          </p>
+          <form onSubmit={handleSubmit}>
+            <TextInput
+              onChange={(e) => setEmail(e.target.value)}
               value={email}
               name="email"
               label="Email"
+              placeholder="staffys@gmail.com"
             />
-
-            <Button onClick={handleSubmit} className="w-full mt-5">
-              Submit
-            </Button>
+            <Button className="w-[100%] font-medium mt-5">Enviar</Button>
           </form>
-        </>
+        </div>
       ) : (
-        <>
-          <div className="w-full  flex justify-start">
-            <h1 className="mt-[10rem] ml-3 font-bold text-[1.7rem]">
-              Restablecer contraseña.
-            </h1>
+        <div className="flex flex-col justify-center gap-4">
+          <h1 className="m-auto font-bold text-2xl">Restablecer contraseña</h1>
+          <div className="flex flex-col justify-center items-center">
+            <p className="text-1xl">Ingresa el código que enviamos a:</p>
+            <p className="font-medium text-1xl">{email}</p>
           </div>
-          <div className="w-[100%] flex justify-start">
-            <p className="mt-1 ml-3  text-1xl w-[90%]">
-              Ingresa el código que enviamos a {email}.
-            </p>
-          </div>
-          <form className="w-[80%] mt-10">
-            <InputText
+          <form>
+            <TextInput
               type="number"
-              onChange={handleCodeInput}
+              onChange={(e) => setCode(e.target.value)}
               value={code}
               name="code"
-              label="code"
+              label="Codigo"
+              placeholder="Codigo"
             />
-
-            <Button className="w-full mt-5">Submit</Button>
+            <Button className="w-[100%] font-medium mt-5">Enviar</Button>
           </form>
-        </>
+        </div>
       )}
-    </div>
+    </Layout>
   );
 };
 
-export default Page;
+export default ForgotPassword;
