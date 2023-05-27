@@ -36,9 +36,9 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
         <div className="flex items-center justify-center bg-grayBackground h-24 w-24 rounded-lg">
           <Image src={imgpackage} alt="package" />
         </div>
-        <div className="flex flex-col gap-[0.20rem] w-[63%]">
+        <div className="flex flex-col gap-[0.20rem] w-[65%]">
           <div className="flex gap-9">
-            <p className="text-greyText font-bold text-sm">
+            <p className="text-greyText font-bold text-sm w-[75%]">
               Destino:{" "}
               <span className="text-greyText font-normal text-sm">{`${destination}`}</span>
             </p>
@@ -47,7 +47,7 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
                 icon={
                   <BsFillTrash3Fill
                     className="fill-redIcon hover:fill-hoverRedIcon"
-                    size={20}
+                    size={18}
                   />
                 }
                 {...iconProps}
