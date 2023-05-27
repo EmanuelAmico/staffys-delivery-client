@@ -2,36 +2,46 @@ import React, { FC } from "react";
 import Image from "next/image";
 import Button from "@/commons/Button";
 import TextInput from "@/commons/InputText";
+import Layout from "@/commons/Layout";
 import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
+import Link from "@/commons/Link";
 
-const page: FC = () => {
+const Register: FC = () => {
   return (
-    <div className="flex flex-col h-screen ">
-      <div className="flex w-full justify-center h-[18rem]  items-center">
-        <Image src={logoFastDelivery} alt="Logo Fast Delivery" width="200" />
+    <Layout className="h-screen">
+      <div className="flex justify-center items-center h-[30%]">
+        <Image
+          src={logoFastDelivery}
+          alt="Logo Fast Delivery"
+          width={200}
+          priority
+        />
       </div>
-      <form className="flex flex-col items-center">
-        <TextInput name="Nombre" placeHolder="Nombre" label="Nombre" />
-        <TextInput name="Apellido" placeHolder="Apellido" label="Apellido" />
-        <TextInput name="Email" placeHolder="Email" label="Email" />
+      <form className="pt-5 pb-5">
+        <TextInput label="Nombre" name="name" placeholder="Nombre" />
+        <TextInput label="Apellido" name="lastname" placeholder="Apellido" />
+        <TextInput label="Email" name="email" placeholder="staffys@gmail.com" />
         <TextInput
-          name="Constraseña"
-          hidden
-          placeHolder="Contraseña"
           label="Contraseña"
+          name="password"
+          placeholder="Contraseña"
+          hidden
         />
         <TextInput
-          name="Segunda Contraseña"
+          label="Confimación Contraseña"
+          name="passwordConfirmation"
+          placeholder="Confimación"
           hidden
-          placeHolder="Segunda Contraseña"
-          label="Segunda Contraseña"
         />
-        <div className="w-full flex justify-center ">
-          <Button className="mt-8 w-11/12 ">Registrar</Button>
-        </div>
+        <Button className="w-[100%] font-medium mt-5">Registrarse</Button>
       </form>
-    </div>
+      <div className="flex flex-col items-center">
+        <Link href="/login" className="text-lg font-medium">
+          Regresar
+        </Link>
+      </div>
+    </Layout>
   );
 };
 
-export default page;
+export default Register;

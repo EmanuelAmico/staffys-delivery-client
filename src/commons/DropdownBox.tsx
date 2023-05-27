@@ -1,71 +1,52 @@
-"use client";
-import React, { useState, CSSProperties } from "react";
+import React, { useState, CSSProperties, FC } from "react";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
-interface IDropdownBox {
+import IconButton from "./IconButton";
+
+interface DropdownBoxProps {
   title: string;
   description?: string;
   children?: JSX.Element | JSX.Element[];
-  titleColor?: string;
-  descriptionColor?: string;
   className?: string;
   style?: CSSProperties;
-  onClick?: () => void;
 }
 
-const DropdownBox: React.FC<IDropdownBox> = ({
+const DropdownBox: FC<DropdownBoxProps> = ({
   title,
   description,
   children,
-  titleColor,
-  descriptionColor,
   className,
   style,
-  onClick,
 }) => {
   const [arrowButton, setArrowButton] = useState(false);
-  const handleArrowButton = () => {
-    setArrowButton(!arrowButton);
-  };
+
   return (
     <div
-      className={`w-[90%] rounded-lg shadow-md ${
+      className={`bg-whiteBackground rounded-lg shadow-md flex items-center ${
         !arrowButton ? "h-[7rem] " : "min-h-[7rem]"
-      } bg-white flex justify-start items-center ${className || ""}`}
+      } 
+        ${className || ""}`}
       style={style}
       onClick={onClick}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === "Enter" && onClick && onClick()}
     >
-      <div className=" w-[100%] ml-5 mr-5 mt-2 mb-2">
-        <div className="relative">
-          <h1
-            className={`${
-              titleColor ? titleColor : "text-black"
-            } text-2xl font-bold`}
-          >
-            {title}
-          </h1>
+      <div className="flex flex-col p-4 w-full gap-1">
+        <div className="flex items-center justify-between">
+          <h1 className="text-lg font-bold">{title}</h1>
           {!arrowButton ? (
-            <IoMdArrowDropdown
-              onClick={handleArrowButton}
-              className="text-black absolute right-1 top-0 text-4xl"
+            <IconButton
+              icon={<IoMdArrowDropdown size={25} />}
+              onClick={() => setArrowButton(!arrowButton)}
             />
           ) : (
-            <IoMdArrowDropup
-              onClick={handleArrowButton}
-              className="text-black absolute right-1 top-0 text-4xl"
+            <IconButton
+              icon={<IoMdArrowDropup size={25} />}
+              onClick={() => setArrowButton(!arrowButton)}
             />
           )}
         </div>
-
-        <div className=" mt-1 text-1xl">
-          <p
-            className={`${descriptionColor ? descriptionColor : "text-black"}`}
-          >
-            {description}
-          </p>
-        </div>
+        <p className={"text-sm"}>{description}</p>
         {arrowButton ? <div>{children}</div> : null}
       </div>
     </div>

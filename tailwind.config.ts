@@ -19,6 +19,7 @@ export default {
         salmonText: "#FF6B6B",
         greyText: "#4F4F4F",
         greenText: "#96DB76",
+        redText: "#DC2626",
         pageBackground: "#F5F5F5",
         grayBackground: "#E0E0E0",
         whiteBackground: "#FFFFFF",
