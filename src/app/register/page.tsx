@@ -101,9 +101,9 @@ const Register: FC = () => {
           hidden
         />
         <TextInput
-          label="Confimación Contraseña"
+          label="Confirmación de contraseña"
           name="passwordConfirmation"
-          placeholder="Confimación"
+          placeholder="Confirmación"
           {...passwordConfirmation}
           hidden
         />
