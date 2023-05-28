@@ -32,37 +32,37 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
     <div
       className={`bg-whiteBackground rounded-lg shadow-md ${className || ""}`}
     >
-      <div className="flex items-center gap-4 p-4">
-        <div className="flex items-center justify-center bg-grayBackground h-32 w-32 rounded-lg">
+      <div className="flex items-center gap-3 p-3">
+        <div className="flex items-center justify-center bg-grayBackground h-24 w-24 rounded-lg">
           <Image src={imgpackage} alt="package" />
         </div>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-[0.20rem] w-[65%]">
           <div className="flex gap-9">
-            <p className="text-greyText font-bold">
+            <p className="text-greyText font-bold text-sm w-[75%]">
               Destino:{" "}
-              <span className="text-greyText font-normal">{`${destination}`}</span>
+              <span className="text-greyText font-normal text-sm">{`${destination}`}</span>
             </p>
             {trash ? (
               <IconButton
                 icon={
                   <BsFillTrash3Fill
                     className="fill-redIcon hover:fill-hoverRedIcon"
-                    size={20}
+                    size={18}
                   />
                 }
                 {...iconProps}
               />
             ) : null}
           </div>
-          <p className="text-greyText font-bold">
+          <p className="text-greyText font-bold text-sm">
             Recibe:{" "}
-            <span className="text-greyText font-normal">{`${addressee}`}</span>
+            <span className="text-greyText font-normal text-sm">{`${addressee}`}</span>
           </p>
-          <p className="text-greyText font-bold">
+          <p className="text-greyText font-bold text-sm">
             Distancia:{" "}
-            <span className="text-greyText font-normal">{`${distance}`}</span>
+            <span className="text-greyText font-normal text-sm">{`${distance}`}</span>
           </p>
-          <div className="self-end pt-3">
+          <div className="self-end pt-1">
             {status ? (
               status === "in progress" ? (
                 <p className="font-bold text-yellowText">En curso</p>
@@ -70,7 +70,10 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
                 <p className="font-bold ">Entregado</p>
               )
             ) : (
-              <Button className={"text-xs"} {...buttonProps}>
+              <Button
+                className={"text-[0.70rem] py-[0.20rem]"}
+                {...buttonProps}
+              >
                 {buttonText}
               </Button>
             )}

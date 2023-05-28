@@ -16,14 +16,14 @@ const Button: FC<ButtonProps> = ({
     <button
       className={`flex justify-center items-center uppercase px-4 py-1.5 rounded text-whiteText shadow-md transition-colors ${
         disabled
-          ? "bg-gray-400 cursor-default"
-          : "bg-primaryBlue hover:bg-blue-600 active:bg-blue-700"
+          ? "bg-disableButton cursor-default"
+          : "bg-primaryBlue hover:bg-hoverBlue active:bg-activeBlue"
       } ${className || ""}`}
       {...buttonProps}
     >
       {loading && (
         <svg
-          className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+          className="animate-spin -ml-1 mr-3 h-5 w-5 text-whiteText"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

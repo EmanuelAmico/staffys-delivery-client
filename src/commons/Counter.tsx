@@ -11,7 +11,7 @@ const Counter: FC<CounterProps> = ({ title, count }) => {
       <p className="mb-1 text-center font-bold">{title}</p>
       <p
         className={`text-center font-bold ${
-          count <= 0 ? "text-red-600" : "text-greenText"
+          count <= 0 ? "text-redText" : "text-greenText"
         }`}
       >
         {count}
