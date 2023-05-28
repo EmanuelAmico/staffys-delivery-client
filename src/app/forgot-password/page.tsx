@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
+import React, { FormEvent, MouseEvent, useState } from "react";
 import TextInput from "@/commons/InputText";
 import Button from "@/commons/Button";
 import Layout from "@/commons/Layout";
