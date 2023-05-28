@@ -2,7 +2,7 @@ import { StrictUnion } from "./helper.types";
 import { ChangeEvent, FocusEvent } from "react";
 
 export interface UseInputParameters {
-  validation: {
+  validators: {
     type: "email" | "password" | "notEmpty";
     errorMessage: string;
   }[];

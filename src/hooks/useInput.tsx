@@ -1,7 +1,7 @@
 import { UseInput } from "@/types/useInput.types";
 import { ChangeEvent, useCallback, useState } from "react";
 
-const useInput: UseInput = function useInput({ validation, extraValidator }) {
+const useInput: UseInput = function useInput({ validators, extraValidator }) {
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
 
@@ -11,7 +11,7 @@ const useInput: UseInput = function useInput({ validation, extraValidator }) {
   );
 
   const onBlur = useCallback(() => {
-    for (const { type, errorMessage } of validation) {
+    for (const { type, errorMessage } of validators) {
       switch (type) {
         case "email":
           if (!/\S+@\S+\.\S+/.test(value)) setError(errorMessage);
@@ -30,7 +30,7 @@ const useInput: UseInput = function useInput({ validation, extraValidator }) {
       const { isValid, errorMessage } = extraValidator(value);
       if (!isValid) setError(errorMessage);
     }
-  }, [validation, extraValidator, value]);
+  }, [validators, extraValidator, value]);
 
   const onFocus = useCallback(() => setError(""), []);
 

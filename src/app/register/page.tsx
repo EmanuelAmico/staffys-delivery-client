@@ -10,7 +10,7 @@ import useInput from "@/hooks/useInput";
 
 const Register: FC = () => {
   const name = useInput({
-    validation: [
+    validators: [
       {
         type: "notEmpty",
         errorMessage: "El nombre es requerido",
@@ -18,7 +18,7 @@ const Register: FC = () => {
     ],
   });
   const lastName = useInput({
-    validation: [
+    validators: [
       {
         type: "notEmpty",
         errorMessage: "El apellido es requerido",
@@ -26,7 +26,7 @@ const Register: FC = () => {
     ],
   });
   const email = useInput({
-    validation: [
+    validators: [
       {
         type: "notEmpty",
         errorMessage: "El email es requerido",
@@ -38,7 +38,7 @@ const Register: FC = () => {
     ],
   });
   const password = useInput({
-    validation: [
+    validators: [
       {
         type: "notEmpty",
         errorMessage: "La contraseña es requerida",
@@ -51,7 +51,7 @@ const Register: FC = () => {
     ],
   });
   const passwordConfirmation = useInput({
-    validation: [
+    validators: [
       {
         type: "notEmpty",
         errorMessage: "La confirmación de contraseña es requerida",
