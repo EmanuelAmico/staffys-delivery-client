@@ -3,7 +3,7 @@ import Image from "next/image";
 import Layout from "@/commons/Layout";
 import Button from "@/commons/Button";
 import Link from "@/commons/Link";
-import InputText from "@/commons/InputText";
+import TextInput from "@/commons/InputText";
 import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
 
 const Login: FC = () => {
@@ -18,12 +18,12 @@ const Login: FC = () => {
         />
       </div>
       <form className="pt-16 pb-5">
-        <InputText
+        <TextInput
           label="Usuario"
           name="email"
           placeholder="staffys@gmail.com"
         />
-        <InputText
+        <TextInput
           label="Contraseña"
           name="password"
           placeholder="Contraseña"
