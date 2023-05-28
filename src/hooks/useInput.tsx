@@ -1,31 +1,5 @@
-import { StrictUnion } from "@/types/helper.types";
-import { ChangeEvent, FocusEvent, useCallback, useState } from "react";
-
-interface UseInputParameters {
-  validation: {
-    type: "email" | "password" | "notEmpty";
-    errorMessage: string;
-  }[];
-  extraValidator?: (value: string) => StrictUnion<
-    | {
-        isValid: false;
-        errorMessage: string;
-      }
-    | { isValid: true }
-  >;
-}
-
-interface UseInputReturnValues {
-  value: string;
-  error: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (event: FocusEvent<HTMLInputElement>) => void;
-  onFocus: (event: FocusEvent<HTMLInputElement>) => void;
-}
-
-interface UseInput {
-  (parameters: UseInputParameters): UseInputReturnValues;
-}
+import { UseInput } from "@/types/useInput.types";
+import { ChangeEvent, useCallback, useState } from "react";
 
 const useInput: UseInput = function useInput({ validation, extraValidator }) {
   const [value, setValue] = useState("");
