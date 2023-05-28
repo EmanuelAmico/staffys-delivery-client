@@ -15,7 +15,7 @@ interface UseInputParameters {
   >;
 }
 
-interface UseInputReturnParameters {
+interface UseInputReturnValues {
   value: string;
   error: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -24,7 +24,7 @@ interface UseInputReturnParameters {
 }
 
 interface UseInput {
-  (parameters: UseInputParameters): UseInputReturnParameters;
+  (parameters: UseInputParameters): UseInputReturnValues;
 }
 
 const useInput: UseInput = function useInput({ validation, extraValidator }) {
