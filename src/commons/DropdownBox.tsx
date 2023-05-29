@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, CSSProperties, FC } from "react";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import IconButton from "./IconButton";
@@ -26,10 +27,8 @@ const DropdownBox: FC<DropdownBoxProps> = ({
       } 
         ${className || ""}`}
       style={style}
-      onClick={onClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && onClick && onClick()}
     >
       <div className="flex flex-col p-4 w-full gap-1">
         <div className="flex items-center justify-between">
