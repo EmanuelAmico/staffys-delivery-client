@@ -1,8 +1,10 @@
+"use client";
+
 import React, { useState, CSSProperties, FC } from "react";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import IconButton from "./IconButton";
 
-interface DropdownBoxProps {
+export interface DropdownBoxProps {
   title: string;
   description?: string;
   children?: JSX.Element | JSX.Element[];
@@ -26,10 +28,8 @@ const DropdownBox: FC<DropdownBoxProps> = ({
       } 
         ${className || ""}`}
       style={style}
-      onClick={onClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && onClick && onClick()}
     >
       <div className="flex flex-col p-4 w-full gap-1">
         <div className="flex items-center justify-between">
@@ -46,7 +46,7 @@ const DropdownBox: FC<DropdownBoxProps> = ({
             />
           )}
         </div>
-        <p className={"text-sm"}>{description}</p>
+        <p className={"text-sm pb-4"}>{description}</p>
         {arrowButton ? <div>{children}</div> : null}
       </div>
     </div>

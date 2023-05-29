@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Image from "next/image";
 import Button from "@/commons/Button";
-import TextInput from "@/commons/InputText";
+import TextInput from "@/commons/TextInput";
 import Layout from "@/commons/Layout";
 import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
 import Link from "@/commons/Link";

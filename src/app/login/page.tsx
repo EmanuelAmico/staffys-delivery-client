@@ -3,7 +3,7 @@ import Image from "next/image";
 import Layout from "@/commons/Layout";
 import Button from "@/commons/Button";
 import Link from "@/commons/Link";
-import TextInput from "@/commons/InputText";
+import TextInput from "@/commons/TextInput";
 import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
 
 const Login: FC = () => {
