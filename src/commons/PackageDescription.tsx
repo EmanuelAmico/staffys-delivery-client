@@ -6,14 +6,16 @@ export interface PackageDescriptionProps {
   packageId?: string;
   recipient?: string;
   coordinates?: string;
+  className?: string;
 }
 const PackageDescription: FC<PackageDescriptionProps> = ({
   destination,
   packageId,
   recipient,
+  className,
 }) => {
   return (
-    <div className="flex justify-center flex-col gap-6">
+    <div className={`flex justify-center flex-col gap-6 ${className || ""}`}>
       <div className="flex justify-center items-center">
         <Image
           src={"/svg/mapcoordinatesdelivery.svg"}

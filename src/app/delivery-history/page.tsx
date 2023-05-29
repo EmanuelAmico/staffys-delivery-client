@@ -1,24 +1,34 @@
-import React, { FC } from "react";
-
-import InputText from "@/commons/InputText";
+"use client";
+import React from "react";
+import InputText from "@/commons/TextInput";
 import Layout from "@/commons/Layout";
 import Button from "@/commons/Button";
 import DeliveryPackageCard from "@/commons/DeliveryPackageCard";
-import { deliveryPackages } from "@/utils/FakeDataDeliveryPackages";
+import { deliveryHistory } from "@/utils/FakeDataDeliveryHistory";
 import IconButton from "@/commons/IconButton";
 import { RiArrowLeftSLine } from "react-icons/ri";
+import { useRouter } from "next/navigation";
 
-const page: FC = () => {
+const DeliveryHistory = () => {
+  const { back } = useRouter();
+
   return (
-    <Layout className="h-[93%] bg-pageBackground">
+    <Layout className="h-[93%]">
       <div>
-        <IconButton icon={<RiArrowLeftSLine size={40} />} />
+        <IconButton
+          onClick={() => back()}
+          icon={<RiArrowLeftSLine size={40} />}
+        />
       </div>
       <div className="flex flex-col gap-6 mb-4 mt-3">
         <div className="flex flex-row gap-2 ">
           <Button className="w-11/12 ">Direccion</Button>
-          <Button className="w-11/12 ">Destinatario</Button>
-          <Button className="w-11/12 ">ID</Button>
+          <Button className="w-11/12 " disabled>
+            Destinatario
+          </Button>
+          <Button className="w-11/12 " disabled>
+            ID
+          </Button>
         </div>
         <InputText
           name="search"
@@ -28,21 +38,17 @@ const page: FC = () => {
       </div>
 
       <div className="pt-4 mb-4 px-4 border-t-2 overflow-y-scroll">
-        {deliveryPackages.map((deliveryPackage) => (
-          <>
-            <DeliveryPackageCard
-              className="mb-4"
-              key={deliveryPackage.id}
-              {...deliveryPackage}
-            />
-            {deliveryPackage !== deliveryPackages.at(-1) && (
+        {deliveryHistory.map((deliveryPackage) => (
+          <div key={deliveryPackage.id}>
+            <DeliveryPackageCard className="mb-4" {...deliveryPackage} />
+            {deliveryPackage !== deliveryHistory.at(-1) && (
               <hr className="mb-4" />
             )}
-          </>
+          </div>
         ))}
       </div>
     </Layout>
   );
 };
 
-export default page;
+export default DeliveryHistory;

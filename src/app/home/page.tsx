@@ -39,6 +39,7 @@ const Home = () => {
         description="Ya repartiste 6 paquetes"
         delivery={false}
         packages={deliveryHistory}
+        pathButton="/delivery-history"
       />
     </Layout>
   );
