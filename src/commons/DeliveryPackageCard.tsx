@@ -15,6 +15,7 @@ interface DeliveryPackageCardProps {
   buttonProps?: ButtonProps;
   iconProps?: IconButtonProps;
   className?: string;
+  onClick?: () => void;
 }
 
 const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
@@ -27,10 +28,15 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
   buttonProps,
   iconProps,
   className,
+  onClick,
 }) => {
   return (
     <div
       className={`bg-whiteBackground rounded-lg shadow-md ${className || ""}`}
+      onClick={onClick}
+      tabIndex={0}
+      role="button"
+      onKeyDown={(e) => e.key === "Enter" && onClick && onClick()}
     >
       <div className="flex items-center gap-3 p-3">
         <div className="flex items-center justify-center bg-grayBackground h-24 w-24 rounded-lg">
