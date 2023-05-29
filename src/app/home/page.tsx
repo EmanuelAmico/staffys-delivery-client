@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import DeliverysCard from "@/components/DeliverysCard";
 import Layout from "@/commons/Layout";
