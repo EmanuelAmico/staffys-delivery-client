@@ -1,8 +1,9 @@
 "use client";
 import React, { FormEvent, MouseEvent, useState } from "react";
-import TextInput from "@/commons/InputText";
+import TextInput from "@/commons/TextInput";
 import Button from "@/commons/Button";
 import Layout from "@/commons/Layout";
+import Link from "@/commons/Link";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -39,6 +40,11 @@ const ForgotPassword = () => {
             />
             <Button className="w-[100%] font-medium mt-5">Enviar</Button>
           </form>
+          <div className="flex justify-center items-center">
+            <Link href="/login" className="text-lg font-medium">
+              Regresar
+            </Link>
+          </div>
         </div>
       ) : (
         <div className="flex flex-col justify-center gap-4">
@@ -58,6 +64,11 @@ const ForgotPassword = () => {
             />
             <Button className="w-[100%] font-medium mt-5">Enviar</Button>
           </form>
+          <div className="flex justify-center items-center">
+            <Link href="/login" className="text-lg font-medium">
+              Regresar
+            </Link>
+          </div>
         </div>
       )}
     </Layout>
