@@ -11,13 +11,13 @@ import { RiArrowLeftSLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 
 const GetPackage = () => {
-  const { push } = useRouter();
+  const { back } = useRouter();
 
   return (
     <Layout className="overflow-y-scroll">
       <div className="flex justify-between">
         <IconButton
-          onClick={() => push("/home")}
+          onClick={() => back()}
           icon={<RiArrowLeftSLine size={40} />}
         />
         <Counter title="Paquetes restantes" count={10} />
