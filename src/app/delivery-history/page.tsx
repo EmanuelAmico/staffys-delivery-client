@@ -11,7 +11,7 @@ import { RiArrowLeftSLine } from "react-icons/ri";
 const page: FC = () => {
   return (
     <Layout className="h-[93%] bg-pageBackground">
-      <div className="">
+      <div>
         <IconButton icon={<RiArrowLeftSLine size={40} />} />
       </div>
       <div className="flex flex-col gap-6 mb-4 mt-3">
@@ -21,7 +21,7 @@ const page: FC = () => {
           <Button className="w-11/12 ">ID</Button>
         </div>
         <InputText
-          name="searcher"
+          name="search"
           placeholder="Inserte su búsqueda"
           label="Filtrar Pedido"
         />
