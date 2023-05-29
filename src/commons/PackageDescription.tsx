@@ -2,10 +2,10 @@ import React, { FC } from "react";
 import Image from "next/image";
 
 export interface PackageDescriptionProps {
-  destination: string;
-  packageId: string;
-  recipient: string;
-  coordinates: string;
+  destination?: string;
+  packageId?: string;
+  recipient?: string;
+  coordinates?: string;
 }
 const PackageDescription: FC<PackageDescriptionProps> = ({
   destination,
@@ -13,8 +13,8 @@ const PackageDescription: FC<PackageDescriptionProps> = ({
   recipient,
 }) => {
   return (
-    <div className="flex h-[28rem]  justify-center flex-col ">
-      <div className="flex justify-center  h-[22rem] items-center">
+    <div className="flex justify-center flex-col gap-6">
+      <div className="flex justify-center items-center">
         <Image
           src={"/svg/mapcoordinatesdelivery.svg"}
           alt="map"
