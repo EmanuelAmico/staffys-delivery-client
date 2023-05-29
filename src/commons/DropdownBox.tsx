@@ -27,8 +27,6 @@ const DropdownBox: FC<DropdownBoxProps> = ({
       } 
         ${className || ""}`}
       style={style}
-      role="button"
-      tabIndex={0}
     >
       <div className="flex flex-col p-4 w-full gap-1">
         <div className="flex items-center justify-between">
