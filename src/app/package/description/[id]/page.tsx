@@ -12,16 +12,14 @@ const page: FC = () => {
       <div className="w-full mt-3">
         <IconButton icon={<RiArrowLeftSLine size={40} />} />
       </div>
-      <div className="flex justify-center bg-white w-[90%] mt-8 rounded-lg shadow-lg h-[37rem] ">
-        <Card title={"Reparto finalizado"}>
-          <PackageDescription
-            destination="Amenabar 2356, Caba"
-            packageId="712"
-            recipient="Raul Rodriguez"
-            coordinates="24,25"
-          />
-        </Card>
-      </div>
+      <Card title="Reparto finalizado">
+        <PackageDescription
+          destination="Amenabar 2356, Caba"
+          packageId="712"
+          recipient="Raul Rodriguez"
+          coordinates="24,25"
+        />
+      </Card>
     </Layout>
   );
 };
