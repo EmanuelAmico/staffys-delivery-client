@@ -26,11 +26,11 @@ const ForgotPassword = () => {
           <h1 className="m-auto font-bold text-2xl">
             ¿Olvidaste tu contraseña?
           </h1>
-          <p className="text-1xl">
+          <p className="text-1xl text-center">
             Ingresa tu dirección de email y te enviaremos un codigo para
             restablecer tu contraseña.
           </p>
-          <form onSubmit={handleSubmit}>
+          <form autoComplete="off" onSubmit={handleSubmit}>
             <TextInput
               onChange={(e) => setEmail(e.target.value)}
               value={email}
@@ -50,8 +50,8 @@ const ForgotPassword = () => {
         <div className="flex flex-col justify-center gap-4">
           <h1 className="m-auto font-bold text-2xl">Restablecer contraseña</h1>
           <div className="flex flex-col justify-center items-center">
-            <p className="text-1xl">Ingresa el código que enviamos a:</p>
-            <p className="font-medium text-1xl">{email}</p>
+            <p className="text-1xl">Ingresa el código enviado al email:</p>
+            <p className="font-bold text-1xl">{email}</p>
           </div>
           <form>
             <TextInput
