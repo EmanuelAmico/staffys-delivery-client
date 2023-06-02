@@ -13,27 +13,27 @@ interface DeliverysCardPropsWithDelivery
   extends DropdownBoxProps,
     PackageDescriptionProps {
   className?: string;
-  delivery: true;
   packages?: DeliveryFakeData[];
   buttonProps?: ButtonProps;
   buttonText?: string;
+  delivery: true;
 }
 
 interface DeliverysCardPropsWithoutDelivery
   extends DropdownBoxProps,
     PackageDescriptionProps {
   className?: string;
-  delivery: false;
   packages?: DeliveryFakeData[];
   buttonProps?: ButtonProps;
   pathButton?: string;
+  delivery: false;
 }
 
 type DeliverysCardProps = StrictUnion<
   DeliverysCardPropsWithDelivery | DeliverysCardPropsWithoutDelivery
 >;
 
-const DeliverysCard: FC<DeliverysCardProps> = ({
+const DeliveryCollapsibleBox: FC<DeliverysCardProps> = ({
   title,
   description,
   delivery,
@@ -100,4 +100,4 @@ const DeliverysCard: FC<DeliverysCardProps> = ({
   );
 };
 
-export default DeliverysCard;
+export default DeliveryCollapsibleBox;

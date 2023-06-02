@@ -1,8 +1,5 @@
 import React from "react";
-import { Inter } from "next/font/google";
 import "../styles/global.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Staffys Delivery",
@@ -17,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

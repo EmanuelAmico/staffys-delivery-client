@@ -1,11 +1,11 @@
 "use client";
+import React from "react";
 import Button from "@/commons/Button";
 import Counter from "@/commons/Counter";
 import DeliveryPackageCard from "@/commons/DeliveryPackageCard";
 import IconButton from "@/commons/IconButton";
 import Layout from "@/commons/Layout";
 import { deliveryPackages } from "@/utils/FakeDataDeliveryPackages";
-import React from "react";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 
@@ -13,7 +13,7 @@ const GetPackage = () => {
   const { back } = useRouter();
 
   return (
-    <Layout className="overflow-y-scroll">
+    <Layout>
       <div className="flex justify-between">
         <IconButton
           onClick={() => back()}

@@ -4,8 +4,8 @@ import InputText from "@/commons/TextInput";
 import Layout from "@/commons/Layout";
 import Button from "@/commons/Button";
 import DeliveryPackageCard from "@/commons/DeliveryPackageCard";
-import { deliveryHistory } from "@/utils/FakeDataDeliveryHistory";
 import IconButton from "@/commons/IconButton";
+import { deliveryHistory } from "@/utils/FakeDataDeliveryHistory";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 
@@ -13,7 +13,7 @@ const DeliveryHistory = () => {
   const { back } = useRouter();
 
   return (
-    <Layout className="h-[93%]">
+    <Layout>
       <div>
         <IconButton
           onClick={() => back()}

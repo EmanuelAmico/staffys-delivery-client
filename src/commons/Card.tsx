@@ -8,7 +8,7 @@ export interface CardProps {
 const Card: FC<CardProps> = ({ title, children, className }) => {
   return (
     <div className={`p-4 shadow-md rounded ${className || ""}`}>
-      <h1 className="font-bold text-2xl">{title}</h1>
+      <h1 className="font-bold text-xl">{title}</h1>
       {children}
     </div>
   );
