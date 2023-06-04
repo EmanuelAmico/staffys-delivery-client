@@ -9,7 +9,7 @@ import { StrictUnion } from "@/types/helper.types";
 import { DeliveryFakeData } from "@/utils/FakeDataDeliveryPending";
 import { useRouter } from "next/navigation";
 
-interface DeliverysCardPropsWithDelivery
+interface DeliveryCollapsibleBoxWithDelivery
   extends DropdownBoxProps,
     PackageDescriptionProps {
   className?: string;
@@ -19,7 +19,7 @@ interface DeliverysCardPropsWithDelivery
   delivery: true;
 }
 
-interface DeliverysCardPropsWithoutDelivery
+interface DeliveryCollapsibleBoxWithoutDelivery
   extends DropdownBoxProps,
     PackageDescriptionProps {
   className?: string;
@@ -29,11 +29,11 @@ interface DeliverysCardPropsWithoutDelivery
   delivery: false;
 }
 
-type DeliverysCardProps = StrictUnion<
-  DeliverysCardPropsWithDelivery | DeliverysCardPropsWithoutDelivery
+type DeliveryCollapsibleBoxProps = StrictUnion<
+  DeliveryCollapsibleBoxWithDelivery | DeliveryCollapsibleBoxWithoutDelivery
 >;
 
-const DeliveryCollapsibleBox: FC<DeliverysCardProps> = ({
+const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
   title,
   description,
   delivery,

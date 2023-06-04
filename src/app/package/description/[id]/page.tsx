@@ -12,12 +12,11 @@ const SinglePackageDescription = () => {
 
   return (
     <Layout className="items-center">
-      <div className="w-full">
-        <IconButton
-          onClick={() => back()}
-          icon={<RiArrowLeftSLine size={40} />}
-        />
-      </div>
+      <IconButton
+        onClick={() => back()}
+        icon={<RiArrowLeftSLine size={40} />}
+        className="self-start"
+      />
       <Card title="Reparto finalizado">
         <PackageDescription
           className="pt-6"
