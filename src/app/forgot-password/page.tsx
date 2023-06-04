@@ -20,7 +20,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <Layout className="h-[90%] flex justify-center">
+    <Layout className="flex justify-center">
       {!fullField ? (
         <div className="flex flex-col justify-center gap-4">
           <h1 className="m-auto font-bold text-2xl">

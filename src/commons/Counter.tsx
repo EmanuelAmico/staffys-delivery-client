@@ -3,11 +3,12 @@ import React, { FC } from "react";
 interface CounterProps {
   title: string;
   count: number;
+  className?: string;
 }
 
-const Counter: FC<CounterProps> = ({ title, count }) => {
+const Counter: FC<CounterProps> = ({ title, count, className }) => {
   return (
-    <div>
+    <div className={`${className || ""}`}>
       <p className="mb-1 text-center font-bold">{title}</p>
       <p
         className={`text-center font-bold ${

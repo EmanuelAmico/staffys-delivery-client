@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import DeliverysCard from "@/components/DeliverysCard";
+import DeliveryCollapsibleBox from "@/components/DeliveryCollapsibleBox";
 import Layout from "@/commons/Layout";
 import Button from "@/commons/Button";
 import { deliveryHistory } from "@/utils/FakeDataDeliveryHistory";
@@ -18,7 +18,7 @@ const Home = () => {
       >
         Obtener paquetes
       </Button>
-      <DeliverysCard
+      <DeliveryCollapsibleBox
         title="Reparto en curso"
         description="Tienes un reparto en curso"
         destination="Amenabar 2356, Caba"
@@ -28,13 +28,13 @@ const Home = () => {
         buttonText="Finalizar"
         delivery={true}
       />
-      <DeliverysCard
+      <DeliveryCollapsibleBox
         title="Repartos pendientes"
-        description="No tenes 6 repartos pendientes"
+        description="Tienes 6 repartos pendientes"
         delivery={false}
         packages={deliveryPending}
       />
-      <DeliverysCard
+      <DeliveryCollapsibleBox
         title="Historial de repartos"
         description="Ya repartiste 6 paquetes"
         delivery={false}

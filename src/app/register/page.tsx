@@ -1,14 +1,14 @@
 "use client";
-import React, { FC } from "react";
-import Image from "next/image";
+import React from "react";
 import Button from "@/commons/Button";
 import TextInput from "@/commons/TextInput";
 import Layout from "@/commons/Layout";
-import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
 import Link from "@/commons/Link";
 import useInput from "@/hooks/useInput";
+import Image from "next/image";
+import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
 
-const Register: FC = () => {
+const Register = () => {
   const name = useInput({
     validators: [
       {
@@ -79,7 +79,7 @@ const Register: FC = () => {
           priority
         />
       </div>
-      <form className="pt-5 pb-5">
+      <form autoComplete="off" className="pt-5 pb-5">
         <TextInput label="Nombre" name="name" placeholder="Nombre" {...name} />
         <TextInput
           label="Apellido"
