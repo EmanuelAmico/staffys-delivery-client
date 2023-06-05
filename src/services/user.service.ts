@@ -19,7 +19,7 @@ export class UserService {
   }
   static async deleteUser(id: string) {
     await waitRandomSeconds();
-    return { message: `User with id:${id} has been deleted` };
+    return { message: `User with id: ${id} has been deleted` };
   }
   static async editUser(
     name: string,
@@ -37,17 +37,17 @@ export class UserService {
   }
   static async startDelivery(id: string) {
     await waitRandomSeconds();
-    return { message: `the delivery of id:${id} has started` };
+    return { message: `the delivery of id: ${id} has started` };
   }
 
   static async finishDelivery(id: string) {
     await waitRandomSeconds();
 
-    return { message: `the delivery of id:${id} has finished` };
+    return { message: `the delivery of id: ${id} has finished` };
   }
 
   static async cancelDelivery(id: string) {
     await waitRandomSeconds();
-    return { message: `the delivery of id:${id} has been cancelled` };
+    return { message: `the delivery of id: ${id} has been cancelled` };
   }
 }

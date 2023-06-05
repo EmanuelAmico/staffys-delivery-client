@@ -6,7 +6,7 @@ import { waitRandomSeconds } from "../utils/wait";
 export class PackageService {
   static async getPackageById(id: string) {
     await waitRandomSeconds();
-    return { message: `the package id:${id} has been add` };
+    return { message: `the package id: ${id} has been added` };
   }
 
   static async getAvailablePackages() {
@@ -25,7 +25,7 @@ export class PackageService {
 
   static async takePackage(id: string) {
     await waitRandomSeconds();
-    return { message: `the package id:${id} has taken` };
+    return { message: `the package id: ${id} has been taken` };
   }
   static async deletePackage(id: string) {
     await waitRandomSeconds();
