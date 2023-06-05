@@ -18,12 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SkeletonTheme>
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en">
+      <body className={inter.className}>
+        <SkeletonTheme>
           <CheckRefreshProvider>{children}</CheckRefreshProvider>
-        </body>
-      </html>
-    </SkeletonTheme>
+        </SkeletonTheme>
+      </body>
+    </html>
   );
 }
