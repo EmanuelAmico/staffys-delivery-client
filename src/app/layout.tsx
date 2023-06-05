@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import { Inter } from "next/font/google";
 import "../styles/global.css";
-
+import { SkeletonTheme } from "react-loading-skeleton";
+import CheckRefreshProvider from "../context/refresh";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -16,8 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <SkeletonTheme>
+      <html lang="en">
+        <body className={inter.className}>
+          <CheckRefreshProvider>{children}</CheckRefreshProvider>
+        </body>
+      </html>
+    </SkeletonTheme>
   );
 }
