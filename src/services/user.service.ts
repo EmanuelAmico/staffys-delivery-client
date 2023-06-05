@@ -37,7 +37,7 @@ export class UserService {
   }
   static async startDelivery(id: string) {
     await waitRandomSeconds();
-    return { message: `the delivery of id:${id} has started` };
+    return { message: `the delivery of id: ${id} has started` };
   }
 
   static async finishDelivery(id: string) {
