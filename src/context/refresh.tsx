@@ -22,9 +22,9 @@ export const CheckRefreshContext = createContext(
 const CheckRefreshContextProvider: FC<CheckRefreshContextProps> = ({
   children,
 }) => {
-  const [isRefreshed, setIsRefreshed] = useState(false);
+  const [isRefreshed, setIsRefreshed] = useState(true);
 
-  const changeRefresh = () => setIsRefreshed(true);
+  const changeRefresh = () => setIsRefreshed(false);
 
   const value = { isRefreshed, changeRefresh };
 
