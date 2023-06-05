@@ -1,23 +1,22 @@
 "use client";
-import React, { FC } from "react";
+import React from "react";
 import IconButton from "@/commons/IconButton";
-import { RiArrowLeftSLine } from "react-icons/ri";
 import Card from "@/commons/Card";
 import PackageDescription from "@/commons/PackageDescription";
 import Layout from "@/commons/Layout";
+import { RiArrowLeftSLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 
-const SinglePackageDescription: FC = () => {
+const SinglePackageDescription = () => {
   const { back } = useRouter();
 
   return (
-    <Layout className="h-[93%] items-center">
-      <div className="w-full">
-        <IconButton
-          onClick={() => back()}
-          icon={<RiArrowLeftSLine size={40} />}
-        />
-      </div>
+    <Layout className="items-center">
+      <IconButton
+        onClick={() => back()}
+        icon={<RiArrowLeftSLine size={40} />}
+        className="self-start"
+      />
       <Card title="Reparto finalizado">
         <PackageDescription
           className="pt-6"

@@ -22,9 +22,7 @@ const DropdownBox: FC<DropdownBoxProps> = ({
 
   return (
     <div
-      className={`bg-whiteBackground rounded-lg shadow-md flex items-center ${
-        !arrowButton ? "h-[7rem] " : "min-h-[7rem]"
-      } 
+      className={`bg-whiteBackground rounded-lg shadow-md flex items-center 
         ${className || ""}`}
       style={style}
     >

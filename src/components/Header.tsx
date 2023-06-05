@@ -1,11 +1,7 @@
-import React, { FC, ReactNode } from "react";
+import React from "react";
 import Image from "next/image";
 
-interface NavbarProps {
-  children?: ReactNode;
-}
-
-const Header: FC<NavbarProps> = () => {
+const Header = () => {
   return (
     <div className="flex w-full h-[60px] items-center shadow-md relative">
       <div>
@@ -15,12 +11,13 @@ const Header: FC<NavbarProps> = () => {
           width={20}
           height={20}
           className="w-[80px] h-[60px]"
+          priority
         />
       </div>
       <div className="w-full absolute text-center">
         <p className="text-greyText">
-          <span className="text-greyText">FAST</span>
-          <span className="ml-1 text-yellowText">DELIVERY</span>
+          FAST
+          <span className="text-yellowText"> DELIVERY</span>
         </p>
       </div>
     </div>

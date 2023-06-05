@@ -43,8 +43,8 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
           <Image src={imgpackage} alt="package" />
         </div>
         <div className="flex flex-col gap-[0.20rem] w-[65%]">
-          <div className="flex gap-9">
-            <p className="text-greyText font-bold text-sm w-[75%]">
+          <div className="flex gap-9 justify-between">
+            <p className="text-greyText font-bold text-sm">
               Destino:{" "}
               <span className="text-greyText font-normal text-sm">{`${destination}`}</span>
             </p>

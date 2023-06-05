@@ -4,8 +4,8 @@ import InputText from "@/commons/TextInput";
 import Layout from "@/commons/Layout";
 import Button from "@/commons/Button";
 import DeliveryPackageCard from "@/commons/DeliveryPackageCard";
-import { deliveryHistory } from "@/utils/FakeDataDeliveryHistory";
 import IconButton from "@/commons/IconButton";
+import { deliveryHistory } from "@/utils/FakeDataDeliveryHistory";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 
@@ -13,13 +13,12 @@ const DeliveryHistory = () => {
   const { back } = useRouter();
 
   return (
-    <Layout className="h-[93%]">
-      <div>
-        <IconButton
-          onClick={() => back()}
-          icon={<RiArrowLeftSLine size={40} />}
-        />
-      </div>
+    <Layout>
+      <IconButton
+        onClick={() => back()}
+        icon={<RiArrowLeftSLine size={40} />}
+        className="self-start"
+      />
       <div className="flex flex-col gap-6 mb-4 mt-3">
         <div className="flex flex-row gap-2 ">
           <Button className="w-11/12 ">Direccion</Button>
@@ -30,13 +29,14 @@ const DeliveryHistory = () => {
             ID
           </Button>
         </div>
-        <InputText
-          name="search"
-          placeholder="Inserte su búsqueda"
-          label="Filtrar Pedido"
-        />
+        <form autoComplete="off">
+          <InputText
+            name="search"
+            placeholder="Inserte su búsqueda"
+            label="Filtrar Pedido"
+          />
+        </form>
       </div>
-
       <div className="pt-4 mb-4 px-4 border-t-2 overflow-y-scroll">
         {deliveryHistory.map((deliveryPackage) => (
           <div key={deliveryPackage.id}>
