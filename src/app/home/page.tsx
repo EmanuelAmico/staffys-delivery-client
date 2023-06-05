@@ -1,19 +1,24 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import DeliveryCollapsibleBox from "@/components/DeliveryCollapsibleBox";
 import Layout from "@/commons/Layout";
 import Button from "@/commons/Button";
 import { deliveryHistory } from "@/utils/FakeDataDeliveryHistory";
 import { deliveryPending } from "@/utils/FakeDataDeliveryPending";
 import { useRouter } from "next/navigation";
+import { CheckRefreshContext } from "@/context/refresh";
 
 const Home = () => {
   const { push } = useRouter();
+  const { changeRefresh } = useContext(CheckRefreshContext);
 
   return (
     <Layout className="flex gap-4">
       <Button
-        onClick={() => push("/package/get")}
+        onClick={() => {
+          changeRefresh();
+          push("/package/get");
+        }}
         className="font-medium w-full"
       >
         Obtener paquetes

@@ -1,5 +1,8 @@
+"use client";
 import React from "react";
 import "../styles/global.css";
+import { SkeletonTheme } from "react-loading-skeleton";
+import CheckRefreshProvider from "../context/refresh";
 
 export const metadata = {
   title: "Staffys Delivery",
@@ -17,7 +20,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <SkeletonTheme>
+          <CheckRefreshProvider>{children}</CheckRefreshProvider>
+        </SkeletonTheme>
+      </body>
     </html>
   );
 }
