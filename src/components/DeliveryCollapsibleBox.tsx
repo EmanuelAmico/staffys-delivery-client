@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import DeliveryPackageCard from "@/commons/DeliveryPackageCard";
 import DropdownBox, { DropdownBoxProps } from "@/commons/DropdownBox";
 import PackageDescription, {
@@ -8,6 +8,7 @@ import Button, { ButtonProps } from "@/commons/Button";
 import { StrictUnion } from "@/types/helper.types";
 import { DeliveryFakeData } from "@/utils/FakeDataDeliveryPending";
 import { useRouter } from "next/navigation";
+import { CheckRefreshContext } from "@/context/refresh";
 
 interface DeliveryCollapsibleBoxWithDelivery
   extends DropdownBoxProps,
@@ -45,9 +46,11 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
   buttonProps,
   buttonText,
   pathButton,
+
   className,
 }) => {
   const { push } = useRouter();
+  const { changeRefresh } = useContext(CheckRefreshContext);
 
   return (
     <div className={`${className || ""}`}>
@@ -72,9 +75,10 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
                   <DeliveryPackageCard
                     className="mb-4"
                     {...deliveryPackage}
-                    onClick={() =>
-                      push(`package/description/${deliveryPackage.id}`)
-                    }
+                    onClick={() => {
+                      changeRefresh();
+                      push(`package/description/${deliveryPackage.id}`);
+                    }}
                   />
                   {deliveryPackage !== packages.at(-1) && (
                     <hr className="mb-4" />
