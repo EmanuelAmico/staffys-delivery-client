@@ -87,7 +87,10 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
               ))}
               {pathButton ? (
                 <Button
-                  onClick={() => push(pathButton)}
+                  onClick={() => {
+                    changeRefresh();
+                    push(pathButton);
+                  }}
                   className="m-auto py-[0.20rem]"
                   {...buttonProps}
                 >
