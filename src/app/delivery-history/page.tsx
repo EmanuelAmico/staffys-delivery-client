@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import InputText from "@/commons/TextInput";
 import Layout from "@/commons/Layout";
 import Button from "@/commons/Button";
@@ -8,14 +8,16 @@ import IconButton from "@/commons/IconButton";
 import { deliveryHistory } from "@/utils/FakeDataDeliveryHistory";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
+import { CheckRefreshContext } from "@/context/refresh";
 
 const DeliveryHistory = () => {
-  const { back } = useRouter();
+  const router = useRouter();
+  const { isRefreshed } = useContext(CheckRefreshContext);
 
   return (
     <Layout>
       <IconButton
-        onClick={() => back()}
+        onClick={() => (isRefreshed ? router.push("/home") : router.back())}
         icon={<RiArrowLeftSLine size={40} />}
         className="self-start"
       />

@@ -15,9 +15,7 @@ const SinglePackageDescription = () => {
   return (
     <Layout className="items-center">
       <IconButton
-        onClick={() =>
-          isRefreshed ? router.push("/package/get") : router.back()
-        }
+        onClick={() => (isRefreshed ? router.push("/home") : router.back())}
         icon={<RiArrowLeftSLine size={40} />}
         className="self-start"
       />
