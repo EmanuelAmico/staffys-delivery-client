@@ -8,6 +8,7 @@ services:
     volumes:
       - ./src:/app/src
       - ./public:/app/public
+      - /app/node_modules
       - ./next.config.js:/app/next.config.js
       - ./postcss.config.js:/app/postcss.config.js
       - ./tailwind.config.ts:/app/tailwind.config.ts
@@ -16,3 +17,21 @@ services:
       - 3000:3000
     tty: true
     entrypoint: ["npm", "run", "dev"]
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: staffys_delivery_client
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+      - /app/node_modules
+      - /app/coverage
+      - ./next.config.js:/app/next.config.js
+      - ./postcss.config.js:/app/postcss.config.js
+      - ./tailwind.config.ts:/app/tailwind.config.ts
+    container_name: staffys_delivery_client_local_test
+    ports:
+      - 3000:3000
+    tty: true
+    entrypoint: ["npm", "run", "test:watch"]
