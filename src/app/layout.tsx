@@ -25,6 +25,11 @@ export default function RootLayout({
       <head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href={metadata.icons.favicon}
+        ></link>
       </head>
       <SkeletonTheme>
         <Provider store={store}>
