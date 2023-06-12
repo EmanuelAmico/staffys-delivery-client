@@ -53,7 +53,7 @@ const ForgotPassword = () => {
             <p className="text-1xl">Ingresa el código enviado al email:</p>
             <p className="font-bold text-1xl">{email}</p>
           </div>
-          <form>
+          <form autoComplete="off">
             <TextInput
               type="number"
               onChange={(e) => setCode(e.target.value)}

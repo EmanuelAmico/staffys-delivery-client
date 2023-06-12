@@ -1,7 +1,8 @@
-import React, { ComponentPropsWithoutRef, FC } from "react";
+import React, { FC } from "react";
 
-interface LayoutProps extends ComponentPropsWithoutRef<"div"> {
+interface LayoutProps {
   children: JSX.Element | JSX.Element[];
+  className?: string;
 }
 
 const Layout: FC<LayoutProps> = ({ children, className, ...layoutProps }) => {
