@@ -1,12 +1,19 @@
-import React from "react";
+"use client";
+import React, { FormEvent } from "react";
 import Layout from "@/commons/Layout";
 import Button from "@/commons/Button";
 import Link from "@/commons/Link";
 import TextInput from "@/commons/TextInput";
 import Image from "next/image";
 import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
+import axios from "axios";
 
 const Login = () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await axios.get("http://localhost:4000/");
+  };
+
   return (
     <Layout className="h-screen">
       <div className="flex justify-center items-end h-[30%]">
@@ -17,7 +24,7 @@ const Login = () => {
           priority
         />
       </div>
-      <form autoComplete="off" className="pt-16 pb-5">
+      <form autoComplete="off" className="pt-16 pb-5" onSubmit={handleSubmit}>
         <TextInput
           label="Usuario"
           name="email"

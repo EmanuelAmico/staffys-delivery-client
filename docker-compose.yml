@@ -17,6 +17,8 @@ services:
       - 3000:3000
     tty: true
     entrypoint: ["npm", "run", "dev"]
+    networks:
+      - staffys_api_network
   test:
     build:
       context: .
@@ -35,3 +37,8 @@ services:
       - 3000:3000
     tty: true
     entrypoint: ["npm", "run", "test:watch"]
+    networks:
+      - staffys_api_network
+networks:
+  staffys_api_network:
+    external: true
