@@ -5,8 +5,8 @@ import TextInput from "@/commons/TextInput";
 import Layout from "@/commons/Layout";
 import Link from "@/commons/Link";
 import useInput from "@/hooks/useInput";
-import Image from "next/image";
-import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
+import IconButton from "@/commons/IconButton";
+import { TbCameraPlus } from "react-icons/tb";
 
 const Register = () => {
   const name = useInput({
@@ -72,11 +72,9 @@ const Register = () => {
   return (
     <Layout className="h-screen">
       <div className="flex justify-center items-center h-[30%]">
-        <Image
-          src={logoFastDelivery}
-          alt="Logo Fast Delivery"
-          width={200}
-          priority
+        <IconButton
+          className="bg-primaryBlue w-[6rem] h-[6rem] rounded-full"
+          icon={<TbCameraPlus className="text-white" size={60} />}
         />
       </div>
       <form autoComplete="off" className="pt-5 pb-5">
