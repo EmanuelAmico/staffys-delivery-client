@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Button from "@/commons/Button";
 import Counter from "@/commons/Counter";
 import DeliveryPackageCard from "@/commons/DeliveryPackageCard";
@@ -8,15 +8,17 @@ import Layout from "@/commons/Layout";
 import { deliveryPackages } from "@/utils/FakeDataDeliveryPackages";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
+import { CheckRefreshContext } from "@/context/refresh";
 
 const GetPackage = () => {
-  const { back } = useRouter();
+  const router = useRouter();
+  const { isRefreshed } = useContext(CheckRefreshContext);
 
   return (
     <Layout>
       <div className="flex justify-between">
         <IconButton
-          onClick={() => back()}
+          onClick={() => (isRefreshed ? router.push("/home") : router.back())}
           icon={<RiArrowLeftSLine size={40} />}
         />
         <Counter title="Paquetes restantes" count={10} />

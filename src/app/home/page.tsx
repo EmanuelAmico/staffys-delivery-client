@@ -17,6 +17,7 @@ const Home = () => {
       <Button
         onClick={() => {
           changeRefresh();
+
           push("/package/get");
         }}
         className="font-medium w-full"
