@@ -34,11 +34,9 @@ const TextInput: FC<TextInputProps> = ({
           disabled ? "border-b-disableButton" : "border-b-primaryBlue"
         }`}
       />
-      {error ? (
-        <p className="text-redText">{error}</p>
-      ) : helper ? (
-        <p className="text-blackText">{helper}</p>
-      ) : null}
+      {error ? <p className="text-redText">{error}</p> : null}
+
+      {helper ? <p className="text-blackText">{helper}</p> : null}
     </div>
   );
 };

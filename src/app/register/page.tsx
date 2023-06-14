@@ -90,6 +90,7 @@ const Register = () => {
           label="Apellido"
           name="lastname"
           placeholder="Apellido"
+          helper="hola"
           {...lastName}
         />
         <TextInput
