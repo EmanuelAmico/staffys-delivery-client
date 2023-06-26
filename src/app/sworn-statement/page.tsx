@@ -26,31 +26,35 @@ export default function SwornStatement() {
   }, []);
 
   return (
-    <Layout>
-      <IconButton
-        onClick={() => (isRefreshed ? router.push("/home") : router.back())}
-        icon={<RiArrowLeftSLine size={40} />}
-        className="self-start"
-      />
-      <h2>Declaración jurada</h2>
-      <QuestionConfirmation
-        question="¿Ha consumido bebidas alcohólicas en las últimas 12 horas?"
-        name="hasDrank"
-        value={hasDrank}
-        onChange={onChange}
-      />
-      <QuestionConfirmation
-        question="¿Usted está haciendo uso de medicamentos psicoactivos? (tranquilizantes, antigripales, antialérgicos o para insomnio)"
-        name="hasPsychotropicDrugs"
-        value={hasPsychotropicDrugs}
-        onChange={onChange}
-      />
-      <QuestionConfirmation
-        question="¿Tiene usted algún problema familiar emocional o de cualquier tipo que lo distraiga?"
-        name="hasEmotionalProblems"
-        value={hasEmotionalProblems}
-        onChange={onChange}
-      />
+    <Layout className="flex flex-col">
+      <div className="grow">
+        <IconButton
+          onClick={() => (isRefreshed ? router.push("/home") : router.back())}
+          icon={<RiArrowLeftSLine size={40} />}
+          className="self-start -mb-2"
+        />
+        <h2 className="text-center text-xl mb-4">Declaración jurada</h2>
+        <QuestionConfirmation
+          question="¿Ha consumido bebidas alcohólicas en las últimas 12 horas?"
+          name="hasDrank"
+          value={hasDrank}
+          onChange={onChange}
+          className="mb-2"
+        />
+        <QuestionConfirmation
+          question="¿Usted está haciendo uso de medicamentos psicoactivos? (tranquilizantes, antigripales, antialérgicos o para insomnio)"
+          name="hasPsychotropicDrugs"
+          value={hasPsychotropicDrugs}
+          onChange={onChange}
+          className="mb-2"
+        />
+        <QuestionConfirmation
+          question="¿Tiene usted algún problema familiar emocional o de cualquier tipo que lo distraiga?"
+          name="hasEmotionalProblems"
+          value={hasEmotionalProblems}
+          onChange={onChange}
+        />
+      </div>
       <Button>Continuar</Button>
     </Layout>
   );
