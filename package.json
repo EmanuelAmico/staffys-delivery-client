@@ -42,7 +42,7 @@
     "prettier-staged": "pretty-quick --staged",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx --ignore-path .eslintignore --max-warnings=0",
     "lint-staged": "lint-staged",
-    "test": "jest",
+    "test": "NODE_ENV=test jest",
     "test:watch": "jest --watchAll",
     "prepare": "husky install"
   },
