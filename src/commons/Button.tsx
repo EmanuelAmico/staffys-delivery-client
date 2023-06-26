@@ -3,6 +3,7 @@ import React, { ComponentPropsWithoutRef, FC } from "react";
 export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   children: string;
   loading?: boolean;
+  customBg?: string;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -10,12 +11,15 @@ const Button: FC<ButtonProps> = ({
   className,
   loading,
   disabled,
+  customBg,
   ...buttonProps
 }) => {
   return (
     <button
       className={`flex justify-center items-center uppercase px-4 py-1.5 rounded text-whiteText shadow-md transition-colors ${
-        disabled
+        customBg
+          ? customBg
+          : disabled
           ? "bg-disableButton cursor-default"
           : "bg-primaryBlue hover:bg-hoverBlue active:bg-activeBlue"
       } ${className || ""}`}
