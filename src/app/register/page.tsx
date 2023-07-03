@@ -44,8 +44,7 @@ const Register = () => {
       },
       {
         type: "password",
-        errorMessage:
-          "La contraseña debe tener al menos 8 caracteres, una letra y un número",
+        errorMessage: "Debe tener al menos 8 caracteres, una letra y un número",
       },
     ],
   });
@@ -97,12 +96,14 @@ const Register = () => {
           name="email"
           placeholder="staffys@gmail.com"
           {...email}
+          helper="Debe contener @ para este campo "
         />
         <TextInput
           label="Contraseña"
           name="password"
           placeholder="Contraseña"
           {...password}
+          helper="Debe contener al menos 8 caracteres, una mayuscula y un numero "
           hidden
         />
         <TextInput
@@ -110,6 +111,7 @@ const Register = () => {
           name="passwordConfirmation"
           placeholder="Confirmación"
           {...passwordConfirmation}
+          helper="Debe coincidir con el de arriba "
           hidden
         />
         <Button className="w-[100%] font-medium mt-5">Registrarse</Button>
