@@ -6,6 +6,7 @@ interface TextInputProps extends ComponentPropsWithoutRef<"input"> {
   label?: string;
   error?: string;
   helper?: string;
+  toolkit?: string;
 }
 
 const TextInput: FC<TextInputProps> = ({
@@ -16,6 +17,7 @@ const TextInput: FC<TextInputProps> = ({
   helper,
   disabled,
   className,
+  toolkit,
   ...inputProps
 }) => {
   const [showIconTooltip, setShowIconTooltip] = useState(false);
@@ -46,9 +48,9 @@ const TextInput: FC<TextInputProps> = ({
             disabled ? "border-b-disableButton" : "border-b-primaryBlue"
           }`}
         />
-        {helper && showIconTooltip && (
+        {toolkit && showIconTooltip && (
           <div className="absolute p-1 -top-0 right-10 bg-whiteBackground rounded-2xl border border-activeBlue shadow-md">
-            <p className="text-greyText text-[10px]">{helper}</p>
+            <p className="text-greyText text-[10px]">{toolkit}</p>
           </div>
         )}
         <div
@@ -65,7 +67,11 @@ const TextInput: FC<TextInputProps> = ({
           />
         </div>
       </div>
-      {error && <p className="text-redText text-xs mt-2">{error}</p>}
+      {error ? (
+        <p className="text-redText">{error}</p>
+      ) : helper ? (
+        <p className="text-blackText">{helper}</p>
+      ) : null}
     </div>
   );
 };

@@ -122,14 +122,16 @@ const Register = () => {
           name="email"
           placeholder="staffys@gmail.com"
           {...email}
-          helper="Debe contener @ para este campo "
+          toolkit="Debe contener @ para este campo"
+          helper=""
         />
         <TextInput
           label="Contraseña"
           name="password"
           placeholder="Contraseña"
           {...password}
-          helper="Debe contener al menos 8 caracteres, una mayuscula y un numero "
+          toolkit="Debe contener al menos 8 caracteres, una mayuscula y un numero "
+          helper=""
           hidden
         />
         <TextInput
@@ -137,7 +139,8 @@ const Register = () => {
           name="passwordConfirmation"
           placeholder="Confirmación"
           {...passwordConfirmation}
-          helper="Debe coincidir con el de arriba "
+          toolkit="Debe coincidir con el de arriba"
+          helper=""
           hidden
         />
         <Button onClick={handleRegister} className="w-[100%] font-medium mt-5">
