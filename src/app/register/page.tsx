@@ -7,7 +7,15 @@ import Link from "@/commons/Link";
 import useInput from "@/hooks/useInput";
 import IconButton from "@/commons/IconButton";
 import { TbCameraPlus } from "react-icons/tb";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { createUser } from "@/redux/reducers/user";
+import { useDispatch } from "react-redux";
+
 const Register = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const dispatch = useDispatch();
+  dispatch;
+
   const name = useInput({
     validators: [
       {
@@ -66,6 +74,24 @@ const Register = () => {
       };
     },
   });
+  const handleRegister = async (event: React.MouseEvent) => {
+    event.preventDefault();
+    const userData = {
+      name: name.value,
+      lastname: lastName.value,
+      email: email.value,
+      password: password.value,
+      confirmpassword: passwordConfirmation.value,
+      urlphoto: "",
+    };
+    try {
+      userData;
+      // const actionResult = await dispatch(createUser(userData));
+      // const result = actionResult.payload;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Layout className="h-screen">
@@ -114,7 +140,9 @@ const Register = () => {
           helper="Debe coincidir con el de arriba "
           hidden
         />
-        <Button className="w-[100%] font-medium mt-5">Registrarse</Button>
+        <Button onClick={handleRegister} className="w-[100%] font-medium mt-5">
+          Registrarse
+        </Button>
       </form>
       <div className="flex flex-col items-center">
         <Link href="/login" className="text-lg font-medium">

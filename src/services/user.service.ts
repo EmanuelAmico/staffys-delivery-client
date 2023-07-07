@@ -1,21 +1,21 @@
 import { waitRandomSeconds } from "@/utils/wait";
-
+import axios from "axios";
+import { UserState } from "@/types/user.types";
 export class UserService {
-  static async createUser(
-    name: string,
-    lastname: string,
-    email: string,
-    password: string,
-    photo: string
-  ) {
-    await waitRandomSeconds();
-    return {
+  static apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  static async createUser(userData: UserState) {
+    const { name, lastname, password, confirmpassword, email, urlphoto } =
+      userData;
+
+    const user = await axios.post(`${UserService.apiUrl}/auth/create`, {
       name,
       lastname,
-      email,
       password,
-      photo,
-    };
+      confirmpassword,
+      email,
+      urlphoto,
+    });
+    return user;
   }
   static async deleteUser(id: string) {
     await waitRandomSeconds();
