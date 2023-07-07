@@ -87,8 +87,7 @@ const Register = () => {
     };
     try {
       userData;
-      const actionResult = await dispatch(createUser(userData));
-      // const result = actionResult.payload;
+      await dispatch(createUser(userData));
     } catch (error) {
       console.error(error);
     }

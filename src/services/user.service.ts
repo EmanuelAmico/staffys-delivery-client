@@ -1,20 +1,29 @@
 import { waitRandomSeconds } from "@/utils/wait";
 import axios from "axios";
-import { UserState } from "@/types/user.types";
+import { UserRegister } from "@/types/user.types";
+// import https from "https";
 export class UserService {
   static apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  static async createUser(userData: UserState) {
-    const { name, lastname, password, confirmpassword, email, urlphoto } =
-      userData;
 
-    const user = await axios.post(`${UserService.apiUrl}/auth/create`, {
-      name,
-      lastname,
-      password,
-      confirmpassword,
-      email,
-      urlphoto,
-    });
+  // agent = new https.Agent({
+  //   rejectUnauthorized: false,
+  // });
+
+  static async createUser(userData: UserRegister) {
+    const { name, lastname, password, confirmpassword, email } = userData;
+
+    const user = await axios.post(
+      "https://staffys-api.fi7qj5ura3dd4.us-east-1.cs.amazonlightsail.com/auth/register",
+      {
+        name,
+        lastname,
+        password,
+        confirmpassword,
+        email,
+        urlphoto: "holaa",
+        is_admin: false,
+      }
+    );
     return user;
   }
   static async deleteUser(id: string) {
