@@ -10,10 +10,11 @@ import { TbCameraPlus } from "react-icons/tb";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createUser } from "@/redux/reducers/user";
 import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
 
 const Register = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   dispatch;
 
   const name = useInput({
@@ -86,7 +87,7 @@ const Register = () => {
     };
     try {
       userData;
-      // const actionResult = await dispatch(createUser(userData));
+      const actionResult = await dispatch(createUser(userData));
       // const result = actionResult.payload;
     } catch (error) {
       console.error(error);
