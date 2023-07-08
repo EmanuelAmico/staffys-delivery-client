@@ -6,14 +6,24 @@ export interface UserRegister {
   email: string;
   urlphoto: string;
   is_admin?: boolean;
-  loading?: boolean; // Set initial value to false
-  error?: string | null;
 }
-
-export interface UserState {
+export interface User {
+  _id: string;
   name: string;
   lastname: string;
   email: string;
+  is_admin: boolean;
+  is_active: boolean;
   urlphoto: string;
-  is_admin?: boolean;
+  is_deleted: boolean;
+  resetToken?: string;
+  pendingPackages: string[];
+  currentPackage: string | null;
+  historyPackages: string[];
+  loading?: boolean;
+  error?: string | null;
+}
+export interface UserLogin {
+  email: string;
+  password: string;
 }

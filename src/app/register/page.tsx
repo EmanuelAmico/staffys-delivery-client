@@ -83,7 +83,6 @@ const Register = () => {
       urlphoto: "",
     };
     try {
-      userData;
       await dispatch(createUser(userData));
     } catch (error) {
       console.error(error);

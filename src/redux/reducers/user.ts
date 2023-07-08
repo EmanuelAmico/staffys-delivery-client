@@ -5,72 +5,68 @@ import {
 } from "@reduxjs/toolkit";
 
 import { UserService } from "@/services/user.service";
-import { UserState, UserRegister } from "@/types/user.types";
+import { UserLogin, UserRegister, User } from "@/types/user.types";
 
-const initialState: UserRegister = {
+const initialState: User = {
+  _id: "",
   name: "",
   lastname: "",
-  password: "",
-  confirmpassword: "",
   email: "",
-  urlphoto: "",
   is_admin: false,
+  is_active: false,
+  urlphoto: "",
+  is_deleted: false,
+  resetToken: "",
+  pendingPackages: [],
+  currentPackage: null,
+  historyPackages: [],
 };
 
-export const setuser = createAction<UserState>("SET_USER");
+export const setUser = createAction<User>("SET_USER");
 export const logout = createAction("LOGOUT");
 
 export const createUser = createAsyncThunk(
-  "user/fetchUser",
+  "user/createUser",
   async (userData: UserRegister) => {
     try {
       const response = await UserService.createUser(userData);
-
-      return response.data.data.user;
+      return response.data.user;
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      throw new error("no funciona el registro");
+      throw new error("login is not working");
+    }
+  }
+);
+
+export const loginUser = createAsyncThunk(
+  "user/loginUser",
+  async (userData: UserLogin) => {
+    try {
+      const response = await UserService.loginUser(userData);
+      return response.data.user;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      throw new error("login is not working");
     }
   }
 );
 
 const userReducer = createReducer(initialState, {
-  [setuser.type]: (state, action) => {
+  [setUser.type]: (state, action) => {
     return {
       ...state,
       ...action.payload,
     };
   },
   [logout.type]: () => initialState,
-  [createUser.pending.toString()]: (state) => {
-    state.loading = true;
-    state.error = null;
+
+  [createUser.fulfilled.type]: (_state, action) => {
+    return action.payload;
   },
-  [createUser.fulfilled.type]: (state, action) => {
-    const {
-      name,
-      lastname,
-      password,
-      confirmpassword,
-      email,
-      urlphoto,
-      is_admin,
-    } = action.payload;
-    return {
-      ...state,
-      name,
-      lastname,
-      password,
-      confirmpassword,
-      email,
-      urlphoto,
-      is_admin,
-    };
-  },
-  [createUser.rejected.type]: (state, action) => {
-    state.loading = false;
-    state.error = action.error.message || "Failed to fetch user data.";
+
+  [loginUser.fulfilled.type]: (_state, action) => {
+    return action.payload;
   },
 });
 export default userReducer;
