@@ -15,8 +15,6 @@ const initialState: UserRegister = {
   email: "",
   urlphoto: "",
   is_admin: false,
-  loading: false, // Set initial value to false
-  error: null as string | null,
 };
 
 export const setuser = createAction<UserState>("SET_USER");

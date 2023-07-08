@@ -12,18 +12,15 @@ export class UserService {
   static async createUser(userData: UserRegister) {
     const { name, lastname, password, confirmpassword, email } = userData;
 
-    const user = await axios.post(
-      "https://staffys-api.fi7qj5ura3dd4.us-east-1.cs.amazonlightsail.com/auth/register",
-      {
-        name,
-        lastname,
-        password,
-        confirmpassword,
-        email,
-        urlphoto: "holaa",
-        is_admin: false,
-      }
-    );
+    const user = await axios.post(`${this.apiUrl}/auth/register`, {
+      name,
+      lastname,
+      password,
+      confirmpassword,
+      email,
+      urlphoto: "holaa",
+      is_admin: false,
+    });
     return user;
   }
   static async deleteUser(id: string) {
