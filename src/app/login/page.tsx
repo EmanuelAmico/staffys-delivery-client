@@ -48,8 +48,7 @@ const Login = () => {
       password: password.value,
     };
     try {
-      const user = await dispatch(login(userData)).unwrap();
-      localStorage.setItem("token", user.token);
+      await dispatch(login(userData)).unwrap();
       push("/home");
     } catch (error) {
       console.error(error);

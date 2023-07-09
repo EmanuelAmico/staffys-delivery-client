@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import Header from "@/components/Header";
 import { usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,22 +15,26 @@ export default function Template({
   const { push } = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const pathname = usePathname();
+  const allowedPathnames = useMemo(
+    () => ["/login", "/register", "/forgot-password"],
+    []
+  );
 
   const checkUserSession = useCallback(async () => {
     try {
-      if (user.token) return;
+      if (user.token || allowedPathnames.includes(pathname)) return;
       await dispatch(checkForUserTokenAndPersistSession()).unwrap();
       push("/home");
     } catch (error) {
       push("/login");
     }
-  }, [dispatch, push, user.token]);
+  }, [dispatch, push, user.token, allowedPathnames, pathname]);
 
   useEffect(() => {
     checkUserSession();
   }, [checkUserSession]);
 
-  if (pathname === "/login" || pathname === "/register") {
+  if (allowedPathnames.includes(pathname)) {
     return children;
   }
 

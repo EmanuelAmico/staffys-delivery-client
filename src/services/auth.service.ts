@@ -13,7 +13,7 @@ export class AuthService {
       password,
       confirmpassword,
       email,
-      urlphoto: "",
+      urlphoto: "http://url.com",
       is_admin: false,
     });
 
@@ -41,5 +41,25 @@ export class AuthService {
     });
 
     return data;
+  }
+
+  static async initResetPassword(email: string) {
+    return await axios.post(`${this.apiUrl}/auth/init-reset-password`, {
+      email,
+    });
+  }
+
+  static async resetPassword(
+    email: string,
+    code: number,
+    password: string,
+    confirmPassword: string
+  ) {
+    return await axios.put(`${this.apiUrl}/auth/reset-password`, {
+      email,
+      code,
+      password,
+      confirmPassword,
+    });
   }
 }

@@ -10,9 +10,11 @@ import { TbCameraPlus } from "react-icons/tb";
 import { register } from "@/redux/reducers/user";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const { push } = useRouter();
 
   const name = useInput({
     validators: [
@@ -83,7 +85,8 @@ const Register = () => {
       urlphoto: "",
     };
     try {
-      await dispatch(register(userData));
+      await dispatch(register(userData)).unwrap();
+      push("/home");
     } catch (error) {
       console.error(error);
     }
@@ -126,7 +129,7 @@ const Register = () => {
           name="password"
           placeholder="Contraseña"
           {...password}
-          tooltip="Debe contener al menos 8 caracteres, una mayuscula y un numero "
+          tooltip="Debe contener al menos 8 caracteres, una mayúscula y un numero "
           helper=""
           hidden
         />
@@ -135,7 +138,7 @@ const Register = () => {
           name="passwordConfirmation"
           placeholder="Confirmación"
           {...passwordConfirmation}
-          tooltip="Debe coincidir con el de arriba"
+          tooltip="Debe coincidir con la contraseña ingresada previamente"
           helper=""
           hidden
         />

@@ -30,7 +30,10 @@ export const register = createAsyncThunk(
   "USER/REGISTER",
   async (userData: UserRegister) => {
     const response = await AuthService.register(userData);
-    return response.data.user;
+    const user = response.data.user;
+    const token = response.data.token;
+    localStorage.setItem("token", token);
+    return { ...user, token };
   }
 );
 
@@ -40,6 +43,7 @@ export const login = createAsyncThunk(
     const response = await AuthService.login(userData);
     const user = response.data.user;
     const token = response.data.token;
+    localStorage.setItem("token", token);
     return { ...user, token };
   }
 );
@@ -54,6 +58,30 @@ export const checkForUserTokenAndPersistSession = createAsyncThunk(
     const user = await AuthService.me(token);
 
     return { ...user, token };
+  }
+);
+
+export const initResetPassword = createAsyncThunk(
+  "USER/INIT_RESET_PASSWORD",
+  async (email: string) => {
+    await AuthService.initResetPassword(email);
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  "USER/RESET_PASSWORD",
+  async ({
+    email,
+    code,
+    password,
+    confirmPassword,
+  }: {
+    email: string;
+    code: number;
+    password: string;
+    confirmPassword: string;
+  }) => {
+    await AuthService.resetPassword(email, code, password, confirmPassword);
   }
 );
 
@@ -84,6 +112,18 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(checkForUserTokenAndPersistSession.rejected, (_state, _action) => {
       localStorage.removeItem("token");
       return initialState;
+    })
+    .addCase(initResetPassword.fulfilled, (state) => {
+      return state;
+    })
+    .addCase(initResetPassword.rejected, (state) => {
+      return state;
+    })
+    .addCase(resetPassword.fulfilled, (state) => {
+      return state;
+    })
+    .addCase(resetPassword.rejected, (state) => {
+      return state;
     });
 });
 
