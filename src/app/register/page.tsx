@@ -7,7 +7,7 @@ import Link from "@/commons/Link";
 import useInput from "@/hooks/useInput";
 import IconButton from "@/commons/IconButton";
 import { TbCameraPlus } from "react-icons/tb";
-import { createUser } from "@/redux/reducers/user";
+import { register } from "@/redux/reducers/user";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 
@@ -83,7 +83,7 @@ const Register = () => {
       urlphoto: "",
     };
     try {
-      await dispatch(createUser(userData));
+      await dispatch(register(userData));
     } catch (error) {
       console.error(error);
     }

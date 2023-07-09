@@ -2,10 +2,12 @@ import {
   createAction,
   createReducer,
   createAsyncThunk,
+  PayloadAction,
 } from "@reduxjs/toolkit";
 
 import { UserService } from "@/services/user.service";
 import { UserLogin, UserRegister, User } from "@/types/user.types";
+import { AuthService } from "@/services/auth.service";
 
 const initialState: User = {
   _id: "",
@@ -20,53 +22,71 @@ const initialState: User = {
   pendingPackages: [],
   currentPackage: null,
   historyPackages: [],
+  token: "",
 };
 
 export const setUser = createAction<User>("SET_USER");
 export const logout = createAction("LOGOUT");
 
-export const createUser = createAsyncThunk(
-  "user/createUser",
+export const register = createAsyncThunk(
+  "USER/REGISTER",
   async (userData: UserRegister) => {
-    try {
-      const response = await UserService.createUser(userData);
-      return response.data.user;
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      throw new error("login is not working");
-    }
+    const response = await UserService.register(userData);
+    return response.data.user;
   }
 );
 
-export const loginUser = createAsyncThunk(
-  "user/loginUser",
+export const login = createAsyncThunk(
+  "USER/LOGIN",
   async (userData: UserLogin) => {
-    try {
-      const response = await UserService.loginUser(userData);
-      return response.data.user;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      throw new error("login is not working");
-    }
+    const response = await UserService.login(userData);
+    const user = response.data.user;
+    const token = response.data.token;
+    return { ...user, token };
   }
 );
 
-const userReducer = createReducer(initialState, {
-  [setUser.type]: (state, action) => {
-    return {
-      ...state,
-      ...action.payload,
-    };
-  },
-  [logout.type]: () => initialState,
+export const checkForUserTokenAndPersistSession = createAsyncThunk(
+  "USER/ME",
+  async () => {
+    const token = localStorage.getItem("token");
 
-  [createUser.fulfilled.type]: (_state, action) => {
-    return action.payload;
-  },
+    if (!token) throw new Error("No user token found");
 
-  [loginUser.fulfilled.type]: (_state, action) => {
-    return action.payload;
-  },
+    const user = await AuthService.me(token);
+
+    return { ...user, token };
+  }
+);
+
+const userReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(setUser, (state, action: PayloadAction<User>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    })
+    .addCase(logout, () => {
+      localStorage.removeItem("token");
+      return initialState;
+    })
+    .addCase(register.fulfilled, (_state, action: PayloadAction<User>) => {
+      return action.payload;
+    })
+    .addCase(login.fulfilled, (_state, action: PayloadAction<User>) => {
+      return action.payload;
+    })
+    .addCase(
+      checkForUserTokenAndPersistSession.fulfilled,
+      (_state, action: PayloadAction<User>) => {
+        return action.payload;
+      }
+    )
+    .addCase(checkForUserTokenAndPersistSession.rejected, (_state, _action) => {
+      localStorage.removeItem("token");
+      return initialState;
+    });
 });
+
 export default userReducer;
