@@ -14,7 +14,7 @@ export class UserService {
       password,
       confirmpassword,
       email,
-      urlphoto: "holaa",
+      urlphoto: "Waiting for Photo",
       is_admin: false,
     });
     return user.data;

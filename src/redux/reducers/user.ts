@@ -26,7 +26,7 @@ export const setUser = createAction<User>("SET_USER");
 export const logout = createAction("LOGOUT");
 
 export const createUser = createAsyncThunk(
-  "user/createUser",
+  "USER/CREATE_USER",
   async (userData: UserRegister) => {
     try {
       const response = await UserService.createUser(userData);
@@ -40,7 +40,7 @@ export const createUser = createAsyncThunk(
 );
 
 export const loginUser = createAsyncThunk(
-  "user/loginUser",
+  "USER/LOGIN_USER",
   async (userData: UserLogin) => {
     try {
       const response = await UserService.loginUser(userData);
