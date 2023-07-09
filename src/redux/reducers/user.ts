@@ -4,8 +4,6 @@ import {
   createAsyncThunk,
   PayloadAction,
 } from "@reduxjs/toolkit";
-
-import { UserService } from "@/services/user.service";
 import { UserLogin, UserRegister, User } from "@/types/user.types";
 import { AuthService } from "@/services/auth.service";
 
@@ -31,7 +29,7 @@ export const logout = createAction("LOGOUT");
 export const register = createAsyncThunk(
   "USER/REGISTER",
   async (userData: UserRegister) => {
-    const response = await UserService.register(userData);
+    const response = await AuthService.register(userData);
     return response.data.user;
   }
 );
@@ -39,7 +37,7 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk(
   "USER/LOGIN",
   async (userData: UserLogin) => {
-    const response = await UserService.login(userData);
+    const response = await AuthService.login(userData);
     const user = response.data.user;
     const token = response.data.token;
     return { ...user, token };
