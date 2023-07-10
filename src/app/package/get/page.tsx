@@ -114,7 +114,10 @@ const GetPackage = () => {
             );
           })}
         </div>
-        <Button type="submit" disabled={loading}>
+        <Button
+          type="submit"
+          disabled={loading || !user.pendingPackages.length}
+        >
           Iniciar Jornada
         </Button>
       </form>
