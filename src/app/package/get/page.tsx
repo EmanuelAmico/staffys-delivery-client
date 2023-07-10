@@ -1,18 +1,35 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Button from "@/commons/Button";
 import Counter from "@/commons/Counter";
 import DeliveryPackageCard from "@/commons/DeliveryPackageCard";
 import IconButton from "@/commons/IconButton";
 import Layout from "@/commons/Layout";
-import { deliveryPackages } from "@/utils/FakeDataDeliveryPackages";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 import { CheckRefreshContext } from "@/context/refresh";
+import { fetchPackagesByCurrentLocation } from "@/redux/reducers/package";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
 
 const GetPackage = () => {
   const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
   const { isRefreshed } = useContext(CheckRefreshContext);
+  const deliveryPackages = useSelector(
+    (state: RootState) => state.deliverypackages.packages
+  );
+
+  useEffect(() => {
+    dispatch(fetchPackagesByCurrentLocation())
+      .unwrap()
+      .then((result) => {
+        return result;
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }, [dispatch]);
 
   return (
     <Layout>
@@ -26,14 +43,22 @@ const GetPackage = () => {
       <h4 className="mt-4 font-bold text-xl">Obtener paquetes</h4>
       <p className="mb-4">¿Cuántos paquetes más vas a repartir hoy?</p>
       <div className="pt-4 mb-4 px-4 border-t-2 overflow-y-scroll">
-        {deliveryPackages.map((deliveryPackage) => (
-          <div key={deliveryPackage.id}>
-            <DeliveryPackageCard className="mb-4" {...deliveryPackage} />
-            {deliveryPackage !== deliveryPackages.at(-1) && (
-              <hr className="mb-4" />
-            )}
-          </div>
-        ))}
+        {deliveryPackages?.map((deliveryPackage) => {
+          return (
+            <div key={deliveryPackage._id}>
+              <DeliveryPackageCard
+                className="mb-4"
+                deliveryPackage={deliveryPackage}
+                trash={false}
+                buttonText="Tomar"
+              />
+              {deliveryPackage !==
+                deliveryPackages[deliveryPackages.length - 1] && (
+                <hr className="mb-4" />
+              )}
+            </div>
+          );
+        })}
       </div>
       <Button>Iniciar Jornada</Button>
     </Layout>
