@@ -82,7 +82,7 @@ const Register = () => {
       email: email.value,
       password: password.value,
       confirmpassword: passwordConfirmation.value,
-      urlphoto: "",
+      urlphoto: "http://url.com",
     };
     try {
       await dispatch(register(userData)).unwrap();
