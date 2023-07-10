@@ -1,44 +1,154 @@
 "use client";
-import React, { FormEvent, MouseEvent, useState } from "react";
+import React, { FormEvent, useCallback, useState } from "react";
 import TextInput from "@/commons/TextInput";
 import Button from "@/commons/Button";
 import Layout from "@/commons/Layout";
 import Link from "@/commons/Link";
+import useInput from "@/hooks/useInput";
+import { useDispatch } from "react-redux";
+import { initResetPassword, resetPassword } from "@/redux/reducers/user";
+import { AppDispatch } from "@/redux/store";
+import { useRouter } from "next/navigation";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
-  const [code, setCode] = useState("");
-  const [fullField, setFullField] = useState(false);
+  const [showSecondStep, setShowSecondStep] = useState(false);
+  const { push } = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+  const email = useInput({
+    validators: [
+      {
+        type: "notEmpty",
+        errorMessage: "El email es requerido",
+      },
+      {
+        type: "email",
+        errorMessage: "El email tiene un formato incorrecto",
+      },
+    ],
+  });
+  const code = useInput({
+    validators: [
+      {
+        type: "notEmpty",
+        errorMessage: "El código es requerido",
+      },
+    ],
+    extraValidator: (value) => {
+      if (isNaN(parseInt(value)) || value.length !== 6)
+        return {
+          isValid: false,
+          errorMessage: "Debe ser un número válido de 6 dígitos",
+        };
+      return {
+        isValid: true,
+      };
+    },
+  });
+  const password = useInput({
+    validators: [
+      {
+        type: "notEmpty",
+        errorMessage: "La contraseña es requerida",
+      },
+      {
+        type: "password",
+        errorMessage: "Debe tener al menos 8 caracteres, una letra y un número",
+      },
+    ],
+  });
+  const passwordConfirmation = useInput({
+    validators: [
+      {
+        type: "notEmpty",
+        errorMessage: "La confirmación de contraseña es requerida",
+      },
+    ],
+    extraValidator: (value) => {
+      if (value !== password.value)
+        return {
+          isValid: false,
+          errorMessage: "Las contraseñas no coinciden",
+        };
+      return {
+        isValid: true,
+      };
+    },
+  });
 
-  const handleSubmit = (
-    e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>
-  ) => {
-    e.preventDefault();
-    if (email.length > 0) {
-      setFullField(true);
-    }
-  };
+  const handleEmailSubmit = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      try {
+        e.preventDefault();
+        if (email.error) return;
+        await dispatch(initResetPassword(email.value)).unwrap();
+        setShowSecondStep(true);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [dispatch, email.error, email.value]
+  );
+
+  const handleResetPasswordSubmit = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      try {
+        e.preventDefault();
+        if (
+          email.error ||
+          code.error ||
+          password.error ||
+          passwordConfirmation.error
+        )
+          return;
+        await dispatch(
+          resetPassword({
+            email: email.value,
+            code: parseInt(code.value),
+            password: password.value,
+            confirmPassword: passwordConfirmation.value,
+          })
+        );
+        push("/login");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [
+      dispatch,
+      push,
+      code.error,
+      code.value,
+      email.error,
+      email.value,
+      password.error,
+      password.value,
+      passwordConfirmation.error,
+      passwordConfirmation.value,
+    ]
+  );
 
   return (
     <Layout className="flex justify-center">
-      {!fullField ? (
+      {!showSecondStep ? (
         <div className="flex flex-col justify-center gap-4">
           <h1 className="m-auto font-bold text-2xl">
             ¿Olvidaste tu contraseña?
           </h1>
           <p className="text-1xl text-center">
-            Ingresa tu dirección de email y te enviaremos un codigo para
+            Ingresa tu dirección de email y te enviaremos un código para
             restablecer tu contraseña.
           </p>
-          <form autoComplete="off" onSubmit={handleSubmit}>
+          <form autoComplete="off" onSubmit={handleEmailSubmit}>
             <TextInput
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
               name="email"
               label="Email"
               placeholder="staffys@gmail.com"
+              tooltip="El email con el que te registraste"
+              {...email}
             />
-            <Button className="w-[100%] font-medium mt-5">Enviar</Button>
+            <Button type="submit" className="w-[100%] font-medium mt-5">
+              Enviar
+            </Button>
           </form>
           <div className="flex justify-center items-center">
             <Link href="/login" className="text-lg font-medium">
@@ -51,18 +161,38 @@ const ForgotPassword = () => {
           <h1 className="m-auto font-bold text-2xl">Restablecer contraseña</h1>
           <div className="flex flex-col justify-center items-center">
             <p className="text-1xl">Ingresa el código enviado al email:</p>
-            <p className="font-bold text-1xl">{email}</p>
+            <p className="font-bold text-1xl">{email.value}</p>
           </div>
-          <form autoComplete="off">
+          <form autoComplete="off" onSubmit={handleResetPasswordSubmit}>
             <TextInput
               type="number"
-              onChange={(e) => setCode(e.target.value)}
-              value={code}
               name="code"
-              label="Codigo"
-              placeholder="Codigo"
+              label="Código"
+              placeholder="Código"
+              tooltip="Código enviado al email"
+              {...code}
             />
-            <Button className="w-[100%] font-medium mt-5">Enviar</Button>
+            <TextInput
+              label="Contraseña"
+              name="password"
+              placeholder="Nueva contraseña"
+              {...password}
+              tooltip="Debe contener al menos 8 caracteres, una mayúscula y un numero "
+              helper=""
+              hidden
+            />
+            <TextInput
+              label="Confirmación de contraseña"
+              name="passwordConfirmation"
+              placeholder="Confirmación"
+              {...passwordConfirmation}
+              tooltip="Debe coincidir con la contraseña ingresada previamente"
+              helper=""
+              hidden
+            />
+            <Button type="submit" className="w-[100%] font-medium mt-5">
+              Enviar
+            </Button>
           </form>
           <div className="flex justify-center items-center">
             <Link href="/login" className="text-lg font-medium">
