@@ -38,6 +38,10 @@ export default function Template({
     return children;
   }
 
+  if (!user.token && !allowedPathnames.includes(pathname)) {
+    return null;
+  }
+
   return (
     <div className="h-screen w-full">
       <Header />

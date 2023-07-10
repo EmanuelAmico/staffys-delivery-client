@@ -23,6 +23,7 @@ const Button: FC<ButtonProps> = ({
           ? "bg-disableButton cursor-default"
           : "bg-primaryBlue hover:bg-hoverBlue active:bg-activeBlue"
       } ${className || ""}`}
+      disabled={disabled || loading}
       {...buttonProps}
     >
       {loading && (
