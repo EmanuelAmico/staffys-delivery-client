@@ -1,6 +1,6 @@
 export async function getCurrentCoordinates(): Promise<{
   direction: string;
-  coordenates: { lat: number; lng: number };
+  coordinates: { lat: number; lng: number };
 }> {
   if (navigator.geolocation) {
     const position = await new Promise<GeolocationPosition>(
@@ -21,9 +21,9 @@ export async function getCurrentCoordinates(): Promise<{
 
     const data = await response.json();
     const direction = data.results[0].formatted_address;
-    const coordenates = data.results[0].geometry.location;
+    const coordinates = data.results[0].geometry.location;
 
-    return { direction, coordenates };
+    return { direction, coordinates };
   } else {
     throw new Error("Geolocation not supported");
   }

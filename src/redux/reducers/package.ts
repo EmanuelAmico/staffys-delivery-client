@@ -26,12 +26,12 @@ const initialState = {
 export const fetchPackagesByCurrentLocation = createAsyncThunk(
   "PACKAGES/FETCH_PACKAGES",
   async (_, thunkAPI) => {
-    const { coordenates }: { coordenates: Coordinates } =
+    const { coordinates }: { coordinates: Coordinates } =
       await getCurrentCoordinates();
     const { user } = thunkAPI.getState() as RootState;
 
     const { data } = await PackageService.getAvailablePackagesByCurrentLocation(
-      coordenates,
+      coordinates,
       user
     );
 
