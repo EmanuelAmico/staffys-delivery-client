@@ -14,7 +14,8 @@ export interface DeliveryPackageCardProps {
   status?: string;
   trash: boolean;
   buttonText: string;
-  buttonProps?: ButtonProps;
+  buttonProps?: Omit<ButtonProps, "children"> &
+    Partial<Pick<ButtonProps, "children">>;
   iconProps?: IconButtonProps;
   className?: string;
   onClick?: () => void;
