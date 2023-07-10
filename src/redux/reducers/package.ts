@@ -2,6 +2,7 @@ import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import { getCurrentCoordinates } from "@/utils/geoLocation";
 import { PackageService } from "@/services/package.service";
 import { Coordinates } from "@/types/package.types";
+import { RootState } from "../store";
 type Package = {
   _id: string;
   title: string;
@@ -24,12 +25,14 @@ const initialState = {
 
 export const fetchPackagesByCurrentLocation = createAsyncThunk(
   "PACKAGES/FETCH_PACKAGES",
-  async () => {
+  async (_, thunkAPI) => {
     const { coordenates }: { coordenates: Coordinates } =
       await getCurrentCoordinates();
+    const { user } = thunkAPI.getState() as RootState;
 
     const { data } = await PackageService.getAvailablePackagesByCurrentLocation(
-      coordenates
+      coordenates,
+      user
     );
 
     return data.data;

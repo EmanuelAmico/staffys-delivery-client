@@ -24,7 +24,6 @@ export default function Template({
     try {
       if (user.token || allowedPathnames.includes(pathname)) return;
       await dispatch(checkForUserTokenAndPersistSession()).unwrap();
-      push("/home");
     } catch (error) {
       push("/login");
     }

@@ -6,6 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { UserLogin, UserRegister, User } from "@/types/user.types";
 import { AuthService } from "@/services/auth.service";
+import { UserService } from "@/services/user.service";
 
 const initialState: User = {
   _id: "",
@@ -85,6 +86,17 @@ export const resetPassword = createAsyncThunk(
   }
 );
 
+export const takePackage = createAsyncThunk(
+  "USER/TAKE_PACKAGE",
+  async (packageId: string, thunkAPI) => {
+    const { user } = thunkAPI.getState() as { user: User };
+
+    const updatedUser = await UserService.takePackage(user, packageId);
+
+    return updatedUser;
+  }
+);
+
 const userReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setUser, (state, action: PayloadAction<User>) => {
@@ -123,6 +135,12 @@ const userReducer = createReducer(initialState, (builder) => {
       return state;
     })
     .addCase(resetPassword.rejected, (state) => {
+      return state;
+    })
+    .addCase(takePackage.fulfilled, (_state, action: PayloadAction<User>) => {
+      return action.payload;
+    })
+    .addCase(takePackage.rejected, (state) => {
       return state;
     });
 });
