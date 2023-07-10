@@ -1,13 +1,9 @@
 import { waitRandomSeconds } from "@/utils/wait";
 import axios from "axios";
-import { UserRegister } from "@/types/user.types";
-// import https from "https";
+import { UserRegister, UserLogin } from "@/types/user.types";
+
 export class UserService {
   static apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-  // agent = new https.Agent({
-  //   rejectUnauthorized: false,
-  // });
 
   static async createUser(userData: UserRegister) {
     const { name, lastname, password, confirmpassword, email } = userData;
@@ -18,10 +14,19 @@ export class UserService {
       password,
       confirmpassword,
       email,
-      urlphoto: "holaa",
+      urlphoto: "Waiting for Photo",
       is_admin: false,
     });
-    return user;
+    return user.data;
+  }
+  static async loginUser(userData: UserLogin) {
+    const { password, email } = userData;
+
+    const user = await axios.post(`${this.apiUrl}/auth/login`, {
+      password,
+      email,
+    });
+    return user.data;
   }
   static async deleteUser(id: string) {
     await waitRandomSeconds();

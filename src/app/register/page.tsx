@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { FormEvent } from "react";
 import Button from "@/commons/Button";
 import TextInput from "@/commons/TextInput";
 import Layout from "@/commons/Layout";
@@ -7,15 +7,12 @@ import Link from "@/commons/Link";
 import useInput from "@/hooks/useInput";
 import IconButton from "@/commons/IconButton";
 import { TbCameraPlus } from "react-icons/tb";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createUser } from "@/redux/reducers/user";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 
 const Register = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch<AppDispatch>();
-  dispatch;
 
   const name = useInput({
     validators: [
@@ -75,7 +72,7 @@ const Register = () => {
       };
     },
   });
-  const handleRegister = async (event: React.MouseEvent) => {
+  const handleRegister = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const userData = {
       name: name.value,
@@ -86,7 +83,6 @@ const Register = () => {
       urlphoto: "",
     };
     try {
-      userData;
       await dispatch(createUser(userData));
     } catch (error) {
       console.error(error);
@@ -109,7 +105,7 @@ const Register = () => {
           </>
         </div>
       </div>
-      <form autoComplete="off" className="pt-5 pb-5">
+      <form onSubmit={handleRegister} autoComplete="off" className="pt-5 pb-5">
         <TextInput label="Nombre" name="name" placeholder="Nombre" {...name} />
         <TextInput
           label="Apellido"
@@ -122,7 +118,7 @@ const Register = () => {
           name="email"
           placeholder="staffys@gmail.com"
           {...email}
-          toolkit="Debe contener @ para este campo"
+          tooltip="Debe contener @ para este campo"
           helper=""
         />
         <TextInput
@@ -130,7 +126,7 @@ const Register = () => {
           name="password"
           placeholder="Contraseña"
           {...password}
-          toolkit="Debe contener al menos 8 caracteres, una mayuscula y un numero "
+          tooltip="Debe contener al menos 8 caracteres, una mayuscula y un numero "
           helper=""
           hidden
         />
@@ -139,11 +135,11 @@ const Register = () => {
           name="passwordConfirmation"
           placeholder="Confirmación"
           {...passwordConfirmation}
-          toolkit="Debe coincidir con el de arriba"
+          tooltip="Debe coincidir con el de arriba"
           helper=""
           hidden
         />
-        <Button onClick={handleRegister} className="w-[100%] font-medium mt-5">
+        <Button type="submit" className="w-[100%] font-medium mt-5">
           Registrarse
         </Button>
       </form>
