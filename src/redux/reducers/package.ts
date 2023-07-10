@@ -25,11 +25,11 @@ const initialState = {
 export const fetchPackagesByCurrentLocation = createAsyncThunk(
   "PACKAGES/FETCH_PACKAGES",
   async () => {
-    const { coordenates }: { coordenates: Coordinates } =
+    const { coordinates }: { coordinates: Coordinates } =
       await getCurrentCoordinates();
 
     const { data } = await PackageService.getAvailablePackagesByCurrentLocation(
-      coordenates
+      coordinates
     );
 
     return data.data;

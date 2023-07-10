@@ -21,11 +21,14 @@ const GetPackage = () => {
   );
 
   useEffect(() => {
-    try {
-      dispatch(fetchPackagesByCurrentLocation());
-    } catch (error) {
-      console.error("error", error);
-    }
+    dispatch(fetchPackagesByCurrentLocation())
+      .unwrap()
+      .then((result) => {
+        return result;
+      })
+      .catch((error) => {
+        throw error;
+      });
   }, [dispatch]);
 
   return (
