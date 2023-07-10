@@ -7,7 +7,16 @@ import Link from "@/commons/Link";
 import useInput from "@/hooks/useInput";
 import IconButton from "@/commons/IconButton";
 import { TbCameraPlus } from "react-icons/tb";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { createUser } from "@/redux/reducers/user";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+
 const Register = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const dispatch = useDispatch<AppDispatch>();
+  dispatch;
+
   const name = useInput({
     validators: [
       {
@@ -44,8 +53,7 @@ const Register = () => {
       },
       {
         type: "password",
-        errorMessage:
-          "La contraseña debe tener al menos 8 caracteres, una letra y un número",
+        errorMessage: "Debe tener al menos 8 caracteres, una letra y un número",
       },
     ],
   });
@@ -67,6 +75,23 @@ const Register = () => {
       };
     },
   });
+  const handleRegister = async (event: React.MouseEvent) => {
+    event.preventDefault();
+    const userData = {
+      name: name.value,
+      lastname: lastName.value,
+      email: email.value,
+      password: password.value,
+      confirmpassword: passwordConfirmation.value,
+      urlphoto: "",
+    };
+    try {
+      userData;
+      await dispatch(createUser(userData));
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Layout className="h-screen">
@@ -97,12 +122,16 @@ const Register = () => {
           name="email"
           placeholder="staffys@gmail.com"
           {...email}
+          toolkit="Debe contener @ para este campo"
+          helper=""
         />
         <TextInput
           label="Contraseña"
           name="password"
           placeholder="Contraseña"
           {...password}
+          toolkit="Debe contener al menos 8 caracteres, una mayuscula y un numero "
+          helper=""
           hidden
         />
         <TextInput
@@ -110,9 +139,13 @@ const Register = () => {
           name="passwordConfirmation"
           placeholder="Confirmación"
           {...passwordConfirmation}
+          toolkit="Debe coincidir con el de arriba"
+          helper=""
           hidden
         />
-        <Button className="w-[100%] font-medium mt-5">Registrarse</Button>
+        <Button onClick={handleRegister} className="w-[100%] font-medium mt-5">
+          Registrarse
+        </Button>
       </form>
       <div className="flex flex-col items-center">
         <Link href="/login" className="text-lg font-medium">
