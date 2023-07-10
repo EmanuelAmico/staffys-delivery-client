@@ -22,20 +22,25 @@ export class UserService {
     return updatedUser;
   }
 
-  // static async startDelivery(
-  //   userData: StartDeliveryRequestBody,
-  //   token: string
-  // ) {
-  //   const {
-  //     data: { data },
-  //   } = await axios.post(`${this.apiUrl}/user/start-delivery`, userData, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
+  static async startDelivery(user: User) {
+    const {
+      data: {
+        data: { user: updatedUser },
+      },
+    } = await axios.post(
+      `${this.apiUrl}/user/start-delivery`,
+      {
+        userId: user._id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
 
-  //   return data;
-  // }
+    return updatedUser;
+  }
 
   // static async cancelDelivery(
   //   userData: CancelDeliveryRequestBody,

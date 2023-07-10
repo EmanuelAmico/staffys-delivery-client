@@ -26,6 +26,7 @@ const QuestionConfirmation: FC<QuestionConfirmationProps> = ({
 
       <div className="flex items-center mt-4">
         <Button
+          type="button"
           name={name}
           onClick={() => onChange("yes", name)}
           className="capitalize !px-11"
@@ -35,6 +36,7 @@ const QuestionConfirmation: FC<QuestionConfirmationProps> = ({
           Sí
         </Button>
         <Button
+          type="button"
           name={name}
           onClick={() => onChange("no", name)}
           className="ml-6 capitalize !px-11"

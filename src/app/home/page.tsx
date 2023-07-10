@@ -7,10 +7,13 @@ import { deliveryHistory } from "@/utils/FakeDataDeliveryHistory";
 import { deliveryPending } from "@/utils/FakeDataDeliveryPending";
 import { useRouter } from "next/navigation";
 import { CheckRefreshContext } from "@/context/refresh";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 const Home = () => {
   const { push } = useRouter();
   const { changeRefresh } = useContext(CheckRefreshContext);
+  const user = useSelector((state: RootState) => state.user);
 
   return (
     <Layout className="flex gap-4">
@@ -21,6 +24,7 @@ const Home = () => {
           push("/package/get");
         }}
         className="font-medium w-full"
+        disabled={user.is_active}
       >
         Obtener paquetes
       </Button>

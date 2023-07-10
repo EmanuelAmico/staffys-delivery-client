@@ -21,17 +21,20 @@ export const setForm = createAction<Form>("SET_FORM");
 
 export const getOrCreateTodayForm = createAsyncThunk(
   "FORM/TODAY_FORM",
-  async ({
-    user,
-    hasDrank,
-    hasPsychotropicDrugs,
-    hasEmotionalProblems,
-  }: {
-    user: User;
-    hasDrank: boolean;
-    hasPsychotropicDrugs: boolean;
-    hasEmotionalProblems: boolean;
-  }) => {
+  async (
+    {
+      hasDrank,
+      hasPsychotropicDrugs,
+      hasEmotionalProblems,
+    }: {
+      hasDrank: boolean;
+      hasPsychotropicDrugs: boolean;
+      hasEmotionalProblems: boolean;
+    },
+    thunkAPI
+  ) => {
+    const { user } = thunkAPI.getState() as { user: User };
+
     const { data: form } = await FormService.getOrCreateTodayForm(
       user,
       hasDrank,
