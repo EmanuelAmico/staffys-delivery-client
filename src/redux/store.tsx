@@ -1,10 +1,14 @@
 "use client";
 
 import { configureStore } from "@reduxjs/toolkit";
-import exampleReducer from "./example";
+import packageReducer from "./reducers/package";
+
 const store = configureStore({
   reducer: {
-    example: exampleReducer,
+    deliverypackages: packageReducer,
   },
 });
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+
 export default store;

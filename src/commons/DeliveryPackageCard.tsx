@@ -4,14 +4,16 @@ import IconButton, { IconButtonProps } from "./IconButton";
 import Image from "next/image";
 import imgpackage from "../../public/svg/package.svg";
 import { BsFillTrash3Fill } from "react-icons/bs";
+import { Package } from "@/types/package.types";
 
-interface DeliveryPackageCardProps {
-  destination: string;
-  addressee: string;
-  distance: string;
+export interface DeliveryPackageCardProps {
+  deliveryPackage?: Package;
+  destination?: string;
+  receptorName?: string;
+  distance?: string;
+  status?: string;
   trash: boolean;
   buttonText: string;
-  status?: string;
   buttonProps?: ButtonProps;
   iconProps?: IconButtonProps;
   className?: string;
@@ -19,17 +21,16 @@ interface DeliveryPackageCardProps {
 }
 
 const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
-  destination,
-  addressee,
-  distance,
-  status,
-  buttonText,
+  deliveryPackage,
   trash,
+  buttonText,
   buttonProps,
   iconProps,
   className,
   onClick,
 }) => {
+  const { city, receptorName, distance, status } = deliveryPackage || {};
+
   return (
     <div
       className={`bg-whiteBackground rounded-lg shadow-md ${className || ""}`}
@@ -46,7 +47,7 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
           <div className="flex gap-9 justify-between">
             <p className="text-greyText font-bold text-sm">
               Destino:{" "}
-              <span className="text-greyText font-normal text-sm">{`${destination}`}</span>
+              <span className="text-greyText font-normal text-sm">{`${city}`}</span>
             </p>
             {trash ? (
               <IconButton
@@ -62,7 +63,7 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
           </div>
           <p className="text-greyText font-bold text-sm">
             Recibe:{" "}
-            <span className="text-greyText font-normal text-sm">{`${addressee}`}</span>
+            <span className="text-greyText font-normal text-sm">{`${receptorName}`}</span>
           </p>
           <p className="text-greyText font-bold text-sm">
             Distancia:{" "}
@@ -70,7 +71,7 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
           </p>
           <div className="self-end pt-1">
             {status ? (
-              status === "in progress" ? (
+              status === "in_progress" ? (
                 <p className="font-bold text-yellowText">En curso</p>
               ) : (
                 <p className="font-bold ">Entregado</p>
