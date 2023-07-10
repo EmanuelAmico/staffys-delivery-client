@@ -9,9 +9,11 @@ import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import useInput from "@/hooks/useInput";
-import { loginUser } from "@/redux/reducers/user";
+import { login } from "@/redux/reducers/user";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const { push } = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const email = useInput({
     validators: [
@@ -25,6 +27,7 @@ const Login = () => {
       },
     ],
   });
+
   const password = useInput({
     validators: [
       {
@@ -37,6 +40,7 @@ const Login = () => {
       },
     ],
   });
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userData = {
@@ -44,7 +48,8 @@ const Login = () => {
       password: password.value,
     };
     try {
-      await dispatch(loginUser(userData));
+      await dispatch(login(userData)).unwrap();
+      push("/home");
     } catch (error) {
       console.error(error);
     }

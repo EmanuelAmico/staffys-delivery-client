@@ -20,8 +20,7 @@ export interface User {
   pendingPackages: string[];
   currentPackage: string | null;
   historyPackages: string[];
-  loading?: boolean;
-  error?: string | null;
+  token: string;
 }
 export interface UserLogin {
   email: string;
