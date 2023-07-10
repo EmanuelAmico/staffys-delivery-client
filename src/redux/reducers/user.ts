@@ -97,6 +97,17 @@ export const takePackage = createAsyncThunk(
   }
 );
 
+export const startDelivery = createAsyncThunk(
+  "USER/START_DELIVERY",
+  async (_, thunkAPI) => {
+    const { user } = thunkAPI.getState() as { user: User };
+
+    const updatedUser = await UserService.startDelivery(user);
+
+    return updatedUser;
+  }
+);
+
 const userReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setUser, (state, action: PayloadAction<User>) => {
@@ -109,16 +120,25 @@ const userReducer = createReducer(initialState, (builder) => {
       localStorage.removeItem("token");
       return initialState;
     })
-    .addCase(register.fulfilled, (_state, action: PayloadAction<User>) => {
-      return action.payload;
+    .addCase(register.fulfilled, (state, action: PayloadAction<User>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
     })
-    .addCase(login.fulfilled, (_state, action: PayloadAction<User>) => {
-      return action.payload;
+    .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
     })
     .addCase(
       checkForUserTokenAndPersistSession.fulfilled,
-      (_state, action: PayloadAction<User>) => {
-        return action.payload;
+      (state, action: PayloadAction<User>) => {
+        return {
+          ...state,
+          ...action.payload,
+        };
       }
     )
     .addCase(checkForUserTokenAndPersistSession.rejected, (_state, _action) => {
@@ -137,10 +157,22 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(resetPassword.rejected, (state) => {
       return state;
     })
-    .addCase(takePackage.fulfilled, (_state, action: PayloadAction<User>) => {
-      return action.payload;
+    .addCase(takePackage.fulfilled, (state, action: PayloadAction<User>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
     })
     .addCase(takePackage.rejected, (state) => {
+      return state;
+    })
+    .addCase(startDelivery.fulfilled, (state, action: PayloadAction<User>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    })
+    .addCase(startDelivery.rejected, (state) => {
       return state;
     });
 });
