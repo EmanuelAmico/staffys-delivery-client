@@ -7,6 +7,7 @@ import {
 import { UserLogin, UserRegister, User } from "@/types/user.types";
 import { AuthService } from "@/services/auth.service";
 import { UserService } from "@/services/user.service";
+import { RootState } from "../store";
 
 const initialState: User = {
   _id: "",
@@ -50,7 +51,7 @@ export const login = createAsyncThunk(
 );
 
 export const checkForUserTokenAndPersistSession = createAsyncThunk(
-  "USER/ME",
+  "USER/PERSIST_SESSION",
   async () => {
     const token = localStorage.getItem("token");
 
@@ -61,6 +62,16 @@ export const checkForUserTokenAndPersistSession = createAsyncThunk(
     return { ...user, token };
   }
 );
+
+export const me = createAsyncThunk("USER/ME", async (_, thunkAPI) => {
+  const {
+    user: { token },
+  } = thunkAPI.getState() as RootState;
+
+  const updatedUser = await AuthService.me(token);
+
+  return { ...updatedUser, token };
+});
 
 export const initResetPassword = createAsyncThunk(
   "USER/INIT_RESET_PASSWORD",
@@ -89,7 +100,7 @@ export const resetPassword = createAsyncThunk(
 export const takePackage = createAsyncThunk(
   "USER/TAKE_PACKAGE",
   async (packageId: string, thunkAPI) => {
-    const { user } = thunkAPI.getState() as { user: User };
+    const { user } = thunkAPI.getState() as RootState;
 
     const updatedUser = await UserService.takePackage(user, packageId);
 
@@ -100,9 +111,31 @@ export const takePackage = createAsyncThunk(
 export const startDelivery = createAsyncThunk(
   "USER/START_DELIVERY",
   async (_, thunkAPI) => {
-    const { user } = thunkAPI.getState() as { user: User };
+    const { user } = thunkAPI.getState() as RootState;
 
     const updatedUser = await UserService.startDelivery(user);
+
+    return updatedUser;
+  }
+);
+
+export const startPackageDelivery = createAsyncThunk(
+  "USER/START_PACKAGE_DELIVERY",
+  async (packageId: string, thunkAPI) => {
+    const { user } = thunkAPI.getState() as RootState;
+
+    const updatedUser = await UserService.startPackageDelivery(user, packageId);
+
+    return updatedUser;
+  }
+);
+
+export const finishPackageDelivery = createAsyncThunk(
+  "USER/FINISH_PACKAGE_DELIVERY",
+  async (_, thunkAPI) => {
+    const { user } = thunkAPI.getState() as RootState;
+
+    const updatedUser = await UserService.finishPackageDelivery(user);
 
     return updatedUser;
   }
@@ -145,6 +178,15 @@ const userReducer = createReducer(initialState, (builder) => {
       localStorage.removeItem("token");
       return initialState;
     })
+    .addCase(me.fulfilled, (state, action: PayloadAction<User>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    })
+    .addCase(me.rejected, (state) => {
+      return state;
+    })
     .addCase(initResetPassword.fulfilled, (state) => {
       return state;
     })
@@ -173,6 +215,30 @@ const userReducer = createReducer(initialState, (builder) => {
       };
     })
     .addCase(startDelivery.rejected, (state) => {
+      return state;
+    })
+    .addCase(
+      startPackageDelivery.fulfilled,
+      (state, action: PayloadAction<User>) => {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      }
+    )
+    .addCase(startPackageDelivery.rejected, (state) => {
+      return state;
+    })
+    .addCase(
+      finishPackageDelivery.fulfilled,
+      (state, action: PayloadAction<User>) => {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      }
+    )
+    .addCase(finishPackageDelivery.rejected, (state) => {
       return state;
     });
 });

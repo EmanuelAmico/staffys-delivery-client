@@ -4,6 +4,16 @@ import axios from "axios";
 export class FormService {
   static apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
+  static async getTodayForm(user: User) {
+    const { data } = await axios.get(`${this.apiUrl}/form/today-form`, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+
+    return data;
+  }
+
   static async getOrCreateTodayForm(
     user: User,
     hasDrank: boolean,

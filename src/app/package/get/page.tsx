@@ -17,7 +17,7 @@ import { CheckRefreshContext } from "@/context/refresh";
 import { fetchPackagesByCurrentLocation } from "@/redux/reducers/package";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
-import { startDelivery, takePackage } from "@/redux/reducers/user";
+import { me, startDelivery, takePackage } from "@/redux/reducers/user";
 import { AxiosError } from "axios";
 
 const GetPackage = () => {
@@ -44,6 +44,7 @@ const GetPackage = () => {
         await dispatch(takePackage(packageId)).unwrap();
         await fetchPackages();
       } catch (error) {
+        await dispatch(me()).unwrap();
         console.error(error);
       }
     },
@@ -63,7 +64,7 @@ const GetPackage = () => {
         const statusCode = parseInt(
           (error as AxiosError).message.split(" ").at(-1) || ""
         );
-        if (statusCode === 403) {
+        if (statusCode === 412) {
           setLoading(false);
           push("/sworn-statement");
         }
@@ -104,6 +105,7 @@ const GetPackage = () => {
                   buttonProps={{
                     type: "button",
                     onClick: () => handleTakePackage(deliveryPackage._id),
+                    disabled: !user.is_active,
                   }}
                 />
                 {deliveryPackage !==

@@ -14,6 +14,10 @@ const PackageDescription: FC<PackageDescriptionProps> = ({
   recipient,
   className,
 }) => {
+  if (!destination || !packageId || !recipient) {
+    return null;
+  }
+
   return (
     <div className={`flex justify-center flex-col gap-6 ${className || ""}`}>
       <div className="flex justify-center items-center">

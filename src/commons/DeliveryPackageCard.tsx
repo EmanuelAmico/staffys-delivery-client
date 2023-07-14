@@ -7,7 +7,10 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 import { Package } from "@/types/package.types";
 
 export interface DeliveryPackageCardProps {
-  deliveryPackage?: Package;
+  deliveryPackage?: Pick<
+    Package,
+    "city" | "receptorName" | "distance" | "status"
+  >;
   destination?: string;
   receptorName?: string;
   distance?: string;
@@ -44,7 +47,7 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
         <div className="flex items-center justify-center bg-grayBackground h-24 w-24 rounded-lg">
           <Image src={imgpackage} alt="package" />
         </div>
-        <div className="flex flex-col gap-[0.20rem] w-[65%]">
+        <div className="flex flex-col gap-[0.20rem] grow">
           <div className="flex gap-9 justify-between">
             <p className="text-greyText font-bold text-sm">
               Destino:{" "}
@@ -68,7 +71,7 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
           </p>
           <p className="text-greyText font-bold text-sm">
             Distancia:{" "}
-            <span className="text-greyText font-normal text-sm">{`${distance}`}</span>
+            <span className="text-greyText font-normal text-sm">{`${distance} km`}</span>
           </p>
           <div className="self-end pt-1">
             {status ? (
