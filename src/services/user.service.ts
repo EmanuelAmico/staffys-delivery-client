@@ -41,4 +41,46 @@ export class UserService {
 
     return updatedUser;
   }
+
+  static async startPackageDelivery(user: User, packageId: string) {
+    const {
+      data: {
+        data: { user: updatedUser },
+      },
+    } = await axios.post(
+      `${this.apiUrl}/user/start-package-delivery`,
+      {
+        userId: user._id,
+        packageId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+
+    return updatedUser;
+  }
+
+  static async finishPackageDelivery(user: User) {
+    const {
+      data: {
+        data: { user: updatedUser },
+      },
+    } = await axios.put(
+      `${this.apiUrl}/user/finish-package-delivery`,
+      {
+        userId: user._id,
+        packageId: user.currentPackage?._id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+
+    return updatedUser;
+  }
 }
