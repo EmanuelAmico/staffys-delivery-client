@@ -4,8 +4,8 @@ import Layout from "@/commons/Layout";
 import Button from "@/commons/Button";
 import Link from "@/commons/Link";
 import TextInput from "@/commons/TextInput";
-import Image from "next/image";
-import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
+// import Image from "next/image";
+// import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import useInput from "@/hooks/useInput";
@@ -58,12 +58,12 @@ const Login = () => {
   return (
     <Layout className="h-screen">
       <div className="flex justify-center items-end h-[30%]">
-        <Image
+        {/* <Image
           src={logoFastDelivery}
           alt="Logo Fast Delivery"
           width="200"
           priority
-        />
+        /> */}
       </div>
       <form autoComplete="off" className="pt-16 pb-5" onSubmit={handleSubmit}>
         <TextInput
