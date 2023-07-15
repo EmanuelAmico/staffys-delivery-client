@@ -5,7 +5,7 @@ export interface PackageDescriptionProps {
   destination?: string;
   packageId?: string;
   recipient?: string;
-  coordinates?: string;
+  coordinates?: { lat: number; lng: number } | null;
   className?: string;
 }
 const PackageDescription: FC<PackageDescriptionProps> = ({

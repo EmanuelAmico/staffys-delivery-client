@@ -3,7 +3,17 @@ import axios from "axios";
 
 export class PackageService {
   static apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
+  static async getPackageById(_id: string | string[]) {
+    const foundPackage = await axios.get(
+      `${this.apiUrl}/package/find-package/${_id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return foundPackage.data;
+  }
   static async getAvailablePackagesByCurrentLocation(
     coordenates: {
       lat: number;

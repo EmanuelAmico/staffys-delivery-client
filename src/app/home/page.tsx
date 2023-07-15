@@ -34,7 +34,6 @@ const Home = () => {
         destination="Amenabar 2356, Caba"
         packageId="712"
         recipient="Raul Rodriguez"
-        coordinates="24,25"
         buttonText="Finalizar"
         delivery={true}
       />
