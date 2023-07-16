@@ -68,9 +68,9 @@ export const me = createAsyncThunk("USER/ME", async (_, thunkAPI) => {
     user: { token },
   } = thunkAPI.getState() as RootState;
 
-  const updatedUser = await AuthService.me(token);
+  const user = await AuthService.me(token);
 
-  return { ...updatedUser, token };
+  return { ...user, token };
 });
 
 export const initResetPassword = createAsyncThunk(
