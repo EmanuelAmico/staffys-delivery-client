@@ -8,10 +8,12 @@ import { CheckRefreshContext } from "@/context/refresh";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import {
+  editUser,
   finishPackageDelivery,
   startPackageDelivery,
 } from "@/redux/reducers/user";
 import { getTodayForm } from "@/redux/reducers/form";
+import { AxiosError } from "axios";
 
 const Home = () => {
   const { push } = useRouter();
@@ -42,12 +44,18 @@ const Home = () => {
     (async () => {
       try {
         if (form._id) return;
-        await dispatch(getTodayForm());
+        await dispatch(getTodayForm()).unwrap();
       } catch (error) {
         console.error(error);
+        const statusCode = parseInt(
+          (error as AxiosError).message.split(" ").at(-1) || ""
+        );
+        if (statusCode === 404 && !user.is_active) {
+          await dispatch(editUser({ is_active: true })).unwrap();
+        }
       }
     })();
-  }, [dispatch, form._id]);
+  }, [dispatch, form._id, user.is_active]);
 
   return (
     <Layout className="flex gap-4">

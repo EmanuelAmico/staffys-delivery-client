@@ -141,6 +141,17 @@ export const finishPackageDelivery = createAsyncThunk(
   }
 );
 
+export const editUser = createAsyncThunk(
+  "USER/EDIT",
+  async (fields: Partial<Omit<User, "token">>, thunkAPI) => {
+    const { user } = thunkAPI.getState() as RootState;
+
+    const response = await UserService.editUser(user, fields);
+
+    return response;
+  }
+);
+
 const userReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setUser, (state, action: PayloadAction<User>) => {
@@ -239,6 +250,15 @@ const userReducer = createReducer(initialState, (builder) => {
       }
     )
     .addCase(finishPackageDelivery.rejected, (state) => {
+      return state;
+    })
+    .addCase(editUser.fulfilled, (state, action: PayloadAction<User>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    })
+    .addCase(editUser.rejected, (state) => {
       return state;
     });
 });

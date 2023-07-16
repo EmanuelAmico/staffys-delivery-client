@@ -83,4 +83,22 @@ export class UserService {
 
     return updatedUser;
   }
+
+  static async editUser(user: User, fields: Partial<Omit<User, "token">>) {
+    const {
+      data: {
+        data: { findUser: updatedUser },
+      },
+    } = await axios.put(
+      `${this.apiUrl}/user/update`,
+      { _id: user._id, ...fields },
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+
+    return updatedUser;
+  }
 }
