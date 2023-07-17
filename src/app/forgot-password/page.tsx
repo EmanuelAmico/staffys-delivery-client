@@ -10,6 +10,7 @@ import { initResetPassword, resetPassword } from "@/redux/reducers/user";
 import { AppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { showToast } from "@/utils/toast";
+import { AxiosError } from "axios";
 
 const ForgotPassword = () => {
   const [showSecondStep, setShowSecondStep] = useState(false);
@@ -110,11 +111,17 @@ const ForgotPassword = () => {
             password: password.value,
             confirmPassword: passwordConfirmation.value,
           })
-        );
+        ).unwrap();
         showToast("success", "Contraseña restablecida exitosamente");
         push("/login");
       } catch (error) {
         console.error(error);
+        const statusCode = parseInt(
+          (error as AxiosError).message.split(" ").at(-1) || ""
+        );
+        if (statusCode === 400) {
+          return showToast("error", "El código ingresado es inválido");
+        }
         showToast("error", "Ha ocurrido un error");
       }
     },
