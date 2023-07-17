@@ -1,3 +1,5 @@
+import { Package } from "./package.types";
+
 export interface UserRegister {
   name: string;
   lastname: string;
@@ -17,9 +19,9 @@ export interface User {
   urlphoto: string;
   is_deleted: boolean;
   resetToken?: string;
-  pendingPackages: string[];
-  currentPackage: string | null;
-  historyPackages: string[];
+  pendingPackages: Package[];
+  currentPackage: Package | null;
+  historyPackages: Package[];
   token: string;
 }
 export interface UserLogin {

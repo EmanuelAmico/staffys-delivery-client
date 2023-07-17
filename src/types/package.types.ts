@@ -9,7 +9,7 @@ export interface Package {
   deliveredAt: Date | null;
   status: "taken" | "in_progress" | "delivered" | null;
   deadlines: Date;
-  city: string;
+  city?: string;
   coordinates?: {
     lat: number;
     lng: number;

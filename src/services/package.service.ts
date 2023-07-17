@@ -21,15 +21,13 @@ export class PackageService {
     },
     user: User
   ) {
-    const usercoordenates = {
-      userLatitude: coordenates.lat,
-      userLongitude: coordenates.lng,
-    };
-
-    const deliveryPackages = await axios.post(
+    const deliveryPackages = await axios.get(
       `${this.apiUrl}/package/by-current-location`,
-      usercoordenates,
       {
+        params: {
+          userLatitude: coordenates.lat,
+          userLongitude: coordenates.lng,
+        },
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

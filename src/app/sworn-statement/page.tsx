@@ -10,6 +10,7 @@ import Button from "@/commons/Button";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { getOrCreateTodayForm } from "@/redux/reducers/form";
+import { showToast } from "@/utils/toast";
 
 export default function SwornStatement() {
   const [hasDrank, setHasDrank] = useState("");
@@ -51,10 +52,12 @@ export default function SwornStatement() {
             hasEmotionalProblems: hasEmotionalProblems === "yes",
           })
         ).unwrap();
+        showToast("success", "Declaración jurada enviada");
         push("/package/get");
       } catch (error) {
         console.error(error);
         setLoading(false);
+        showToast("error", "Error al enviar la declaración jurada");
       }
     },
     [dispatch, hasDrank, hasEmotionalProblems, hasPsychotropicDrugs, push]

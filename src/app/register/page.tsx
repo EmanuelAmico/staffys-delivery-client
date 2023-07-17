@@ -11,6 +11,7 @@ import { register } from "@/redux/reducers/user";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
+import { showToast } from "@/utils/toast";
 
 const Register = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -86,9 +87,11 @@ const Register = () => {
     };
     try {
       await dispatch(register(userData)).unwrap();
+      showToast("success", "Usuario registrado correctamente");
       push("/home");
     } catch (error) {
       console.error(error);
+      showToast("error", "Error al registrar usuario");
     }
   };
 
