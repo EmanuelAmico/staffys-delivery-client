@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { initResetPassword, resetPassword } from "@/redux/reducers/user";
 import { AppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
+import { showToast } from "@/utils/toast";
 
 const ForgotPassword = () => {
   const [showSecondStep, setShowSecondStep] = useState(false);
@@ -81,9 +82,11 @@ const ForgotPassword = () => {
         e.preventDefault();
         if (email.error) return;
         await dispatch(initResetPassword(email.value)).unwrap();
+        showToast("success", "Por favor revisa tu email");
         setShowSecondStep(true);
       } catch (error) {
         console.error(error);
+        showToast("error", "Ha ocurrido un error");
       }
     },
     [dispatch, email.error, email.value]
@@ -108,9 +111,11 @@ const ForgotPassword = () => {
             confirmPassword: passwordConfirmation.value,
           })
         );
+        showToast("success", "Contraseña restablecida exitosamente");
         push("/login");
       } catch (error) {
         console.error(error);
+        showToast("error", "Ha ocurrido un error");
       }
     },
     [

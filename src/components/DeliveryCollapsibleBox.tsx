@@ -15,7 +15,8 @@ interface DeliveryCollapsibleBoxWithDelivery
     PackageDescriptionProps {
   className?: string;
   packages?: DeliveryFakeData[];
-  buttonProps?: ButtonProps;
+  buttonProps?: Omit<ButtonProps, "children"> &
+    Partial<Pick<ButtonProps, "children">>;
   buttonText?: string;
   delivery: true;
 }
@@ -25,7 +26,8 @@ interface DeliveryCollapsibleBoxWithoutDelivery
     PackageDescriptionProps {
   className?: string;
   packages?: DeliveryFakeData[];
-  buttonProps?: ButtonProps;
+  buttonProps?: Omit<ButtonProps, "children"> &
+    Partial<Pick<ButtonProps, "children">>;
   pathButton?: string;
   delivery: false;
 }
@@ -46,7 +48,6 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
   buttonProps,
   buttonText,
   pathButton,
-
   className,
 }) => {
   const { push } = useRouter();
@@ -71,10 +72,19 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
           ) : packages ? (
             <>
               {packages.map((deliveryPackage) => (
-                <div key={deliveryPackage.id}>
+                <div key={deliveryPackage.id + Date.now().toString()}>
                   <DeliveryPackageCard
                     className="mb-4"
-                    {...deliveryPackage}
+                    deliveryPackage={{
+                      city: deliveryPackage.destination,
+                      receptorName: deliveryPackage.addressee,
+                      distance: deliveryPackage.distance,
+                      status: deliveryPackage.status || null,
+                    }}
+                    buttonText={deliveryPackage.buttonText || ""}
+                    trash={deliveryPackage.trash}
+                    status={deliveryPackage.status || ""}
+                    buttonProps={deliveryPackage.buttonProps}
                     onClick={() => {
                       changeRefresh();
                       push(`package/description/${deliveryPackage.id}`);
@@ -98,9 +108,7 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
                 </Button>
               ) : null}
             </>
-          ) : (
-            <p>Ningun reparto añadido aun</p>
-          )}
+          ) : null}
         </>
       </DropdownBox>
     </div>

@@ -4,9 +4,9 @@ import {
   createAsyncThunk,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { User } from "@/types/user.types";
 import { FormService } from "@/services/form.service";
 import { Form } from "@/types/form.types";
+import { RootState } from "../store";
 
 const initialState: Form = {
   _id: "",
@@ -19,8 +19,19 @@ const initialState: Form = {
 
 export const setForm = createAction<Form>("SET_FORM");
 
+export const getTodayForm = createAsyncThunk(
+  "FORM/GET_TODAY_FORM",
+  async (_, thunkAPI) => {
+    const { user } = thunkAPI.getState() as RootState;
+
+    const { data: form } = await FormService.getTodayForm(user);
+
+    return form;
+  }
+);
+
 export const getOrCreateTodayForm = createAsyncThunk(
-  "FORM/TODAY_FORM",
+  "FORM/CREATE_TODAY_FORM",
   async (
     {
       hasDrank,
@@ -33,7 +44,7 @@ export const getOrCreateTodayForm = createAsyncThunk(
     },
     thunkAPI
   ) => {
-    const { user } = thunkAPI.getState() as { user: User };
+    const { user } = thunkAPI.getState() as RootState;
 
     const { data: form } = await FormService.getOrCreateTodayForm(
       user,
@@ -59,7 +70,13 @@ const formReducer = createReducer(initialState, (builder) => {
       (_state, action: PayloadAction<Form>) => {
         return action.payload;
       }
-    );
+    )
+    .addCase(getTodayForm.fulfilled, (_state, action: PayloadAction<Form>) => {
+      return action.payload;
+    })
+    .addCase(getTodayForm.rejected, (state, _action) => {
+      return state;
+    });
 });
 
 export default formReducer;

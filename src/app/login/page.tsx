@@ -11,6 +11,7 @@ import { AppDispatch } from "@/redux/store";
 import useInput from "@/hooks/useInput";
 import { login } from "@/redux/reducers/user";
 import { useRouter } from "next/navigation";
+import { showToast } from "@/utils/toast";
 
 const Login = () => {
   const { push } = useRouter();
@@ -49,9 +50,11 @@ const Login = () => {
     };
     try {
       await dispatch(login(userData)).unwrap();
+      showToast("success", "¡Usuario logueado con éxito!");
       push("/home");
     } catch (error) {
       console.error(error);
+      showToast("error", "Credenciales inválidas");
     }
   };
 
