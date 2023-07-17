@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { me, startDelivery, takePackage } from "@/redux/reducers/user";
 import { AxiosError } from "axios";
+import { showToast } from "@/utils/toast";
 
 const GetPackage = () => {
   const { push, back } = useRouter();
@@ -42,10 +43,12 @@ const GetPackage = () => {
     async (packageId: string) => {
       try {
         await dispatch(takePackage(packageId)).unwrap();
+        showToast("success", "Paquete tomado");
         await fetchPackages();
       } catch (error) {
         await dispatch(me()).unwrap();
         console.error(error);
+        showToast("error", "Error al tomar el paquete");
       }
     },
     [dispatch, fetchPackages]
@@ -57,6 +60,7 @@ const GetPackage = () => {
         e.preventDefault();
         setLoading(true);
         await dispatch(startDelivery()).unwrap();
+        showToast("success", "Jornada iniciada correctamente");
         push("/home");
         setLoading(false);
       } catch (error) {
@@ -66,6 +70,7 @@ const GetPackage = () => {
         );
         if (statusCode === 412) {
           setLoading(false);
+          showToast("warn", "Para poder repartir debes llenar la declaración");
           push("/sworn-statement");
         }
       }

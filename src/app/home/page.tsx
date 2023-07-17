@@ -14,6 +14,7 @@ import {
 } from "@/redux/reducers/user";
 import { getTodayForm } from "@/redux/reducers/form";
 import { AxiosError } from "axios";
+import { showToast } from "@/utils/toast";
 
 const Home = () => {
   const { push } = useRouter();
@@ -25,8 +26,10 @@ const Home = () => {
     async (packageId: string) => {
       try {
         await dispatch(startPackageDelivery(packageId));
+        showToast("success", "Reparto iniciado");
       } catch (error) {
         console.error(error);
+        showToast("error", "Error al iniciar el reparto");
       }
     },
     [dispatch]
@@ -35,8 +38,10 @@ const Home = () => {
   const handleFinishPackageDelivery = useCallback(async () => {
     try {
       await dispatch(finishPackageDelivery());
+      showToast("success", "Reparto finalizado");
     } catch (error) {
       console.error(error);
+      showToast("error", "Error al finalizar el reparto");
     }
   }, [dispatch]);
 

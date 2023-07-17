@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { logout } from "@/redux/reducers/user";
+import { showToast } from "@/utils/toast";
 
 const Header = () => {
   const { push } = useRouter();
@@ -13,6 +14,7 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    showToast("success", "Sesión cerrada");
     push("/login");
   };
 
