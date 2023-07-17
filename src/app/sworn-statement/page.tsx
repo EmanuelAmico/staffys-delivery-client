@@ -42,6 +42,7 @@ export default function SwornStatement() {
         })) {
           if (value === "") {
             throw new Error("Faltan campos por llenar");
+            showToast("error", "Faltan campos por llenar");
           }
         }
         setLoading(true);

@@ -73,6 +73,13 @@ const GetPackage = () => {
           showToast("warn", "Para poder repartir debes llenar la declaración");
           push("/sworn-statement");
         }
+        if (statusCode === 451) {
+          setLoading(false);
+          showToast(
+            "warn",
+            "Por cuestiones legales, no podrás repartir por 24hs"
+          );
+        }
       }
     },
     [dispatch, push]
