@@ -79,6 +79,7 @@ const GetPackage = () => {
             "warn",
             "Por cuestiones legales, no podrás repartir por 24hs"
           );
+          await dispatch(me()).unwrap();
           push("/home");
         }
       }
