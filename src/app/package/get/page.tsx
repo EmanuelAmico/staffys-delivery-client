@@ -119,7 +119,7 @@ const GetPackage = () => {
                   buttonProps={{
                     type: "button",
                     onClick: () => handleTakePackage(deliveryPackage._id),
-                    disabled: !user.is_active,
+                    disabled: user.is_disabled || !user.is_able_to_deliver,
                   }}
                 />
                 {deliveryPackage !==

@@ -55,12 +55,12 @@ const Home = () => {
         const statusCode = parseInt(
           (error as AxiosError).message.split(" ").at(-1) || ""
         );
-        if (statusCode === 404 && !user.is_active) {
-          await dispatch(editUser({ is_active: true })).unwrap();
+        if (statusCode === 404 && !user.is_able_to_deliver) {
+          await dispatch(editUser({ is_able_to_deliver: true })).unwrap();
         }
       }
     })();
-  }, [dispatch, form._id, user.is_active]);
+  }, [dispatch, form._id, user.is_able_to_deliver]);
 
   return (
     <Layout className="flex gap-4">
@@ -71,7 +71,8 @@ const Home = () => {
         }}
         className="font-medium w-full"
         disabled={
-          !user.is_active ||
+          user.is_disabled ||
+          !user.is_able_to_deliver ||
           Boolean(user.currentPackage) ||
           user.pendingPackages.some((p) => p.status === "taken")
         }
@@ -114,7 +115,8 @@ const Home = () => {
             buttonText: "Iniciar reparto",
             buttonProps: {
               disabled:
-                !user.is_active ||
+                user.is_disabled ||
+                !user.is_able_to_deliver ||
                 Boolean(user.currentPackage) ||
                 !form._id ||
                 user.pendingPackages.some((p) => p.status !== "taken"),
