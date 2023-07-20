@@ -132,7 +132,7 @@ const Register = () => {
           name="password"
           placeholder="Contraseña"
           {...password}
-          tooltip="Debe contener al menos 8 caracteres, una mayúscula y un numero "
+          tooltip="Contener al menos 8 caracteres, una mayúscula y un numero "
           helper=""
           hidden
         />
