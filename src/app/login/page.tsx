@@ -5,7 +5,6 @@ import Button from "@/commons/Button";
 import Link from "@/commons/Link";
 import TextInput from "@/commons/TextInput";
 import Image from "next/image";
-// import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import useInput from "@/hooks/useInput";
@@ -62,7 +61,7 @@ const Login = () => {
     <Layout className="h-screen">
       <div className="flex justify-center items-end h-[30%]">
         <Image
-          src={"../../../public/images/logoFastDelivery.png"}
+          src={"/images/logoFastDelivery.png"}
           alt="Logo Fast Delivery"
           width="200"
           height="200"
@@ -80,7 +79,6 @@ const Login = () => {
           label="Contraseña"
           name="password"
           placeholder="Contraseña"
-          hidden
           {...password}
         />
         <Button className="w-[100%] font-medium mt-5">Ingresar</Button>

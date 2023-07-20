@@ -134,7 +134,6 @@ const Register = () => {
           {...password}
           tooltip="Contener al menos 8 caracteres, una mayúscula y un numero "
           helper=""
-          hidden
         />
         <TextInput
           label="Confirmación de contraseña"
@@ -143,7 +142,6 @@ const Register = () => {
           {...passwordConfirmation}
           tooltip="Debe coincidir con la contraseña ingresada previamente"
           helper=""
-          hidden
         />
         <Button type="submit" className="w-[100%] font-medium mt-5">
           Registrarse
