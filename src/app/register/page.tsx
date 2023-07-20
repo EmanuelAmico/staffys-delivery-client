@@ -53,7 +53,7 @@ const Register = () => {
       },
       {
         type: "password",
-        errorMessage: "Debe tener al menos 8 caracteres, una letra y un número",
+        errorMessage: "Al menos 8 caracteres, una letra y un número",
       },
     ],
   });
