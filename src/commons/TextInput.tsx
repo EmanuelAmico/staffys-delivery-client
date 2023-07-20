@@ -62,12 +62,12 @@ const TextInput: FC<TextInputProps> = ({
           </div>
         )}
         {isPasswordInput && !showPassword ? (
-          <IoMdEye
+          <IoMdEyeOff
             onClick={togglePasswordVisibility}
             className="absolute right-0 top-0 mt-2 mr-2"
           />
         ) : isPasswordInput && showPassword ? (
-          <IoMdEyeOff
+          <IoMdEye
             onClick={togglePasswordVisibility}
             className="absolute right-0 top-0 mt-2 mr-2"
           />
