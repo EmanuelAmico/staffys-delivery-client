@@ -1,20 +1,22 @@
 "use client";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import Layout from "@/commons/Layout";
 import Button from "@/commons/Button";
 import Link from "@/commons/Link";
 import TextInput from "@/commons/TextInput";
-// import Image from "next/image";
-// import logoFastDelivery from "../../../public/images/logoFastDelivery.png";
+import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import useInput from "@/hooks/useInput";
 import { login } from "@/redux/reducers/user";
 import { useRouter } from "next/navigation";
+import { showToast } from "@/utils/toast";
 
 const Login = () => {
   const { push } = useRouter();
   const dispatch = useDispatch<AppDispatch>();
+  const [showPassword, setShowPassword] = useState(false);
+
   const email = useInput({
     validators: [
       {
@@ -36,7 +38,7 @@ const Login = () => {
       },
       {
         type: "password",
-        errorMessage: "Debe tener al menos 8 caracteres, una letra y un número",
+        errorMessage: "Al menos 8 caracteres, una letra y un número",
       },
     ],
   });
@@ -49,21 +51,24 @@ const Login = () => {
     };
     try {
       await dispatch(login(userData)).unwrap();
+      showToast("success", "¡Usuario logueado con éxito!");
       push("/home");
     } catch (error) {
       console.error(error);
+      showToast("error", "Credenciales inválidas");
     }
   };
 
   return (
     <Layout className="h-screen">
       <div className="flex justify-center items-end h-[30%]">
-        {/* <Image
-          src={logoFastDelivery}
+        <Image
+          src={"/images/logoFastDelivery.png"}
           alt="Logo Fast Delivery"
           width="200"
+          height="200"
           priority
-        /> */}
+        />
       </div>
       <form autoComplete="off" className="pt-16 pb-5" onSubmit={handleSubmit}>
         <TextInput
@@ -71,12 +76,15 @@ const Login = () => {
           name="email"
           placeholder="staffys@gmail.com"
           {...email}
+          type="email"
         />
         <TextInput
           label="Contraseña"
           name="password"
           placeholder="Contraseña"
-          hidden
+          type={showPassword ? "password" : "text"}
+          setShowPassword={setShowPassword}
+          showPassword={showPassword}
           {...password}
         />
         <Button className="w-[100%] font-medium mt-5">Ingresar</Button>

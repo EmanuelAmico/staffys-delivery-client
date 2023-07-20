@@ -5,6 +5,8 @@ import store from "../redux/store";
 import { Provider } from "react-redux";
 import { SkeletonTheme } from "react-loading-skeleton";
 import CheckRefreshProvider from "../context/refresh";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const metadata = {
   title: "Staffys Delivery",
@@ -34,7 +36,10 @@ export default function RootLayout({
       <SkeletonTheme>
         <Provider store={store}>
           <CheckRefreshProvider>
-            <body>{children}</body>
+            <body>
+              <ToastContainer />
+              {children}
+            </body>
           </CheckRefreshProvider>
         </Provider>
       </SkeletonTheme>

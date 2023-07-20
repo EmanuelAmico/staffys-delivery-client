@@ -1,3 +1,5 @@
+import { Package } from "./package.types";
+
 export interface UserRegister {
   name: string;
   lastname: string;
@@ -13,13 +15,14 @@ export interface User {
   lastname: string;
   email: string;
   is_admin: boolean;
-  is_active: boolean;
+  is_able_to_deliver: boolean;
+  is_disabled: boolean;
   urlphoto: string;
   is_deleted: boolean;
   resetToken?: string;
-  pendingPackages: string[];
-  currentPackage: string | null;
-  historyPackages: string[];
+  pendingPackages: Package[];
+  currentPackage: Package | null;
+  historyPackages: Package[];
   token: string;
 }
 export interface UserLogin {

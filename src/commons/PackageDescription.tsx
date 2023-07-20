@@ -33,6 +33,9 @@ const PackageDescription: React.FC<PackageDescriptionProps> = ({
     lat: 34.0522, // Latitude of the destination
     lng: -118.2437, // Longitude of the destination
   };
+  if (!destination || !packageId || !recipient) {
+    return null;
+  }
 
   return (
     <div className={`flex justify-center flex-col gap-6 ${className || ""}`}>

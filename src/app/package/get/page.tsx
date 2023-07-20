@@ -17,8 +17,9 @@ import { CheckRefreshContext } from "@/context/refresh";
 import { fetchPackagesByCurrentLocation } from "@/redux/reducers/package";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
-import { startDelivery, takePackage } from "@/redux/reducers/user";
+import { me, startDelivery, takePackage } from "@/redux/reducers/user";
 import { AxiosError } from "axios";
+import { showToast } from "@/utils/toast";
 
 const GetPackage = () => {
   const { push, back } = useRouter();
@@ -42,9 +43,12 @@ const GetPackage = () => {
     async (packageId: string) => {
       try {
         await dispatch(takePackage(packageId)).unwrap();
+        showToast("success", "Paquete tomado");
         await fetchPackages();
       } catch (error) {
+        await dispatch(me()).unwrap();
         console.error(error);
+        showToast("error", "Error al tomar el paquete");
       }
     },
     [dispatch, fetchPackages]
@@ -56,6 +60,7 @@ const GetPackage = () => {
         e.preventDefault();
         setLoading(true);
         await dispatch(startDelivery()).unwrap();
+        showToast("success", "Jornada iniciada correctamente");
         push("/home");
         setLoading(false);
       } catch (error) {
@@ -63,9 +68,19 @@ const GetPackage = () => {
         const statusCode = parseInt(
           (error as AxiosError).message.split(" ").at(-1) || ""
         );
-        if (statusCode === 403) {
+        if (statusCode === 412) {
           setLoading(false);
+          showToast("warn", "Para poder repartir debes llenar la declaración");
           push("/sworn-statement");
+        }
+        if (statusCode === 451) {
+          setLoading(false);
+          showToast(
+            "warn",
+            "Por cuestiones legales, no podrás repartir por 24hs"
+          );
+          await dispatch(me()).unwrap();
+          push("/home");
         }
       }
     },
@@ -104,6 +119,7 @@ const GetPackage = () => {
                   buttonProps={{
                     type: "button",
                     onClick: () => handleTakePackage(deliveryPackage._id),
+                    disabled: user.is_disabled || !user.is_able_to_deliver,
                   }}
                 />
                 {deliveryPackage !==
