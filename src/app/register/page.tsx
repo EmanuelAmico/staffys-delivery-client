@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import Button from "@/commons/Button";
 import TextInput from "@/commons/TextInput";
 import Layout from "@/commons/Layout";
@@ -16,6 +16,7 @@ import { showToast } from "@/utils/toast";
 const Register = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { push } = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   const name = useInput({
     validators: [
@@ -53,7 +54,7 @@ const Register = () => {
       },
       {
         type: "password",
-        errorMessage: "Debe tener al menos 8 caracteres, una letra y un número",
+        errorMessage: "Al menos 8 caracteres, una letra y un número",
       },
     ],
   });
@@ -117,6 +118,7 @@ const Register = () => {
           label="Apellido"
           name="lastname"
           placeholder="Apellido"
+          type="text"
           {...lastName}
         />
         <TextInput
@@ -125,6 +127,7 @@ const Register = () => {
           placeholder="staffys@gmail.com"
           {...email}
           tooltip="Debe contener @ para este campo"
+          type="email"
           helper=""
         />
         <TextInput
@@ -132,18 +135,20 @@ const Register = () => {
           name="password"
           placeholder="Contraseña"
           {...password}
-          tooltip="Debe contener al menos 8 caracteres, una mayúscula y un numero "
+          tooltip="Contener al menos 8 caracteres, una mayúscula y un numero "
+          setShowPassword={setShowPassword}
+          showPassword={showPassword}
           helper=""
-          hidden
         />
         <TextInput
           label="Confirmación de contraseña"
           name="passwordConfirmation"
           placeholder="Confirmación"
           {...passwordConfirmation}
+          setShowPassword={setShowPassword}
+          showPassword={showPassword}
           tooltip="Debe coincidir con la contraseña ingresada previamente"
           helper=""
-          hidden
         />
         <Button type="submit" className="w-[100%] font-medium mt-5">
           Registrarse

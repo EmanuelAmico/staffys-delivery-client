@@ -12,6 +12,8 @@ services:
       - ./next.config.js:/app/next.config.js
       - ./postcss.config.js:/app/postcss.config.js
       - ./tailwind.config.ts:/app/tailwind.config.ts
+    env_file:
+      - ./.env
     container_name: staffys_delivery_client_local
     ports:
       - 3000:3000
