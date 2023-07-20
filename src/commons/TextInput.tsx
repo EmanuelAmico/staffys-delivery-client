@@ -57,7 +57,11 @@ const TextInput: FC<TextInputProps> = ({
           }`}
         />
         {tooltip && showIconTooltip && (
-          <div className="absolute p-1 -top-0 right-12 mr-1 bg-whiteBackground rounded-2xl border border-activeBlue shadow-md">
+          <div
+            className={`absolute p-1 -top-0 ${
+              isPasswordInput ? "right-12" : "right-4"
+            } mr-1 bg-whiteBackground rounded-2xl border border-activeBlue shadow-md`}
+          >
             <p className="text-greyText text-[10px]">{tooltip}</p>
           </div>
         )}
@@ -73,7 +77,9 @@ const TextInput: FC<TextInputProps> = ({
           />
         ) : null}
         <div
-          className="absolute right-0 top-0 mt-2 mr-8 cursor-pointer"
+          className={`absolute right-0 top-0 mt-2  cursor-pointer ${
+            isPasswordInput ? "mr-8" : "mr-0"
+          }`}
           onMouseEnter={handleIconMouseEnter}
           onMouseLeave={handleIconMouseLeave}
         >
