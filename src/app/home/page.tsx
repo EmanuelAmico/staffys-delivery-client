@@ -26,6 +26,7 @@ const Home = () => {
     async (packageId: string) => {
       try {
         await dispatch(startPackageDelivery(packageId));
+
         showToast("success", "Reparto iniciado");
       } catch (error) {
         console.error(error);
@@ -86,10 +87,11 @@ const Home = () => {
             ? "Tienes un reparto en curso"
             : "No tienes ningún reparto en curso"
         }
+        coordinatesUser={user.currentPackage?.coordinatesUser}
+        coordinatesPackage={user.currentPackage?.coordinatesPackage}
         destination={user.currentPackage?.address}
         packageId={user.currentPackage?._id}
         recipient={user.currentPackage?.receptorName}
-        // coordinates="24,25"
         buttonText={user.currentPackage ? "Finalizar" : undefined}
         buttonProps={{ onClick: handleFinishPackageDelivery }}
         delivery={true}

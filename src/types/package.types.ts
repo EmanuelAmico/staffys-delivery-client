@@ -10,10 +10,14 @@ export interface Package {
   status: "taken" | "in_progress" | "delivered" | null;
   deadlines: Date;
   city?: string;
-  coordinates?: {
+  coordinatesPackage?: {
     lat: number;
     lng: number;
-  } | null;
+  };
+  coordinatesUser?: {
+    lat: number;
+    lng: number;
+  };
   distance?: number | null;
 }
 

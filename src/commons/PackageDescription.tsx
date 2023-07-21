@@ -5,11 +5,11 @@ export interface PackageDescriptionProps {
   destination?: string;
   packageId?: string;
   recipient?: string;
-  originCoordinates?: {
+  coordinatesPackage?: {
     lat: number;
     lng: number;
   };
-  destinationCoordinates?: {
+  coordinatesUser?: {
     lat: number;
     lng: number;
   };
@@ -22,8 +22,8 @@ const PackageDescription: React.FC<PackageDescriptionProps> = ({
   packageId,
   recipient,
   className,
-  originCoordinates,
-  destinationCoordinates,
+  coordinatesPackage,
+  coordinatesUser,
 }) => {
   // const originCoordinates = {
   //   lat: 37.7749, // Latitude of the origin
@@ -44,8 +44,8 @@ const PackageDescription: React.FC<PackageDescriptionProps> = ({
       <div className="flex justify-center items-center">
         {/* Render the Map component passing the coordinates */}
         <Map
-          originCoordinates={originCoordinates}
-          destinationCoordinates={destinationCoordinates}
+          originCoordinates={coordinatesUser}
+          destinationCoordinates={coordinatesPackage}
         />
       </div>
       <div className="text-1xl">

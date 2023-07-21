@@ -43,7 +43,8 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
   destination,
   packageId,
   recipient,
-  coordinates,
+  coordinatesUser,
+  coordinatesPackage,
   packages,
   buttonProps,
   buttonText,
@@ -63,7 +64,8 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
                 destination={destination}
                 packageId={packageId}
                 recipient={recipient}
-                coordinates={coordinates}
+                coordinatesUser={coordinatesUser}
+                coordinatesPackage={coordinatesPackage}
               />
               <Button className="self-end" {...buttonProps}>
                 {buttonText}
