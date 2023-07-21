@@ -1,5 +1,7 @@
 import { User } from "@/types/user.types";
 import axios from "axios";
+import { getCurrentCoordinates } from "@/utils/geoLocation";
+import { Coordinates } from "@/types/package.types";
 
 export class UserService {
   static apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -43,6 +45,8 @@ export class UserService {
   }
 
   static async startPackageDelivery(user: User, packageId: string) {
+    const { coordinates }: { coordinates: Coordinates } =
+      await getCurrentCoordinates();
     const {
       data: {
         data: { user: updatedUser },
@@ -52,6 +56,8 @@ export class UserService {
       {
         userId: user._id,
         packageId,
+        userLatitude: coordinates.lat,
+        userLongitude: coordinates.lng,
       },
       {
         headers: {

@@ -39,7 +39,8 @@ const SinglePackageDescription = () => {
           destination={selectedPackage?.address}
           packageId="712"
           recipient={selectedPackage?.receptorName}
-          coordinates={selectedPackage?.coordinates || null}
+          destinationCoordinates={selectedPackage?.coordinatesPackage}
+          originCoordinates={selectedPackage?.coordinatesUser}
         />
       </Card>
     </Layout>

@@ -22,17 +22,19 @@ const PackageDescription: React.FC<PackageDescriptionProps> = ({
   packageId,
   recipient,
   className,
+  originCoordinates,
+  destinationCoordinates,
 }) => {
-  const originCoordinates = {
-    lat: 37.7749, // Latitude of the origin
-    lng: -122.4194, // Longitude of the origin
-  };
+  // const originCoordinates = {
+  //   lat: 37.7749, // Latitude of the origin
+  //   lng: -122.4194, // Longitude of the origin
+  // };
 
-  // Example coordinates for destination
-  const destinationCoordinates = {
-    lat: 34.0522, // Latitude of the destination
-    lng: -118.2437, // Longitude of the destination
-  };
+  // // Example coordinates for destination
+  // const destinationCoordinates = {
+  //   lat: 34.0522, // Latitude of the destination
+  //   lng: -118.2437, // Longitude of the destination
+  // };
   if (!destination || !packageId || !recipient) {
     return null;
   }
