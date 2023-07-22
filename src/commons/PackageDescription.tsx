@@ -2,10 +2,9 @@ import React from "react";
 import Map from "./Map";
 
 export interface PackageDescriptionProps {
-  _id?: string;
   destination?: string;
   packageId?: string;
-  receptorName?: string | null;
+  recipient?: string;
   coordinatesPackage?: {
     lat: number;
     lng: number;
@@ -15,20 +14,17 @@ export interface PackageDescriptionProps {
     lng: number;
   };
   className?: string;
-  coordinates?: string;
-  distance?: number;
-  status?: string;
 }
 
 const PackageDescription: React.FC<PackageDescriptionProps> = ({
   destination,
   packageId,
-  receptorName,
+  recipient,
   className,
   coordinatesPackage,
   coordinatesUser,
 }) => {
-  if (!destination || !packageId || !receptorName) {
+  if (!destination || !packageId || !recipient) {
     return null;
   }
 
@@ -36,6 +32,7 @@ const PackageDescription: React.FC<PackageDescriptionProps> = ({
     <div className={`flex justify-center flex-col gap-6 ${className || ""}`}>
       <div className="flex justify-center items-center">
         {/* Render the Map component passing the coordinates */}
+
         <Map
           originCoordinates={coordinatesUser}
           destinationCoordinates={coordinatesPackage}
@@ -49,7 +46,7 @@ const PackageDescription: React.FC<PackageDescriptionProps> = ({
           # del paquete:<span className="font-normal ml-1">{packageId}</span>
         </p>
         <p className="font-bold">
-          Recibe:<span className="font-normal ml-1">{receptorName}</span>
+          Recibe:<span className="font-normal ml-1">{recipient}</span>
         </p>
       </div>
     </div>

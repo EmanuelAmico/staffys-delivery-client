@@ -1,14 +1,12 @@
 import React, { FC, useContext } from "react";
-import DeliveryPackageCard, {
-  DeliveryPackageCardProps,
-} from "@/commons/DeliveryPackageCard";
+import DeliveryPackageCard from "@/commons/DeliveryPackageCard";
 import DropdownBox, { DropdownBoxProps } from "@/commons/DropdownBox";
 import PackageDescription, {
   PackageDescriptionProps,
 } from "@/commons/PackageDescription";
 import Button, { ButtonProps } from "@/commons/Button";
 import { StrictUnion } from "@/types/helper.types";
-
+import { DeliveryFakeData } from "@/utils/FakeDataDeliveryPending";
 import { useRouter } from "next/navigation";
 import { CheckRefreshContext } from "@/context/refresh";
 
@@ -16,7 +14,7 @@ interface DeliveryCollapsibleBoxWithDelivery
   extends DropdownBoxProps,
     PackageDescriptionProps {
   className?: string;
-  packages?: DeliveryPackageCardProps[];
+  packages?: DeliveryFakeData[];
   buttonProps?: Omit<ButtonProps, "children"> &
     Partial<Pick<ButtonProps, "children">>;
   buttonText?: string;
@@ -27,7 +25,7 @@ interface DeliveryCollapsibleBoxWithoutDelivery
   extends DropdownBoxProps,
     PackageDescriptionProps {
   className?: string;
-  packages?: DeliveryPackageCardProps[];
+  packages?: DeliveryFakeData[];
   buttonProps?: Omit<ButtonProps, "children"> &
     Partial<Pick<ButtonProps, "children">>;
   pathButton?: string;
@@ -44,9 +42,9 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
   delivery,
   destination,
   packageId,
-  receptorName,
-  coordinatesUser,
+  recipient,
   coordinatesPackage,
+  coordinatesUser,
   packages,
   buttonProps,
   buttonText,
@@ -65,7 +63,7 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
               <PackageDescription
                 destination={destination}
                 packageId={packageId}
-                receptorName={receptorName}
+                recipient={recipient}
                 coordinatesUser={coordinatesUser}
                 coordinatesPackage={coordinatesPackage}
               />
@@ -76,23 +74,22 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
           ) : packages ? (
             <>
               {packages.map((deliveryPackage) => (
-                <div key={deliveryPackage._id + Date.now().toString()}>
+                <div key={deliveryPackage.id + Date.now().toString()}>
                   <DeliveryPackageCard
                     className="mb-4"
                     deliveryPackage={{
                       city: deliveryPackage.destination,
-                      receptorName: deliveryPackage.receptorName,
+                      receptorName: deliveryPackage.addressee,
                       distance: deliveryPackage.distance,
-                      status: deliveryPackage.status,
+                      status: deliveryPackage.status || null,
                     }}
-                    receptorName=""
                     buttonText={deliveryPackage.buttonText || ""}
                     trash={deliveryPackage.trash}
                     status={deliveryPackage.status || null}
                     buttonProps={deliveryPackage.buttonProps}
                     onClick={() => {
                       changeRefresh();
-                      push(`package/description/${deliveryPackage._id}`);
+                      push(`package/description/${deliveryPackage.id}`);
                     }}
                   />
                   {deliveryPackage !== packages.at(-1) && (

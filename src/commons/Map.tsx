@@ -26,8 +26,8 @@ const Map: React.FC<MapProps> = ({
   );
 
   useEffect(() => {
-    if (originCoordinates && destinationCoordinates) {
-      const onLoad = () => {
+    const onLoad = () => {
+      if (originCoordinates && destinationCoordinates) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const map = new google.maps.Map(mapRef.current!, {
           center: originCoordinates,
@@ -44,7 +44,7 @@ const Map: React.FC<MapProps> = ({
         const request = {
           origin: originCoordinates,
           destination: destinationCoordinates,
-          travelMode: google.maps.TravelMode.DRIVING, // Cambia esto a google.maps.TravelMode.MOTORCYCLING para mostrar la ruta en moto
+          travelMode: google.maps.TravelMode.DRIVING,
         };
 
         directionsService.route(request, (response, status) => {
@@ -52,17 +52,32 @@ const Map: React.FC<MapProps> = ({
             directionsRenderer.setDirections(response);
           }
         });
-      };
+      } else if (destinationCoordinates) {
+        // Si no hay originCoordinates pero sí destinationCoordinates, mostrar el mapa con solo destinationCoordinates
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const map = new google.maps.Map(mapRef.current!, {
+          center: destinationCoordinates,
+          zoom: 12,
+        });
+        mapInstanceRef.current = map;
 
-      if (!window.google) {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`;
-        script.async = true;
-        script.onload = onLoad;
-        document.head.appendChild(script);
-      } else {
-        onLoad();
+        // Agregar marcador para destinationCoordinates
+        new google.maps.Marker({
+          position: destinationCoordinates,
+          map,
+          title: "Destination",
+        });
       }
+    };
+
+    if (!window.google) {
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`;
+      script.async = true;
+      script.onload = onLoad;
+      document.head.appendChild(script);
+    } else {
+      onLoad();
     }
   }, [originCoordinates, destinationCoordinates]);
 

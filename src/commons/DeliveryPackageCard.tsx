@@ -13,7 +13,7 @@ export interface DeliveryPackageCardProps {
     "city" | "receptorName" | "distance" | "status"
   >;
   destination?: string;
-  receptorName: string;
+  receptorName?: string;
 
   distance?: number;
   status: "taken" | "delivered" | "in_progress" | "pending" | null;

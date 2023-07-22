@@ -91,7 +91,7 @@ const Home = () => {
         coordinatesPackage={user.currentPackage?.coordinatesPackage}
         destination={user.currentPackage?.address}
         packageId={user.currentPackage?._id}
-        receptorName={user.currentPackage?.receptorName || null}
+        recipient={user.currentPackage?.receptorName || undefined}
         buttonText={user.currentPackage ? "Finalizar" : undefined}
         buttonProps={{ onClick: handleFinishPackageDelivery }}
         delivery={true}
@@ -112,7 +112,7 @@ const Home = () => {
           ({ _id, address, receptorName }) => ({
             id: _id,
             destination: address,
-            addressee: receptorName,
+            addressee: receptorName || "",
             distance: 10,
             buttonText: "Iniciar reparto",
             buttonProps: {
@@ -147,7 +147,7 @@ const Home = () => {
           ({ _id, address, receptorName }) => ({
             id: _id,
             destination: address,
-            addressee: receptorName,
+            addressee: receptorName || "",
             distance: 10,
             buttonText: "",
             trash: false,

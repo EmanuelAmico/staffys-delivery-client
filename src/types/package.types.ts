@@ -7,7 +7,7 @@ export interface Package {
   deliveryMan: string | null;
   weight: number | null;
   deliveredAt: Date | null;
-  status: string | null;
+  status: "taken" | "in_progress" | "delivered" | null;
   deadlines: Date;
   city?: string;
   coordinatesPackage?: {
