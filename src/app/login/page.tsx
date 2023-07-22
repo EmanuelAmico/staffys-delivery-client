@@ -82,7 +82,7 @@ const Login = () => {
           label="Contraseña"
           name="password"
           placeholder="Contraseña"
-          type={showPassword ? "password" : "text"}
+          type={showPassword ? "text" : "password"}
           setShowPassword={setShowPassword}
           showPassword={showPassword}
           {...password}
