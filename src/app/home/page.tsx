@@ -91,7 +91,7 @@ const Home = () => {
         coordinatesPackage={user.currentPackage?.coordinatesPackage}
         destination={user.currentPackage?.address}
         packageId={user.currentPackage?._id}
-        recipient={user.currentPackage?.receptorName}
+        receptorName={user.currentPackage?.receptorName || null}
         buttonText={user.currentPackage ? "Finalizar" : undefined}
         buttonProps={{ onClick: handleFinishPackageDelivery }}
         delivery={true}

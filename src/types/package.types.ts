@@ -3,11 +3,11 @@ export interface Package {
   title: string;
   description: string;
   address: string;
-  receptorName: string;
+  receptorName: string | null;
   deliveryMan: string | null;
   weight: number | null;
   deliveredAt: Date | null;
-  status: "taken" | "in_progress" | "delivered" | null;
+  status: string | null;
   deadlines: Date;
   city?: string;
   coordinatesPackage?: {

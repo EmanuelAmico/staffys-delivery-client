@@ -38,7 +38,7 @@ const SinglePackageDescription = () => {
           className="pt-6"
           destination={selectedPackage?.address}
           packageId="712"
-          recipient={selectedPackage?.receptorName}
+          receptorName={selectedPackage?.receptorName}
           coordinatesPackage={selectedPackage?.coordinatesPackage}
           coordinatesUser={selectedPackage?.coordinatesUser}
         />

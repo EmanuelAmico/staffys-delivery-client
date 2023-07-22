@@ -7,14 +7,16 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 import { Package } from "@/types/package.types";
 
 export interface DeliveryPackageCardProps {
+  _id?: string;
   deliveryPackage?: Pick<
     Package,
     "city" | "receptorName" | "distance" | "status"
   >;
   destination?: string;
-  receptorName?: string;
-  distance?: string;
-  status?: string;
+  receptorName: string;
+
+  distance?: number;
+  status: "taken" | "delivered" | "in_progress" | "pending" | null;
   trash: boolean;
   buttonText: string;
   buttonProps?: Omit<ButtonProps, "children"> &
