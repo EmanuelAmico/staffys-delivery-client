@@ -28,7 +28,6 @@ const Map: React.FC<MapProps> = ({
   useEffect(() => {
     const onLoad = () => {
       if (originCoordinates && destinationCoordinates && mapRef.current) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const map = new google.maps.Map(mapRef.current, {
           center: originCoordinates,
           zoom: 12,
