@@ -27,9 +27,9 @@ const Map: React.FC<MapProps> = ({
 
   useEffect(() => {
     const onLoad = () => {
-      if (originCoordinates && destinationCoordinates) {
+      if (originCoordinates && destinationCoordinates && mapRef.current) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const map = new google.maps.Map(mapRef.current!, {
+        const map = new google.maps.Map(mapRef.current, {
           center: originCoordinates,
           zoom: 12,
         });
@@ -52,16 +52,14 @@ const Map: React.FC<MapProps> = ({
             directionsRenderer.setDirections(response);
           }
         });
-      } else if (destinationCoordinates) {
-        // Si no hay originCoordinates pero sí destinationCoordinates, mostrar el mapa con solo destinationCoordinates
+      } else if (destinationCoordinates && mapRef.current) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const map = new google.maps.Map(mapRef.current!, {
+        const map = new google.maps.Map(mapRef.current, {
           center: destinationCoordinates,
           zoom: 12,
         });
         mapInstanceRef.current = map;
 
-        // Agregar marcador para destinationCoordinates
         new google.maps.Marker({
           position: destinationCoordinates,
           map,
