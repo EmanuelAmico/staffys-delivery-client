@@ -53,7 +53,6 @@ const Map: React.FC<MapProps> = ({
           }
         });
       } else if (destinationCoordinates && mapRef.current) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const map = new google.maps.Map(mapRef.current, {
           center: destinationCoordinates,
           zoom: 12,
