@@ -10,6 +10,8 @@ interface TextInputProps extends ComponentPropsWithoutRef<"input"> {
   tooltip?: string;
   setShowPassword?: (value: boolean) => void;
   showPassword?: boolean;
+  setShowPasswordConfirmation?: (value: boolean) => void;
+  showPasswordConfirmation?: boolean;
 }
 
 const TextInput: FC<TextInputProps> = ({
@@ -22,6 +24,8 @@ const TextInput: FC<TextInputProps> = ({
   tooltip,
   setShowPassword,
   showPassword,
+  setShowPasswordConfirmation,
+  showPasswordConfirmation,
   ...inputProps
 }) => {
   const [showIconTooltip, setShowIconTooltip] = useState(false);
@@ -62,17 +66,33 @@ const TextInput: FC<TextInputProps> = ({
             <p className="text-greyText text-[10px]">{tooltip}</p>
           </div>
         )}
-        {isPasswordInput && !showPassword ? (
-          <IoMdEyeOff
-            onClick={() => setShowPassword?.(!showPassword)}
-            className="absolute right-0 top-0 mt-2 mr-2"
-          />
-        ) : isPasswordInput && showPassword ? (
-          <IoMdEye
-            onClick={() => setShowPassword?.(!showPassword)}
-            className="absolute right-0 top-0 mt-2 mr-2"
-          />
+
+        {isPasswordInput ? (
+          !showPassword && !showPasswordConfirmation ? (
+            <IoMdEyeOff
+              onClick={() => {
+                if (name === "password") {
+                  setShowPassword?.(!showPassword);
+                } else if (name === "passwordConfirmation") {
+                  setShowPasswordConfirmation?.(!showPasswordConfirmation);
+                }
+              }}
+              className="absolute right-0 top-0 mt-2 mr-2"
+            />
+          ) : (
+            <IoMdEye
+              onClick={() => {
+                if (name === "password") {
+                  setShowPassword?.(!showPassword);
+                } else if (name === "passwordConfirmation") {
+                  setShowPasswordConfirmation?.(!showPasswordConfirmation);
+                }
+              }}
+              className="absolute right-0 top-0 mt-2 mr-2"
+            />
+          )
         ) : null}
+
         <div
           className={`absolute right-0 top-0 mt-2  cursor-pointer ${
             isPasswordInput ? "mr-8" : "mr-0"

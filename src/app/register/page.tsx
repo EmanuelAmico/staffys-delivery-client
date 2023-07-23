@@ -17,6 +17,8 @@ const Register = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { push } = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] =
+    useState(false);
 
   const name = useInput({
     validators: [
@@ -136,6 +138,7 @@ const Register = () => {
           placeholder="Contraseña"
           {...password}
           tooltip="Contener al menos 8 caracteres, una mayúscula y un numero "
+          type={showPassword ? "text" : "password"}
           setShowPassword={setShowPassword}
           showPassword={showPassword}
           helper=""
@@ -145,8 +148,9 @@ const Register = () => {
           name="passwordConfirmation"
           placeholder="Confirmación"
           {...passwordConfirmation}
-          setShowPassword={setShowPassword}
-          showPassword={showPassword}
+          type={showPasswordConfirmation ? "text" : "password"}
+          setShowPasswordConfirmation={setShowPasswordConfirmation}
+          showPasswordConfirmation={showPasswordConfirmation}
           tooltip="Debe coincidir con la contraseña ingresada previamente"
           helper=""
         />
