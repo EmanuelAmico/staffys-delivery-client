@@ -116,6 +116,7 @@ const GetPackage = () => {
                   deliveryPackage={deliveryPackage}
                   trash={false}
                   buttonText="Tomar"
+                  status={deliveryPackage.status}
                   buttonProps={{
                     type: "button",
                     onClick: () => handleTakePackage(deliveryPackage._id),
