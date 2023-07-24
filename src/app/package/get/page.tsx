@@ -20,6 +20,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { me, startDelivery, takePackage } from "@/redux/reducers/user";
 import { AxiosError } from "axios";
 import { showToast } from "@/utils/toast";
+import Loader from "@/commons/Loader";
 
 const GetPackage = () => {
   const { push, back } = useRouter();
@@ -30,10 +31,14 @@ const GetPackage = () => {
     (state: RootState) => state.deliverypackages.packages
   );
   const [loading, setLoading] = useState(false);
+  const [hasFetchedPackages, setHasFetchedPackages] = useState(false);
 
   const fetchPackages = useCallback(async () => {
     try {
+      setLoading(true);
       await dispatch(fetchPackagesByCurrentLocation()).unwrap();
+      setLoading(false);
+      setHasFetchedPackages(true);
     } catch (error) {
       console.error(error);
     }
@@ -77,7 +82,7 @@ const GetPackage = () => {
           setLoading(false);
           showToast(
             "warn",
-            "Por cuestiones legales, no podrás repartir por 24hs"
+            "Por cuestiones legales, no podrás repartir hasta el próximo día"
           );
           await dispatch(me()).unwrap();
           push("/home");
@@ -88,8 +93,12 @@ const GetPackage = () => {
   );
 
   useEffect(() => {
+    if (user.pendingPackages.some((p) => p.status === "taken")) {
+      showToast("warn", "Ya has iniciado tu jornada");
+      return push("/home");
+    }
     fetchPackages();
-  }, [fetchPackages]);
+  }, [fetchPackages, push, user.is_able_to_deliver, user.pendingPackages]);
 
   return (
     <Layout>
@@ -130,6 +139,10 @@ const GetPackage = () => {
               </div>
             );
           })}
+          {!deliveryPackages?.length && hasFetchedPackages && (
+            <p className="text-center">No hay paquetes disponibles</p>
+          )}
+          {loading && <Loader />}
         </div>
         <Button
           type="submit"
