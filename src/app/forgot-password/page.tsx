@@ -17,6 +17,9 @@ const ForgotPassword = () => {
   const { push } = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] =
+    useState(false);
   const email = useInput({
     validators: [
       {
@@ -202,6 +205,9 @@ const ForgotPassword = () => {
               placeholder="Nueva contraseña"
               {...password}
               tooltip="Debe contener al menos 8 caracteres, una mayúscula y un numero "
+              type={showPassword ? "text" : "password"}
+              setShowPassword={setShowPassword}
+              showPassword={showPassword}
               helper=""
             />
             <TextInput
@@ -210,6 +216,9 @@ const ForgotPassword = () => {
               placeholder="Confirmación"
               {...passwordConfirmation}
               tooltip="Debe coincidir con la contraseña ingresada previamente"
+              type={showPasswordConfirmation ? "text" : "password"}
+              setShowPasswordConfirmation={setShowPasswordConfirmation}
+              showPasswordConfirmation={showPasswordConfirmation}
               helper=""
             />
             <Button
