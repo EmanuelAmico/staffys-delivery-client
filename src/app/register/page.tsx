@@ -162,6 +162,7 @@ const Register = () => {
           type="submit"
           className="w-[100%] font-medium mt-3"
           loading={loading}
+          disabled={loading}
         >
           Registrarse
         </Button>

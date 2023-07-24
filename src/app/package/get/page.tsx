@@ -31,7 +31,24 @@ const GetPackage = () => {
     (state: RootState) => state.deliverypackages.packages
   );
   const [loading, setLoading] = useState(false);
+  const [loadingTakePackage, setLoadingTakePackage] = useState<
+    {
+      _id: string;
+      loading: boolean;
+      disabled: boolean;
+    }[]
+  >([]);
   const [hasFetchedPackages, setHasFetchedPackages] = useState(false);
+
+  useEffect(() => {
+    setLoadingTakePackage(
+      deliveryPackages.map((p) => ({
+        _id: p._id,
+        loading: false,
+        disabled: false,
+      }))
+    );
+  }, [deliveryPackages]);
 
   const fetchPackages = useCallback(async () => {
     try {
@@ -47,13 +64,34 @@ const GetPackage = () => {
   const handleTakePackage = useCallback(
     async (packageId: string) => {
       try {
+        setLoadingTakePackage((packages) =>
+          packages.map((p) =>
+            p._id === packageId
+              ? { _id: p._id, loading: true, disabled: true }
+              : { ...p, loading: false, disabled: true }
+          )
+        );
         await dispatch(takePackage(packageId)).unwrap();
         showToast("success", "Paquete tomado");
         await fetchPackages();
+        setLoadingTakePackage((packages) =>
+          packages.map((p) =>
+            p._id === packageId
+              ? { _id: p._id, loading: false, disabled: false }
+              : { ...p, loading: false, disabled: false }
+          )
+        );
       } catch (error) {
         await dispatch(me()).unwrap();
         console.error(error);
         showToast("error", "Error al tomar el paquete");
+        setLoadingTakePackage((packages) =>
+          packages.map((p) =>
+            p._id === packageId
+              ? { _id: p._id, loading: false, disabled: false }
+              : { ...p, loading: false, disabled: false }
+          )
+        );
       }
     },
     [dispatch, fetchPackages]
@@ -93,10 +131,9 @@ const GetPackage = () => {
   );
 
   useEffect(() => {
-    if (user.pendingPackages.some((p) => p.status === "taken")) {
-      showToast("warn", "Ya has iniciado tu jornada");
+    if (user.pendingPackages.some((p) => p.status === "taken"))
       return push("/home");
-    }
+
     fetchPackages();
   }, [fetchPackages, push, user.is_able_to_deliver, user.pendingPackages]);
 
@@ -129,7 +166,15 @@ const GetPackage = () => {
                   buttonProps={{
                     type: "button",
                     onClick: () => handleTakePackage(deliveryPackage._id),
-                    disabled: user.is_disabled || !user.is_able_to_deliver,
+                    disabled:
+                      user.is_disabled ||
+                      !user.is_able_to_deliver ||
+                      loadingTakePackage.find(
+                        (p) => p._id === deliveryPackage._id
+                      )?.disabled,
+                    loading: loadingTakePackage.find(
+                      (p) => p._id === deliveryPackage._id
+                    )?.loading,
                   }}
                 />
                 {deliveryPackage !==

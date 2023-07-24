@@ -80,7 +80,7 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
           ) : (
             <p className="text-greyText font-bold text-sm">
               Peso:{" "}
-              <span className="text-greyText font-normal text-sm">{`${weight} km`}</span>
+              <span className="text-greyText font-normal text-sm">{`${weight} kg`}</span>
             </p>
           )}
           <div className="self-end pt-1">
