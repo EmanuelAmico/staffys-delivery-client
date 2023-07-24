@@ -71,10 +71,12 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
             Recibe:{" "}
             <span className="text-greyText font-normal text-sm">{`${receptorName}`}</span>
           </p>
-          <p className="text-greyText font-bold text-sm">
-            Distancia:{" "}
-            <span className="text-greyText font-normal text-sm">{`${distance} km`}</span>
-          </p>
+          {distance && (
+            <p className="text-greyText font-bold text-sm">
+              Distancia:{" "}
+              <span className="text-greyText font-normal text-sm">{`${distance} km`}</span>
+            </p>
+          )}
           <div className="self-end pt-1">
             {status ? (
               status === "in_progress" ? (

@@ -153,7 +153,6 @@ const Home = () => {
             id: _id,
             destination: address,
             addressee: receptorName || "",
-            distance: 10,
             buttonText: "Iniciar reparto",
             buttonProps: {
               disabled:
