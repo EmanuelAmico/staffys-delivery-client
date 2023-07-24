@@ -1,4 +1,4 @@
-import React, { FC, useContext } from "react";
+import React, { FC, useContext, useState } from "react";
 import DeliveryPackageCard from "@/commons/DeliveryPackageCard";
 import DropdownBox, { DropdownBoxProps } from "@/commons/DropdownBox";
 import PackageDescription, {
@@ -53,6 +53,7 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
 }) => {
   const { push } = useRouter();
   const { changeRefresh } = useContext(CheckRefreshContext);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className={`${className || ""}`}>
@@ -81,6 +82,9 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
                       city: deliveryPackage.destination,
                       receptorName: deliveryPackage.addressee,
                       distance: deliveryPackage.distance,
+                      weight: deliveryPackage.weight
+                        ? deliveryPackage.weight
+                        : null,
                       status: deliveryPackage.status || null,
                     }}
                     buttonText={deliveryPackage.buttonText || ""}
@@ -99,8 +103,10 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
               ))}
               {pathButton ? (
                 <Button
+                  loading={loading}
                   onClick={() => {
                     changeRefresh();
+                    setLoading(true);
                     push(pathButton);
                   }}
                   className="m-auto py-[0.20rem]"

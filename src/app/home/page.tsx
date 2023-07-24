@@ -184,13 +184,13 @@ const Home = () => {
             : "Todavía no has repartido ningún paquete"
         }
         delivery={false}
-        // NOTE This will change
         packages={user.historyPackages.map(
-          ({ _id, address, receptorName }) => ({
+          ({ _id, address, receptorName, status, weight }) => ({
             id: _id,
             destination: address,
             addressee: receptorName || "",
-            distance: 10,
+            weight,
+            status,
             buttonText: "",
             trash: false,
           })
