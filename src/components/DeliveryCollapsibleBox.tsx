@@ -80,7 +80,6 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
                     deliveryPackage={{
                       city: deliveryPackage.destination,
                       receptorName: deliveryPackage.addressee,
-                      distance: deliveryPackage.distance,
                       status: deliveryPackage.status || null,
                     }}
                     buttonText={deliveryPackage.buttonText || ""}
