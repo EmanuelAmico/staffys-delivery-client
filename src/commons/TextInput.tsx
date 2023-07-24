@@ -41,10 +41,10 @@ const TextInput: FC<TextInputProps> = ({
     name === "password" || name === "passwordConfirmation";
 
   return (
-    <div className={`w-full h-[5.3rem] ${className || ""} relative`}>
+    <div className={`w-full h-[5.1rem] ${className || ""} relative`}>
       <label
         htmlFor={name}
-        className="mb-1 text-xs text-yellowText font-medium border-0"
+        className="text-sm text-yellowText font-medium border-0"
       >
         {label}
       </label>
@@ -53,7 +53,7 @@ const TextInput: FC<TextInputProps> = ({
           {...inputProps}
           id={name}
           name={name}
-          className={`text-blackText text-base w-full p-1 border-b-2 border-solid bg-inherit pl-0 outline-0 ${
+          className={`text-blackText text-base w-full pt-1 border-b-2 border-solid bg-inherit pl-0 outline-0 ${
             disabled ? "border-b-disableButton" : "border-b-primaryBlue"
           }`}
         />
@@ -112,7 +112,7 @@ const TextInput: FC<TextInputProps> = ({
         </div>
       </div>
       {error ? (
-        <p className="text-redText text-xs">{error}</p>
+        <p className="text-redText text-sm">{error}</p>
       ) : helper ? (
         <p className="text-blackText">{helper}</p>
       ) : null}

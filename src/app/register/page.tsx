@@ -19,6 +19,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false);
+  const [loading, setLoading] = useState(false);
 
   const name = useInput({
     validators: [
@@ -89,12 +90,15 @@ const Register = () => {
       urlphoto: "http://url.com",
     };
     try {
+      setLoading(true);
       await dispatch(register(userData)).unwrap();
       showToast("success", "Usuario registrado correctamente");
+      setLoading(false);
       push("/home");
     } catch (error) {
       console.error(error);
       showToast("error", "Error al registrar usuario");
+      setLoading(false);
     }
   };
 
@@ -114,7 +118,7 @@ const Register = () => {
           </>
         </div>
       </div>
-      <form onSubmit={handleRegister} autoComplete="off" className="pt-5 pb-5">
+      <form onSubmit={handleRegister} autoComplete="off" className="pt-4 pb-4">
         <TextInput label="Nombre" name="name" placeholder="Nombre" {...name} />
         <TextInput
           label="Apellido"
@@ -154,7 +158,11 @@ const Register = () => {
           tooltip="Debe coincidir con la contraseña ingresada previamente"
           helper=""
         />
-        <Button type="submit" className="w-[100%] font-medium mt-5">
+        <Button
+          type="submit"
+          className="w-[100%] font-medium mt-3"
+          loading={loading}
+        >
           Registrarse
         </Button>
       </form>

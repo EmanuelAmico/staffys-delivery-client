@@ -10,11 +10,11 @@ export interface DeliveryPackageCardProps {
   _id?: string;
   deliveryPackage?: Pick<
     Package,
-    "city" | "receptorName" | "distance" | "status"
+    "city" | "receptorName" | "distance" | "status" | "weight"
   >;
   destination?: string;
   receptorName?: string;
-
+  weight?: number;
   distance?: number;
   status: "taken" | "delivered" | "in_progress" | "pending" | null;
   trash: boolean;
@@ -35,7 +35,8 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
   className,
   onClick,
 }) => {
-  const { city, receptorName, distance, status } = deliveryPackage || {};
+  const { city, receptorName, distance, status, weight } =
+    deliveryPackage || {};
 
   return (
     <div
@@ -71,10 +72,15 @@ const DeliveryPackageCard: FC<DeliveryPackageCardProps> = ({
             Recibe:{" "}
             <span className="text-greyText font-normal text-sm">{`${receptorName}`}</span>
           </p>
-          {distance && (
+          {distance ? (
             <p className="text-greyText font-bold text-sm">
               Distancia:{" "}
               <span className="text-greyText font-normal text-sm">{`${distance} km`}</span>
+            </p>
+          ) : (
+            <p className="text-greyText font-bold text-sm">
+              Peso:{" "}
+              <span className="text-greyText font-normal text-sm">{`${weight} km`}</span>
             </p>
           )}
           <div className="self-end pt-1">

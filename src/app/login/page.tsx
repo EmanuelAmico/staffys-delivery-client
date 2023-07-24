@@ -16,6 +16,7 @@ const Login = () => {
   const { push } = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const email = useInput({
     validators: [
@@ -50,12 +51,15 @@ const Login = () => {
       password: password.value,
     };
     try {
+      setLoading(true);
       await dispatch(login(userData)).unwrap();
       showToast("success", "¡Usuario logueado con éxito!");
+      setLoading(false);
       push("/home");
     } catch (error) {
       console.error(error);
       showToast("error", "Credenciales inválidas");
+      setLoading(false);
     }
   };
 
@@ -72,7 +76,7 @@ const Login = () => {
       </div>
       <form autoComplete="off" className="pt-16 pb-5" onSubmit={handleSubmit}>
         <TextInput
-          label="Usuario"
+          label="Email"
           name="email"
           placeholder="staffys@gmail.com"
           {...email}
@@ -87,7 +91,9 @@ const Login = () => {
           showPassword={showPassword}
           {...password}
         />
-        <Button className="w-[100%] font-medium mt-5">Ingresar</Button>
+        <Button className="w-[100%] font-medium mt-5" loading={loading}>
+          Ingresar
+        </Button>
       </form>
       <div className="flex flex-col items-center gap-4">
         <Link href="/forgot-password" className="text-lg font-medium">
