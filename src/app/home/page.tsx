@@ -68,14 +68,26 @@ const Home = () => {
         const statusCode = parseInt(
           (error as AxiosError).message.split(" ").at(-1) || ""
         );
-        if (statusCode === 404 && !user.is_able_to_deliver) {
+        if (
+          statusCode === 404 &&
+          (!user.is_able_to_deliver ||
+            user.currentPackage ||
+            user.pendingPackages.some((p) => p.status !== null))
+        ) {
           await dispatch(me()).unwrap();
           showToast("success", "¡Bienvenido a otro día de trabajo! 🚚");
         }
         setLoadingTakePackage(false);
       }
     })();
-  }, [dispatch, form._id, user.is_able_to_deliver]);
+  }, [
+    dispatch,
+    form._id,
+    user.currentPackage,
+    user.is_able_to_deliver,
+    user.pendingPackages,
+    user.pendingPackages.length,
+  ]);
 
   useEffect(() => {
     if (user.is_disabled)
