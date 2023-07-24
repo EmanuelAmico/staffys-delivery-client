@@ -38,7 +38,9 @@ const SinglePackageDescription = () => {
         title={
           selectedPackage?.status === "taken"
             ? "Detalle del reparto"
-            : "Reparto finalizado"
+            : selectedPackage?.status === "delivered"
+            ? "Reparto finalizado"
+            : "No está disponible"
         }
       >
         <PackageDescription
