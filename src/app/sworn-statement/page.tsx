@@ -1,5 +1,11 @@
 "use client";
-import React, { FormEvent, useCallback, useContext, useState } from "react";
+import React, {
+  FormEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import Layout from "@/commons/Layout";
 import IconButton from "@/commons/IconButton";
 import { RiArrowLeftSLine } from "react-icons/ri";
@@ -7,12 +13,15 @@ import QuestionConfirmation from "@/commons/QuestionConfirmation";
 import { useRouter } from "next/navigation";
 import { CheckRefreshContext } from "@/context/refresh";
 import Button from "@/commons/Button";
-import { AppDispatch } from "@/redux/store";
-import { useDispatch } from "react-redux";
-import { getOrCreateTodayForm } from "@/redux/reducers/form";
+import { AppDispatch, RootState } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrCreateTodayForm, getTodayForm } from "@/redux/reducers/form";
 import { showToast } from "@/utils/toast";
+import { AxiosError } from "axios";
+import { me, startDelivery } from "@/redux/reducers/user";
 
 export default function SwornStatement() {
+  const { user, form } = useSelector((state: RootState) => state);
   const [hasDrank, setHasDrank] = useState("");
   const [hasPsychotropicDrugs, setHasPsychotropicDrugs] = useState("");
   const [hasEmotionalProblems, setHasEmotionalProblems] = useState("");
@@ -31,6 +40,30 @@ export default function SwornStatement() {
     stateSetter(value);
   }, []);
 
+  const handleStartDelivery = useCallback(async () => {
+    try {
+      setLoading(true);
+      await dispatch(startDelivery()).unwrap();
+      showToast("success", "Jornada iniciada correctamente");
+      push("/home");
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      const statusCode = parseInt(
+        (error as AxiosError).message.split(" ").at(-1) || ""
+      );
+      if (statusCode === 451) {
+        setLoading(false);
+        showToast(
+          "warn",
+          "Por cuestiones legales, no podrás repartir hasta el próximo día"
+        );
+        await dispatch(me()).unwrap();
+        push("/home");
+      }
+    }
+  }, [dispatch, push]);
+
   const handleSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       try {
@@ -41,8 +74,7 @@ export default function SwornStatement() {
           hasEmotionalProblems,
         })) {
           if (value === "") {
-            throw new Error("Faltan campos por llenar");
-            showToast("error", "Faltan campos por llenar");
+            return showToast("error", "Faltan campos por llenar");
           }
         }
         setLoading(true);
@@ -54,15 +86,44 @@ export default function SwornStatement() {
           })
         ).unwrap();
         showToast("success", "Declaración jurada enviada");
-        push("/package/get");
+        await handleStartDelivery();
       } catch (error) {
         console.error(error);
         setLoading(false);
         showToast("error", "Error al enviar la declaración jurada");
       }
     },
-    [dispatch, hasDrank, hasEmotionalProblems, hasPsychotropicDrugs, push]
+    [
+      dispatch,
+      handleStartDelivery,
+      hasDrank,
+      hasEmotionalProblems,
+      hasPsychotropicDrugs,
+    ]
   );
+
+  useEffect(() => {
+    (async () => {
+      try {
+        if (
+          form._id &&
+          (user.pendingPackages.some((p) => p.status === "taken") ||
+            !user.is_able_to_deliver)
+        )
+          showToast("warn", "Ya has llenado la declaración jurada");
+        if (form._id) return push("/home");
+        await dispatch(getTodayForm()).unwrap();
+      } catch (error) {
+        console.error(error);
+        const statusCode = parseInt(
+          (error as AxiosError).message.split(" ").at(-1) || ""
+        );
+        if (statusCode === 404 && !user.is_able_to_deliver) {
+          await dispatch(me()).unwrap();
+        }
+      }
+    })();
+  }, [dispatch, form._id, push, user.is_able_to_deliver, user.pendingPackages]);
 
   return (
     <Layout>
@@ -96,7 +157,7 @@ export default function SwornStatement() {
             onChange={onChange}
           />
         </div>
-        <Button type="submit" disabled={loading}>
+        <Button type="submit" disabled={loading} loading={loading}>
           Continuar
         </Button>
       </form>
