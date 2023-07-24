@@ -105,12 +105,6 @@ export default function SwornStatement() {
   useEffect(() => {
     (async () => {
       try {
-        if (
-          form._id &&
-          (user.pendingPackages.some((p) => p.status === "taken") ||
-            !user.is_able_to_deliver)
-        )
-          showToast("warn", "Ya has llenado la declaración jurada");
         if (form._id) return push("/home");
         await dispatch(getTodayForm()).unwrap();
       } catch (error) {
