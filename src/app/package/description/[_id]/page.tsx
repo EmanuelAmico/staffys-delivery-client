@@ -33,7 +33,14 @@ const SinglePackageDescription = () => {
         icon={<RiArrowLeftSLine size={40} />}
         className="self-start"
       />
-      <Card className="w-11/12" title="Reparto finalizado ">
+      <Card
+        className="w-11/12"
+        title={
+          selectedPackage?.status === "taken"
+            ? "Detalle del reparto"
+            : "Reparto finalizado"
+        }
+      >
         <PackageDescription
           className="pt-6"
           destination={selectedPackage?.address}
