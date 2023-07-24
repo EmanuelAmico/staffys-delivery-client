@@ -12,7 +12,8 @@ type Package = {
   status: null | "taken" | "in_progress" | "delivered";
   deadline: Date | null;
   city: string;
-  coordinates: { lat: number; lng: number };
+  coordinatesPackage: { lat: number; lng: number };
+  coordinatesUser: { lat: number; lng: number };
   distance: null | number;
 };
 
@@ -28,7 +29,8 @@ const initialState: Package = {
   status: null,
   deadline: null,
   city: "",
-  coordinates: { lat: 0, lng: 0 },
+  coordinatesPackage: { lat: 0, lng: 0 },
+  coordinatesUser: { lat: 0, lng: 0 },
   distance: null,
 };
 

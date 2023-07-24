@@ -43,7 +43,8 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
   destination,
   packageId,
   recipient,
-  coordinates,
+  coordinatesPackage,
+  coordinatesUser,
   packages,
   buttonProps,
   buttonText,
@@ -63,7 +64,8 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
                 destination={destination}
                 packageId={packageId}
                 recipient={recipient}
-                coordinates={coordinates}
+                coordinatesUser={coordinatesUser}
+                coordinatesPackage={coordinatesPackage}
               />
               <Button className="self-end" {...buttonProps}>
                 {buttonText}
@@ -83,7 +85,7 @@ const DeliveryCollapsibleBox: FC<DeliveryCollapsibleBoxProps> = ({
                     }}
                     buttonText={deliveryPackage.buttonText || ""}
                     trash={deliveryPackage.trash}
-                    status={deliveryPackage.status || ""}
+                    status={deliveryPackage.status || null}
                     buttonProps={deliveryPackage.buttonProps}
                     onClick={() => {
                       changeRefresh();

@@ -1,18 +1,28 @@
-import React, { FC } from "react";
-import Image from "next/image";
+import React from "react";
+import Map from "./Map";
 
 export interface PackageDescriptionProps {
   destination?: string;
   packageId?: string;
   recipient?: string;
-  coordinates?: { lat: number; lng: number } | null;
+  coordinatesPackage?: {
+    lat: number;
+    lng: number;
+  };
+  coordinatesUser?: {
+    lat: number;
+    lng: number;
+  };
   className?: string;
 }
-const PackageDescription: FC<PackageDescriptionProps> = ({
+
+const PackageDescription: React.FC<PackageDescriptionProps> = ({
   destination,
   packageId,
   recipient,
   className,
+  coordinatesPackage,
+  coordinatesUser,
 }) => {
   if (!destination || !packageId || !recipient) {
     return null;
@@ -21,15 +31,14 @@ const PackageDescription: FC<PackageDescriptionProps> = ({
   return (
     <div className={`flex justify-center flex-col gap-6 ${className || ""}`}>
       <div className="flex justify-center items-center">
-        <Image
-          src={"/svg/mapcoordinatesdelivery.svg"}
-          alt="map"
-          width={20}
-          height={20}
-          className="w-[335px] h-[290px] object-cover "
+        {/* Render the Map component passing the coordinates */}
+
+        <Map
+          originCoordinates={coordinatesUser}
+          destinationCoordinates={coordinatesPackage}
         />
       </div>
-      <div className="text-1xl ">
+      <div className="text-1xl">
         <p className="font-bold">
           Destino:<span className="font-normal ml-1">{destination}</span>
         </p>
