@@ -16,10 +16,10 @@ const ForgotPassword = () => {
   const [showSecondStep, setShowSecondStep] = useState(false);
   const { push } = useRouter();
   const dispatch = useDispatch<AppDispatch>();
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false);
-
   const email = useInput({
     validators: [
       {
@@ -86,12 +86,15 @@ const ForgotPassword = () => {
       try {
         e.preventDefault();
         if (email.error) return;
+        setLoading(true);
         await dispatch(initResetPassword(email.value)).unwrap();
         showToast("success", "Por favor revisa tu email");
         setShowSecondStep(true);
+        setLoading(false);
       } catch (error) {
         console.error(error);
         showToast("error", "Ha ocurrido un error");
+        setLoading(false);
       }
     },
     [dispatch, email.error, email.value]
@@ -108,6 +111,7 @@ const ForgotPassword = () => {
           passwordConfirmation.error
         )
           return;
+        setLoading(true);
         await dispatch(
           resetPassword({
             email: email.value,
@@ -117,6 +121,7 @@ const ForgotPassword = () => {
           })
         ).unwrap();
         showToast("success", "Contraseña restablecida exitosamente");
+        setLoading(false);
         push("/login");
       } catch (error) {
         console.error(error);
@@ -127,6 +132,7 @@ const ForgotPassword = () => {
           return showToast("error", "El código ingresado es inválido");
         }
         showToast("error", "Ha ocurrido un error");
+        setLoading(false);
       }
     },
     [
@@ -162,7 +168,12 @@ const ForgotPassword = () => {
               tooltip="El email con el que te registraste"
               {...email}
             />
-            <Button type="submit" className="w-[100%] font-medium mt-5">
+            <Button
+              type="submit"
+              className="w-[100%] font-medium mt-5"
+              loading={loading}
+              disabled={loading}
+            >
               Enviar
             </Button>
           </form>
@@ -210,7 +221,12 @@ const ForgotPassword = () => {
               showPasswordConfirmation={showPasswordConfirmation}
               helper=""
             />
-            <Button type="submit" className="w-[100%] font-medium mt-5">
+            <Button
+              type="submit"
+              className="w-[100%] font-medium mt-5"
+              loading={loading}
+              disabled={loading}
+            >
               Enviar
             </Button>
           </form>

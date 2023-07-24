@@ -23,21 +23,45 @@ const Home = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [loadingTakePackage, setLoadingTakePackage] = useState(false);
   const [loadingStartPackageDelivery, setLoadingStartPackageDelivery] =
-    useState(false);
+    useState<
+      {
+        _id: string;
+        loading: boolean;
+        disabled: boolean;
+      }[]
+    >([]);
   const [loadingFinishPackageDelivery, setLoadingFinishPackageDelivery] =
     useState(false);
 
   const handleStartPackageDelivery = useCallback(
     async (packageId: string) => {
       try {
-        setLoadingStartPackageDelivery(true);
+        setLoadingStartPackageDelivery((packages) =>
+          packages.map((p) =>
+            p._id === packageId
+              ? { _id: p._id, loading: true, disabled: true }
+              : { ...p, loading: false, disabled: true }
+          )
+        );
         await dispatch(startPackageDelivery(packageId)).unwrap();
-        setLoadingStartPackageDelivery(false);
+        setLoadingStartPackageDelivery((packages) =>
+          packages.map((p) =>
+            p._id === packageId
+              ? { _id: p._id, loading: false, disabled: false }
+              : { ...p, loading: false, disabled: false }
+          )
+        );
         showToast("success", "Reparto iniciado");
       } catch (error) {
         console.error(error);
         showToast("error", "Error al iniciar el reparto");
-        setLoadingStartPackageDelivery(false);
+        setLoadingStartPackageDelivery((packages) =>
+          packages.map((p) =>
+            p._id === packageId
+              ? { _id: p._id, loading: false, disabled: false }
+              : { ...p, loading: false, disabled: false }
+          )
+        );
       }
     },
     [dispatch]
@@ -49,12 +73,29 @@ const Home = () => {
       await dispatch(finishPackageDelivery()).unwrap();
       setLoadingFinishPackageDelivery(false);
       showToast("success", "Reparto finalizado");
+      setLoadingStartPackageDelivery((packages) =>
+        packages.map((p) =>
+          p._id === user.currentPackage?._id
+            ? { _id: p._id, loading: false, disabled: false }
+            : { ...p, loading: false, disabled: false }
+        )
+      );
     } catch (error) {
       console.error(error);
       showToast("error", "Error al finalizar el reparto");
       setLoadingFinishPackageDelivery(false);
     }
-  }, [dispatch]);
+  }, [dispatch, user.currentPackage?._id]);
+
+  useEffect(() => {
+    setLoadingStartPackageDelivery(
+      user.pendingPackages.map((p) => ({
+        _id: p._id,
+        loading: false,
+        disabled: false,
+      }))
+    );
+  }, [user.pendingPackages]);
 
   useEffect(() => {
     (async () => {
@@ -149,11 +190,12 @@ const Home = () => {
         }
         delivery={false}
         packages={user.pendingPackages.map(
-          ({ _id, address, receptorName }) => ({
+          ({ _id, address, receptorName, weight }) => ({
             id: _id,
             destination: address,
             addressee: receptorName || "",
             buttonText: "Iniciar reparto",
+            weight,
             buttonProps: {
               disabled:
                 user.is_disabled ||
@@ -161,8 +203,10 @@ const Home = () => {
                 Boolean(user.currentPackage) ||
                 !form._id ||
                 user.pendingPackages.some((p) => p.status !== "taken") ||
-                loadingStartPackageDelivery,
-              loading: loadingStartPackageDelivery,
+                loadingStartPackageDelivery.find((p) => p._id === _id)
+                  ?.disabled,
+              loading: loadingStartPackageDelivery.find((p) => p._id === _id)
+                ?.loading,
               type: "button",
               onClick: (e) => {
                 e.stopPropagation();
