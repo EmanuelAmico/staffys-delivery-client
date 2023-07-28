@@ -129,6 +129,7 @@ const ForgotPassword = () => {
           (error as AxiosError).message.split(" ").at(-1) || ""
         );
         if (statusCode === 400) {
+          setLoading(false);
           return showToast("error", "El código ingresado es inválido");
         }
         showToast("error", "Ha ocurrido un error");
