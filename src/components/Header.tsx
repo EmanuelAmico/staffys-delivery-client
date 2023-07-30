@@ -5,15 +5,16 @@ import IconButton from "@/commons/IconButton";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { logout } from "@/redux/reducers/user";
 import { showToast } from "@/utils/toast";
+import { resetStore } from "@/redux/reducers/user";
 
 const Header = () => {
   const { push } = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(resetStore());
+    localStorage.removeItem("token");
     showToast("success", "Sesión cerrada");
     push("/login");
   };

@@ -3,6 +3,7 @@ import { getCurrentCoordinates } from "@/utils/geoLocation";
 import { PackageService } from "@/services/package.service";
 import { Coordinates } from "@/types/package.types";
 import { RootState } from "../store";
+import { resetStore } from "./user";
 type Package = {
   _id: string;
   title: string;
@@ -40,12 +41,13 @@ export const fetchPackagesByCurrentLocation = createAsyncThunk(
 );
 
 const packageReducer = createReducer(initialState, (builder) => {
-  builder.addCase(
-    fetchPackagesByCurrentLocation.fulfilled,
-    (_state, action) => {
+  builder
+    .addCase(resetStore, () => {
+      return initialState;
+    })
+    .addCase(fetchPackagesByCurrentLocation.fulfilled, (_state, action) => {
       return action.payload;
-    }
-  );
+    });
 });
 
 export default packageReducer;
