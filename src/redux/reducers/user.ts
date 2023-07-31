@@ -39,7 +39,12 @@ export const register = createAsyncThunk(
     return { ...user, token };
   }
 );
-
+export const loadProfilePicture = createAsyncThunk(
+  "USER/PROFILE_PHOTO",
+  async (obj: { formData: FormData; _id: string }) => {
+    await AuthService.loadProfilePicture(obj.formData, obj._id);
+  }
+);
 export const login = createAsyncThunk(
   "USER/LOGIN",
   async (userData: UserLogin) => {
@@ -259,6 +264,12 @@ const userReducer = createReducer(initialState, (builder) => {
       };
     })
     .addCase(editUser.rejected, (state) => {
+      return state;
+    })
+    .addCase(loadProfilePicture.fulfilled, (state) => {
+      return state;
+    })
+    .addCase(loadProfilePicture.rejected, (state) => {
       return state;
     });
 });
