@@ -13,6 +13,7 @@ const store = configureStore({
     selectedPackage: selectedPackageReducer,
   },
 });
+
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 

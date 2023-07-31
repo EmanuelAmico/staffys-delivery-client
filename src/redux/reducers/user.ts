@@ -27,7 +27,7 @@ const initialState: User = {
 };
 
 export const setUser = createAction<User>("SET_USER");
-export const logout = createAction("LOGOUT");
+export const resetStore = createAction("RESET_STORE");
 
 export const register = createAsyncThunk(
   "USER/REGISTER",
@@ -161,8 +161,7 @@ const userReducer = createReducer(initialState, (builder) => {
         ...action.payload,
       };
     })
-    .addCase(logout, () => {
-      localStorage.removeItem("token");
+    .addCase(resetStore, () => {
       return initialState;
     })
     .addCase(register.fulfilled, (state, action: PayloadAction<User>) => {

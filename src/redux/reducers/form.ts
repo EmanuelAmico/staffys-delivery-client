@@ -7,6 +7,7 @@ import {
 import { FormService } from "@/services/form.service";
 import { Form } from "@/types/form.types";
 import { RootState } from "../store";
+import { resetStore } from "./user";
 
 const initialState: Form = {
   _id: "",
@@ -64,6 +65,9 @@ const formReducer = createReducer(initialState, (builder) => {
         ...state,
         ...action.payload,
       };
+    })
+    .addCase(resetStore, () => {
+      return initialState;
     })
     .addCase(
       getOrCreateTodayForm.fulfilled,

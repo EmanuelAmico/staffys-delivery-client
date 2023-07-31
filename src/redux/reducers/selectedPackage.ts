@@ -1,5 +1,7 @@
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import { PackageService } from "@/services/package.service";
+import { resetStore } from "../reducers/user";
+
 type Package = {
   _id: string;
   title: string;
@@ -43,9 +45,13 @@ export const fetchPackageById = createAsyncThunk(
 );
 
 const selectedPackageReducer = createReducer(initialState, (builder) => {
-  builder.addCase(fetchPackageById.fulfilled, (_state, action) => {
-    return action.payload;
-  });
+  builder
+    .addCase(resetStore, () => {
+      return initialState;
+    })
+    .addCase(fetchPackageById.fulfilled, (_state, action) => {
+      return action.payload;
+    });
 });
 
 export default selectedPackageReducer;
