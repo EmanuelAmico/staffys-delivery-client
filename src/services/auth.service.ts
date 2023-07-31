@@ -62,4 +62,10 @@ export class AuthService {
       confirmPassword,
     });
   }
+  static async loadProfilePicture(formData: FormData, _id: string) {
+    return await axios.post(
+      `${this.apiUrl}/user/load-profile-picture/${_id}`,
+      formData
+    );
+  }
 }

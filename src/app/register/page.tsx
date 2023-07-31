@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import Button from "@/commons/Button";
 import TextInput from "@/commons/TextInput";
 import Layout from "@/commons/Layout";
@@ -7,12 +7,13 @@ import Link from "@/commons/Link";
 import useInput from "@/hooks/useInput";
 import IconButton from "@/commons/IconButton";
 import { TbCameraPlus } from "react-icons/tb";
-import { register } from "@/redux/reducers/user";
+import { BsFillCheckCircleFill } from "react-icons/bs";
+import { loadProfilePicture, register } from "@/redux/reducers/user";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { showToast } from "@/utils/toast";
-
+import { FileList } from "@/types/form.types";
 const Register = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { push } = useRouter();
@@ -20,7 +21,7 @@ const Register = () => {
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [profilePicture, setProfilePicture] = useState<FileList | string>("");
   const name = useInput({
     validators: [
       {
@@ -87,11 +88,18 @@ const Register = () => {
       email: email.value,
       password: password.value,
       confirmpassword: passwordConfirmation.value,
-      urlphoto: "http://url.com",
+      urlphoto: ".",
     };
+    const formData = new FormData();
+    formData.append("file", profilePicture[0]);
     try {
       setLoading(true);
-      await dispatch(register(userData)).unwrap();
+      const user = await dispatch(register(userData)).unwrap();
+      if (profilePicture) {
+        await dispatch(
+          loadProfilePicture({ formData, _id: user._id })
+        ).unwrap();
+      }
       showToast("success", "Usuario registrado correctamente");
       setLoading(false);
       push("/home");
@@ -101,21 +109,41 @@ const Register = () => {
       setLoading(false);
     }
   };
-
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files as FileList;
+    if (files[0].type.split("/").at(0) === "image") {
+      setProfilePicture(e.target.files as FileList);
+      showToast("success", "Foto cargada exitosamente!");
+    } else {
+      showToast("error", "No se reconoció el archivo.");
+    }
+  };
   return (
     <Layout className="h-screen">
       <div className="flex justify-center items-center h-[30%]">
         <div className="max-h-[6rem] max-w-[6rem] flex justify-center items-center">
-          <>
-            <IconButton
-              className="bg-primaryBlue w-[6rem] h-[6rem] rounded-full "
-              icon={<TbCameraPlus className="text-white" size={60} />}
-            />
-            <input
-              className="bg-red-500 h-[5rem] w-[5rem] absolute rounded-full opacity-0"
-              type="file"
-            />
-          </>
+          {!profilePicture ? (
+            <>
+              <IconButton
+                className="bg-primaryBlue w-[6rem] h-[6rem] rounded-full "
+                icon={<TbCameraPlus className="text-white" size={60} />}
+              />
+              <input
+                onChange={handleFileChange}
+                className="bg-red-500 h-[5rem] w-[5rem] absolute rounded-full opacity-0"
+                type="file"
+              />
+            </>
+          ) : (
+            <>
+              <IconButton
+                className="bg-greenText w-[6rem] h-[6rem] rounded-full "
+                icon={
+                  <BsFillCheckCircleFill className="text-white" size={60} />
+                }
+              />
+            </>
+          )}
         </div>
       </div>
       <form onSubmit={handleRegister} autoComplete="off" className="pt-4 pb-4">
