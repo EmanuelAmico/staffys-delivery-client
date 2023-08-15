@@ -7,21 +7,37 @@ import Link from "@/commons/Link";
 import useInput from "@/hooks/useInput";
 import IconButton from "@/commons/IconButton";
 import { TbCameraPlus } from "react-icons/tb";
-import { BsFillCheckCircleFill } from "react-icons/bs";
+import { BiSolidPencil } from "react-icons/bi";
 import { loadProfilePicture, register } from "@/redux/reducers/user";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { showToast } from "@/utils/toast";
 import { FileList } from "@/types/form.types";
+import ImageCropDialog from "@/components/ImageCropDialog";
+import { croppedImageI } from "@/types/image.types";
+import Image from "next/image";
+
 const Register = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { push } = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false);
-  const [loading, setLoading] = useState(false);
-  const [profilePicture, setProfilePicture] = useState<FileList | string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [profilePictureFile, setProfilePictureFile] = useState<
+    FileList | string
+  >("");
+  const [successfulImageUpload, setSuccessfulImageUpload] = useState(false);
+  const [selectImage, setSelectImage] = useState<boolean>(false);
+  const [profilePictureLocalUrl, setProfilePictureLocalUrl] =
+    useState<croppedImageI>({
+      aspect: { value: null, text: null },
+      crop: { x: null, y: null },
+      croppedImageUrl: "",
+      zoom: null,
+    });
+
   const name = useInput({
     validators: [
       {
@@ -91,11 +107,11 @@ const Register = () => {
       urlphoto: ".",
     };
     const formData = new FormData();
-    formData.append("file", profilePicture[0]);
+    formData.append("file", profilePictureFile as string);
     try {
       setLoading(true);
       const user = await dispatch(register(userData)).unwrap();
-      if (profilePicture) {
+      if (profilePictureFile) {
         await dispatch(
           loadProfilePicture({ formData, _id: user._id })
         ).unwrap();
@@ -110,19 +126,60 @@ const Register = () => {
     }
   };
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files as FileList;
-    if (files[0].type.split("/").at(0) === "image") {
-      setProfilePicture(e.target.files as FileList);
-      showToast("success", "Foto cargada exitosamente!");
-    } else {
-      showToast("error", "No se reconoció el archivo.");
+    try {
+      const files = e.target.files as FileList;
+      if (!(files.length > 0 && files[0].type.split("/").at(0) === "image")) {
+        throw new Error("No se reconoció el tipo de archivo");
+      }
+      if (files[0].size > 2000000) {
+        throw new Error("El archivo no puede pesar más de 2mb");
+      }
+      setProfilePictureFile(e.target.files as FileList);
+      setSelectImage(true);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePictureLocalUrl((prevState) => {
+          return { ...prevState, croppedImageUrl: reader.result as string };
+        });
+      };
+      reader.readAsDataURL(files[0]);
+    } catch (error) {
+      const { message } = error as Error;
+      showToast("error", message);
+      console.error(message);
     }
+  };
+
+  const setCroppedImageFor = (props: croppedImageI, file: FileList) => {
+    const newCar = {
+      ...profilePictureLocalUrl,
+      croppedImageUrl: props?.croppedImageUrl,
+      crop: props?.crop,
+      zoom: props?.zoom,
+      aspect: props?.aspect,
+    };
+    setProfilePictureLocalUrl(newCar);
+    setProfilePictureFile(file);
+    setSelectImage(false);
+    showToast("success", "Foto cargada exitosamente!");
+    setSuccessfulImageUpload(true);
+  };
+
+  const onCancel = () => {
+    setSelectImage(false);
   };
   return (
     <Layout className="h-screen">
       <div className="flex justify-center items-center h-[30%]">
         <div className="max-h-[6rem] max-w-[6rem] flex justify-center items-center">
-          {!profilePicture ? (
+          {selectImage ? (
+            <ImageCropDialog
+              imageUrl={profilePictureLocalUrl.croppedImageUrl}
+              onCancel={onCancel}
+              setCroppedImageFor={setCroppedImageFor}
+            />
+          ) : null}
+          {!successfulImageUpload ? (
             <>
               <IconButton
                 className="bg-primaryBlue w-[6rem] h-[6rem] rounded-full "
@@ -130,19 +187,29 @@ const Register = () => {
               />
               <input
                 onChange={handleFileChange}
-                className="bg-red-500 h-[5rem] w-[5rem] absolute rounded-full opacity-0"
-                type="file"
+                className="bg-red-500 h-[6rem] w-[6rem] absolute rounded-full opacity-0"
+                type={"file"}
               />
             </>
           ) : (
-            <>
-              <IconButton
-                className="bg-greenText w-[6rem] h-[6rem] rounded-full "
-                icon={
-                  <BsFillCheckCircleFill className="text-white" size={60} />
-                }
+            <div className="relative">
+              <Image
+                alt="profile picture"
+                src={profilePictureLocalUrl.croppedImageUrl as string}
+                className="rounded-full"
+                height={100}
+                width={100}
               />
-            </>
+              <IconButton
+                className="text-white absolute w-[2.2rem] h-[2.2rem] bg-primaryBlue rounded-full bottom-2 right-0"
+                icon={<BiSolidPencil />}
+              />
+              <input
+                onChange={handleFileChange}
+                className="bg-red-500 w-[2.2rem] h-[2.2rem] absolute rounded-full opacity-0 bottom-2 right-0"
+                type={"file"}
+              />
+            </div>
           )}
         </div>
       </div>
