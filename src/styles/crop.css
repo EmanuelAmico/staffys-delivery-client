@@ -1,0 +1,44 @@
+.imageCard {
+  text-align: center;
+}
+
+.imageCard img {
+  width: 600px;
+}
+
+.backdrop {
+  position: fixed;
+  background-color: black;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.crop-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 80px;
+}
+
+.controls {
+  position: fixed;
+  top: 100;
+  left: 0;
+  right: 0;
+}
+
+.controls-upper-area {
+  text-align: center;
+}
+
+.slider {
+  width: 100%;
+}
+
+.button-area {
+  text-align: center;
+  margin-top: 1rem;
+}
